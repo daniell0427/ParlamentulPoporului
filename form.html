@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UniteMoldova</title>
+    <link href="form.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="script1.js"></script>
+</head>
+
+<body>
+    <div id="top">    
+        <nav id="nav">
+            <a href="index.html"><i class="material-icons" >home</i></a>
+            <div>
+                <input type="text"
+                placeholder="Cautare..."
+                id="cautare">
+                <i class="material-icons">search</i>
+            </div>    
+            <a href="" id="stiri">Voturi</a>
+            <a href="" id="voturiC">Voturi Curente</a>
+            <a href="" id="buget">Buget</a>
+            <a href="" id="siguranta">Inregistrare</a>
+        </nav>
+        <div id="limba">
+            <button id="romana">RO</button>
+            <button id="engleza">EN</button>
+            <button id="rusa" >RU</button>
+            
+        </div>
+    </div>    
+
+    <hr>   
+     <div id="registrare">
+        
+        <form id="inregistrare">
+
+            <h1>Înregistrare</h1>
+
+            <label for="fname">Nume</label>
+            
+            <input class="input" type="text" id="fname" name="fname"><br>
+            
+            <label for="lname">Prenume</label>
+            
+            <input class="input" type="text" id="lname" name="lname"><br>
+            
+            <label for="fname">Telefon</label>
+            
+            <input class="input" type="text" id="tel" name="fname"><br>
+            
+            <label for="lname">Parola</label>
+            
+            <input class="input" type="password" id="pass" name="lname"><br>
+            
+            <label>Poza de profil</label>
+
+            <input type="file" class="file" name="file"accept="image/png, image/jpeg" >
+
+            <label for="file" class="label">
+                <span class="material-icons">photo_file</span>
+                <p>Selecteaza o poza</p>
+            </label>
+
+            <button type="submit" id="inreg_btn" onclick="inregistrare()">Submit</button>
+            
+          </form>
+     </div>
+</body>
+
+</html>
