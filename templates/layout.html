@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        {% block head %}
+        {% endblock head %}
+
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </head>
+    <body>
+        <div id="top">    
+            <nav id="nav">
+                <a href="index.html"><i class="material-icons" >home</i></a>
+                <div>
+                    <input type="text"
+                    placeholder="Cautare..."
+                    id="cautare">
+                    <i class="material-icons">search</i>
+                </div>    
+                <a href="" id="legiInDiscutie">Legi in discutie</a>
+                <a href="" id="legiN">Legi Nationale</a>
+                <a href="" id="LegiL">Evenimente Locale</a>
+                <a href="form.html" id="">Inregistrare</a>
+            </nav>
+            
+            <div id="limba">
+                <button id="romana">RO</button>
+                <button id="engleza">EN</button>
+                <button id="rusa" >RU</button>
+                
+            </div>
+        </div>    
+
+        {% block content %}
+        {% endblock content %}
+
+    </body>
+</html>
+    

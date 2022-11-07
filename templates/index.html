@@ -1,81 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>ParlamentulPoporului</title>
-        <link href="../static/styles.css" type="text/css" rel="stylesheet">
-        <script src="script.js" defer></script>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    </head>
-    <body>
-        <div id="top">    
-            <nav id="nav">
-                <a href="index.html"><i class="material-icons" >home</i></a>
-                <div>
-                    <input type="text"
-                    placeholder="Cautare..."
-                    id="cautare">
-                    <i class="material-icons">search</i>
-                </div>    
-                <a href="" id="legiInDiscutie">Legi in discutie</a>
-                <a href="" id="legiN">Legi Nationale</a>
-                <a href="" id="LegiL">Evenimente Locale</a>
-                <a href="form.html" id="">Inregistrare</a>
-            </nav>
-            <div id="limba">
-                <button id="romana">RO</button>
-                <button id="engleza">EN</button>
-                <button id="rusa" >RU</button>
-                
-            </div>
-        </div>    
+{% extends "layout.html" %}
 
-        <hr>
-        <div id="logo">
-            <div id="abc">
-                <img id="balance" src="../images/logo.png" alt="..." width="120px" height="120px">
-                <h1 id="title">Parlamentul Poporului</h1>
+{% block head %}
+    <title>ParlamentulPoporului</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" type="text/css" rel="stylesheet">
+{% endblock head %}
+
+
+{% block content %}
+    <hr>
+    <div id="logo">
+        <div id="abc">
+            <img id="balance" src="../images/logo.png" alt="..." width="120px" height="120px">
+            <h1 id="title">Parlamentul Poporului</h1>
+        </div>
+        <div id="cont">
+            <div id="pfp">
+                <img src="../images/default-avatar.png" width="100px">
             </div>
-            <div id="cont">
-                <div id="pfp">
-                    <img src="../images/default-avatar.png" width="100px">
-                </div>
-                <div>
-                    <a href="form.html"id="inregistrare">Înregistrare</a>
-                </div>
+            <div>
+                <a href="form.html"id="inregistrare">Înregistrare</a>
             </div>
-            
         </div>
         
-       <div id="main">
-            <div class="bara">
-                <h2 id="tit">Proiecte de legi </h2>
+    </div>
+    
+    <div id="main">
+        <div class="bara">
+            <h2 id="tit">Proiecte de legi </h2>
+        </div>
+        <div class="legi">
+            <div class="lege">
+                <a href="lege1.html"><p>Proiectul de lege cu privire prevenirea pierderii si risipei alimentare.</p></a>
             </div>
-            <div class="legi">
-                <div class="lege">
-                    <a href="lege1.html"><p>Proiectul de lege cu privire prevenirea pierderii si risipei alimentare.</p></a>
-                </div>
-                <div class="lege">
-                    <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la Convenția poștală universală și Protocolul ei final, întocmite la Abidjan la 26 august 2021
-                    </p></a>
-                </div>
-            </div>
-            <div class="legi">
-                <div class="lege">
-                    <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la cel de al 11-lea Protocol adițional la Constituția Uniunii Poștale Universale, întocmit la Abidjan la 26 august 2021
-                    </p></a>
-                </div>
-                <div class="lege">
-                    <a href=""><p>Proiectul de lege pentru ratificarea Acordului de grant dintre Republica Moldova și Banca Europeană de Investiții în vederea realizării Proiectului ,,Eficiența energetică în Republica Moldova”
-                    </p></a>
-                </div>
-            </div>
-            <div class="more">
-                <button>Mai multe legi...</button>
+            <div class="lege">
+                <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la Convenția poștală universală și Protocolul ei final, întocmite la Abidjan la 26 august 2021
+                </p></a>
             </div>
         </div>
+        <div class="legi">
+            <div class="lege">
+                <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la cel de al 11-lea Protocol adițional la Constituția Uniunii Poștale Universale, întocmit la Abidjan la 26 august 2021
+                </p></a>
+            </div>
+            <div class="lege">
+                <a href=""><p>Proiectul de lege pentru ratificarea Acordului de grant dintre Republica Moldova și Banca Europeană de Investiții în vederea realizării Proiectului ,,Eficiența energetică în Republica Moldova”
+                </p></a>
+            </div>
+        </div>
+        <div class="more">
+            <button>Mai multe legi...</button>
+        </div>
     </div>
-</html>
-    
+{% endblock content %}
+
