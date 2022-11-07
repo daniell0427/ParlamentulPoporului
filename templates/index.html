@@ -1,4 +1,8 @@
+<!--Prima functie face ca sa conecteze layout.html cu index.html-->
+
 {% extends "layout.html" %}
+
+<!--"block head" si "block content" vor lua locul la blocurile libere cu acelasi din layout.html-->
 
 {% block head %}
     <title>ParlamentulPoporului</title>
@@ -18,7 +22,7 @@
                 <img src="../images/default-avatar.png" width="100px">
             </div>
             <div>
-                <a href="form.html"id="inregistrare">Înregistrare</a>
+                <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
             </div>
         </div>
         
@@ -30,7 +34,7 @@
         </div>
         <div class="legi">
             <div class="lege">
-                <a href="lege1.html"><p>Proiectul de lege cu privire prevenirea pierderii si risipei alimentare.</p></a>
+                <a href="{{url_for('lege1')}}"><p>Proiectul de lege cu privire prevenirea pierderii si risipei alimentare.</p></a>
             </div>
             <div class="lege">
                 <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la Convenția poștală universală și Protocolul ei final, întocmite la Abidjan la 26 august 2021

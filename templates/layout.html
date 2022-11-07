@@ -1,9 +1,14 @@
+<!--layout.html am facut pentru a automa si a nu a repeta codul de multe ori-->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <!--Mai jos functia aia este inlocuita de codul din alte html files.-->
+        <!--"head" reprezinta numele blocului de cod--> 
 
         {% block head %}
         {% endblock head %}
@@ -14,7 +19,7 @@
     <body>
         <div id="top">    
             <nav id="nav">
-                <a href="index.html"><i class="material-icons" >home</i></a>
+                <a href="{{ url_for('acasa') }}"><i class="material-icons" >home</i></a>
                 <div>
                     <input type="text"
                     placeholder="Cautare..."
@@ -24,7 +29,7 @@
                 <a href="" id="legiInDiscutie">Legi in discutie</a>
                 <a href="" id="legiN">Legi Nationale</a>
                 <a href="" id="LegiL">Evenimente Locale</a>
-                <a href="form.html" id="">Inregistrare</a>
+                <a href="{{url_for('inregistrare')}}" id="">Inregistrare</a>
             </nav>
             
             <div id="limba">
