@@ -12,26 +12,62 @@
         <form method="POST" action="" id="inregistrare">
             {{form.hidden_tag()}}
 
-            <legend class="border-bottom mb-4", style="font-size:60px ;">Inregistrare</legend>
-            <fieldset class="form-group">
+            <legend class="border-bottom mb-4 d-flex justify-content-center", style="font-size:60px ;">Inregistrare</legend>
+            <fieldset class="form-group ">
                 <div class="form-group">
                     {{form.nume_utilizator.label(class="form-control-label") }}
-                    {{form.nume_utilizator(class="form-control form-control-lg")}}
+                    {% if form.nume_utilizator.errors %}
+                        {{form.nume_utilizator(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.nume_utilizator.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.nume_utilizator(class="form-control form-control-lg")}}
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     {{form.email.label(class="form-control-label") }}
-                    {{form.email(class="form-control form-control-lg")}}
+                    {% if form.email.errors %}
+                        {{form.email(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.email(class="form-control form-control-lg")}}
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     {{form.parola.label(class="form-control-label") }}
-                    {{form.parola(class="form-control form-control-lg")}}
+                    {% if form.parola.errors %}
+                        {{form.parola(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.parola.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.parola(class="form-control form-control-lg")}}
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     {{form.confirma_parola.label(class="form-control-label") }}
-                    {{form.confirma_parola(class="form-control form-control-lg")}}
+                    {% if form.confirma_parola.errors %}
+                        {{ form.confirma_parola(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirma_parola.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.confirma_parola(class="form-control form-control-lg")}}
+                    {% endif %}
                 </div>
             </fieldset>
 
@@ -39,6 +75,11 @@
                 {{form.submit(class="btn btn-outline-info")}}
             </div> 
         </form>
+        <div class="border-top pt-3">
+            <small class="text-muted d-flex justify-content-center">
+                Ai deja un cont? <a class="ml-2" href="{{ url_for('autentificare') }}">Autentificare</a>
+            </small>
+        </div>
     </div>
-
+    
 {% endblock content %}

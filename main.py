@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 from form import RegisterForm, LoginForm
 
 app = Flask(__name__)
@@ -23,14 +23,17 @@ def acasa():
 def lege1():
     return render_template("lege1.html")
 
-@app.route("/inregistrare")
+@app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
     form = RegisterForm()
+    if form.validate_on_submit():
+        flash(f'Cont creat pentru {form.nume_utilizator.data}!', 'success')
+        return redirect(url_for('acasa'))
     return render_template("register.html", form = form)
 
 @app.route("/autentificare")
 def autentificare():
-    form = RegisterForm()
+    form = LoginForm()
     return render_template("login.html", form = form)
     
 
