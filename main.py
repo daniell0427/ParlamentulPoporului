@@ -1,6 +1,9 @@
 from flask import Flask, render_template, url_for
+from form import RegisterForm, LoginForm
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = '969bde9448eb7e83012c9d5d8d0f0ada'
 
 articole = [
     {
@@ -22,7 +25,15 @@ def lege1():
 
 @app.route("/inregistrare")
 def inregistrare():
-    return render_template("form.html")
+    form = RegisterForm()
+    return render_template("register.html", form = form)
+
+@app.route("/autentificare")
+def autentificare():
+    form = RegisterForm()
+    return render_template("login.html", form = form)
+    
+
 
 @app.route("/adauga_proiect")
 def adauga_proiect():
