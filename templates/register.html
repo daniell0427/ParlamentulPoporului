@@ -9,29 +9,36 @@
     <hr>   
     <div id="registrare">
     
-    <form id="inregistrare">
+        <form method="POST" action="" id="inregistrare">
+            {{form.hidden_tag()}}
 
-        <h1>Înregistrare</h1>
-        
-        <label for="fname">Telefon</label>
-        
-        <input class="input" type="text" id="tel" name="fname"><br>
-        
-        <label for="lname">Parola</label>
-        
-        <input class="input" type="password" id="pass" name="lname"><br>
-        
-        <label>Poza de profil</label>
+            <legend class="border-bottom mb-4", style="font-size:60px ;">Inregistrare</legend>
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{form.nume_utilizator.label(class="form-control-label") }}
+                    {{form.nume_utilizator(class="form-control form-control-lg")}}
+                </div>
 
-        <input type="file" class="file" name="file"accept="image/png, image/jpeg" >
+                <div class="form-group">
+                    {{form.email.label(class="form-control-label") }}
+                    {{form.email(class="form-control form-control-lg")}}
+                </div>
 
-        <label for="file" class="label">
-            <span class="material-icons">photo_file</span>
-            <p>Selecteaza o poza</p>
-        </label>
+                <div class="form-group">
+                    {{form.parola.label(class="form-control-label") }}
+                    {{form.parola(class="form-control form-control-lg")}}
+                </div>
 
-        <button type="submit" id="inreg_btn" onclick="inregistrare()">Submit</button>
-        
+                <div class="form-group">
+                    {{form.confirma_parola.label(class="form-control-label") }}
+                    {{form.confirma_parola(class="form-control form-control-lg")}}
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                {{form.submit(class="btn btn-outline-info")}}
+            </div> 
         </form>
     </div>
+
 {% endblock content %}

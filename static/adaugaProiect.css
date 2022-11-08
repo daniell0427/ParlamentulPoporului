@@ -95,11 +95,11 @@ h1{
 }
 
 #text{
-    background-color: rgb(47, 47, 137);
+    background-color: rgb(237, 237, 237);
     border-radius: 10px;
     border: none;
     box-shadow: 3px 3px 3px rgb(5, 17, 73);
-    color: lightgray;
+    color: rgb(21, 19, 36);
     font-size: 20px;
 }
 
