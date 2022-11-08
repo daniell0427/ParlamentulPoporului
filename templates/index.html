@@ -14,12 +14,12 @@
     <hr>
     <div id="logo">
         <div id="abc">
-            <img id="balance" src="../images/logo.png" alt="..." width="120px" height="120px">
+            <img id="balance" src="{{url_for('static',filename='logo.png')}}" alt="..." width="120px" height="120px">
             <h1 id="title">Parlamentul Poporului</h1>
         </div>
         <div id="cont">
             <div id="pfp">
-                <img src="../images/default-avatar.png" width="100px">
+                <img src="{{url_for('static',filename='default-avatar.png')}}" width="100px">
             </div>
             <div>
                 <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
