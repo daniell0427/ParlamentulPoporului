@@ -26,7 +26,7 @@ def inregistrare():
 
 @app.route("/adauga_proiect")
 def adauga_proiect():
-    return render_template("adaugaProiect.html")
+    return render_template("adauga_proiect.html")
 
 if __name__ == "__main__":
     app.run(debug = True)
