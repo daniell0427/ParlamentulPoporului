@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            background-color: lightgray;
+            margin-left: 40%;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('gfg')}}" method="post">
+    <h2>Adaugarea unei legi noi</h2><br>
+    <label for="titlu" id="tit">Titlu: </label>
+    <textarea name="titlu" id="" cols="40" rows="4"></textarea><br>
+
+    <label for="pro_l1">Voturi Pro lectura 1: </label>
+    <input type="number" name="pro_l1" id=""><br>
+    <label for="contra_l1">Voturi Contra lectura 1: </label>
+    <input type="number" name="contra_l1" id=""><br>
+    <label for="neu_l1">Voturi Neutre lectura 1: </label>
+    <input type="number" name="neu_l1" id=""><br>
+
+    <label for="pro_l2">Voturi Pro lectura 2: </label>
+    <input type="number" name="pro_l2" id=""><br>
+    <label for="contra_l1">Voturi Contra lectura 2: </label>
+    <input type="number" name="contra_l2" id=""><br>
+    <label for="neu_l2">Voturi Neutre lectura 2: </label>
+    <input type="number" name="neu_l2" id=""><br>
+    <button type="submit">Trimite</button>
+</form>
+</body>
+</html>
