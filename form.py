@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, none_of
 
+
 class RegisterForm(FlaskForm):
     nume_utilizator = StringField('Nume de utilizator', 
                         validators=[DataRequired(), Length(min=2, max=20)])
