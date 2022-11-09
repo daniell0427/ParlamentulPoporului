@@ -34,9 +34,15 @@ def inregistrare():
     return render_template("register.html", form = form, title = "Inregistrare")
 
 
-@app.route("/autentificare")
+@app.route("/autentificare", methods=['GET', 'POST'])
 def autentificare():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'ciocandaniel45@gmail.com' and form.parola.data == 'parola':
+            flash('Logare cu succes!', 'success')
+            return redirect(url_for('acasa'))
+        else:
+            flash('Autentificare invalida. Va rugam sa verificati emailul si parola', 'danger')
     return render_template("login.html", form = form, title = "Autentificare")
     
 

@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Email, Length, EqualTo, none_of
 
 class RegisterForm(FlaskForm):
     nume_utilizator = StringField('Nume de utilizator', 
-                        validators=[DataRequired(), Length(min=2, max=20), none_of(',')])
+                        validators=[DataRequired(), Length(min=2, max=20)])
     email = EmailField('Email', 
                         validators=[DataRequired(), Email()])
     parola = PasswordField('Parola', 

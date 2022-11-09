@@ -10,6 +10,8 @@
     <hr> 
     <div id="login">
         <form method="POST" action="" id="login_form">
+            {{form.hidden_tag()}}
+            
             <legend class="border-bottom mb-4 d-flex justify-content-center" style="font-size:50px">Autentificare</legend>
             <fieldset class="form-group">
                 <div class="form-group">
@@ -48,6 +50,8 @@
                 {{form.submit(class="btn btn-outline-info")}}
             </div> 
         </form>
+        
+        
         <div class="text-muted d-flex justify-content-center ml-2">
             <a href="{{url_for('reseteaza_parola')}}">Ai uitat parola?</a>
         </div>
