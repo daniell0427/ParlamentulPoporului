@@ -2,7 +2,7 @@
 # importing Flask and other modules
 
 from flask import Flask, request, render_template 
-from database import *
+from webapp.database import *
  
 # Flask constructor
 

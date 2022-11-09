@@ -1,33 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from form import RegisterForm, LoginForm, ResetPassForm
-from flask_sqlalchemy import SQLAlchemy
+from webapp.form import RegisterForm, LoginForm, ResetPassForm
+from flask import render_template, url_for, flash, redirect
+from webapp import app
 
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = '969bde9448eb7e83012c9d5d8d0f0ada'
-app.confic['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-
-db = SQLAlchemy(app)
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(20), unique = True, primary_key = True, nullable = False)
-    email = db.Column(db.String(120), unique = True, primary_key = True, nullable = False)
-    img_file = db.Column(db.String(20), nullable = False, default = 'default-avatar.png' )
-    password = db.Column(db.String(60), nullable = False)
-
-    def __repr__(User):
-        return f"User('{self.username}', '{self.email}', '{self.img_file}')"
-
-articole = [
-    {
-    'titlu': '',
-    'nume': '',
-    'data': '',
-    'text': ''
-    }
-]
-    
 @app.route("/")
 @app.route("/acasa")
 def acasa():
@@ -71,7 +45,3 @@ def reseteaza_parola():
     if form.validate_on_submit():
         return redirect(url_for('#'))
     return render_template("reseteazaparola.html", title = "Reseteaza Parola", form = form)
-
-
-if __name__ == "__main__":
-    app.run(debug = True)
