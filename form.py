@@ -11,7 +11,7 @@ class RegisterForm(FlaskForm):
                         validators=[DataRequired(), Length(min=8)])
     confirma_parola = PasswordField('Confirma Parola', 
                         validators=[DataRequired(), EqualTo('parola')])
-    submit = SubmitField('Trimite')
+    submit = SubmitField('Inregistreaza-te')
 
 
 class LoginForm(FlaskForm):
@@ -21,3 +21,8 @@ class LoginForm(FlaskForm):
                         validators=[DataRequired()])
     rememberme = BooleanField('Tine-ma minte')
     submit = SubmitField('Autentificare')
+
+class ResetPassForm(FlaskForm):
+    email = EmailField('Email', 
+                        validators=[DataRequired(), Email()])
+    submit = SubmitField('Reseteaza Parola')

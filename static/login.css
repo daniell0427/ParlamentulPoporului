@@ -1,0 +1,109 @@
+body{
+    font-family:sans-serif;
+    background-color:aliceblue;
+    color: lightgrey;
+}
+
+hr{
+    height: 4px;
+    border: none;
+    background-color: rgb(17, 16, 75);
+}
+
+#top{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    background-color: rgb(17, 16, 75);
+    padding: 20px;
+    margin-top: -6px;
+}
+
+#nav{
+    width: 135vh;
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+#cautare{
+    font-size:20px;
+    background-color: lightgrey;
+    border-radius: 11px;
+    border: none;
+    height: 25px;
+
+}
+
+a{
+    color:lightgray;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+#limba{
+    display:flex;
+    margin: -10px;
+}
+#romana, #rusa, #engleza{
+    font-size: 25px;
+    border: none;
+    background-color: rgb(67, 67, 128);
+    color:lightgray
+}
+
+#romana{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px ;
+    border-right: 5px solid rgb(17, 16, 75);
+}
+
+#rusa{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#engleza{
+    border-right: 5px solid rgb(17, 16, 75);
+}
+
+#rusa:hover{
+    background-color: rgb(211, 13, 13);
+    color: rgb(46, 46, 46)
+}
+#romana:hover{
+    background-color:  rgb(0, 25, 212);
+    color: rgb(46, 46, 46)
+}
+#engleza:hover{
+    background-color: rgb(207, 207, 0);
+    color: rgb(46, 46, 46)
+}
+#login_form{
+    color:rgb(0, 0, 0);
+    font-weight: 100;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    font-size: 20px;}
+#login{
+    background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+    margin-left: 580px;
+    margin-right: 580px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.317);
+}
+#remembermebtn{
+    font-size: 15px;
+    padding: 10px;
+}
+.form-group{
+    font-size: 25px;
+}
+
+.form-control-lg{
+    font-size: 17px;
+}

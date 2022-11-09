@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, flash, redirect
-from form import RegisterForm, LoginForm
+from form import RegisterForm, LoginForm, ResetPassForm
 
 app = Flask(__name__)
 
@@ -19,9 +19,11 @@ articole = [
 def acasa():
     return render_template("index.html")
 
+
 @app.route("/lege1")
 def lege1():
-    return render_template("lege1.html")
+    return render_template("lege1.html", title = "Legi")
+
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
@@ -29,18 +31,27 @@ def inregistrare():
     if form.validate_on_submit():
         flash(f'Cont creat pentru {form.nume_utilizator.data}!', 'success')
         return redirect(url_for('acasa'))
-    return render_template("register.html", form = form)
+    return render_template("register.html", form = form, title = "Inregistrare")
+
 
 @app.route("/autentificare")
 def autentificare():
     form = LoginForm()
-    return render_template("login.html", form = form)
+    return render_template("login.html", form = form, title = "Autentificare")
     
 
-
-@app.route("/adauga_proiect")
+@app.route("/adauga-proiect")
 def adauga_proiect():
-    return render_template("adauga_proiect.html")
+    return render_template("adauga_proiect.html", title = "Adauga Proiect")
+
+
+@app.route("/reseteaza-parola")
+def reseteaza_parola():
+    form = ResetPassForm()
+    if form.validate_on_submit():
+        return redirect(url_for('#'))
+    return render_template("reseteazaparola.html", title = "Reseteaza Parola", form = form)
+
 
 if __name__ == "__main__":
     app.run(debug = True)

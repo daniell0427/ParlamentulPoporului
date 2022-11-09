@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block head %}
-    <title>UniteMoldova</title>
     <link href="{{ url_for('static', filename='register.css') }}" type="text/css" rel="stylesheet">
 {% endblock head %}
 
@@ -12,9 +11,9 @@
         <form method="POST" action="" id="inregistrare">
             {{form.hidden_tag()}}
 
-            <legend class="border-bottom mb-4 d-flex justify-content-center", style="font-size:60px ;">Inregistrare</legend>
+            <legend class="border-bottom mb-4 d-flex justify-content-center", style="font-size:50px ;">Inregistrare</legend>
             <fieldset class="form-group ">
-                <div class="form-group">
+                <div class="form-group"
                     {{form.nume_utilizator.label(class="form-control-label") }}
                     {% if form.nume_utilizator.errors %}
                         {{form.nume_utilizator(class="form-control form-control-lg is-invalid")}}
@@ -71,12 +70,12 @@
                 </div>
             </fieldset>
 
-            <div class="form-group">
+            <div class="form-group" id="submitbtn">
                 {{form.submit(class="btn btn-outline-info")}}
             </div> 
         </form>
         <div class="border-top pt-3">
-            <small class="text-muted d-flex justify-content-center">
+            <small class="text-muted d-flex justify-content-center" id="aicontdeja">
                 Ai deja un cont? <a class="ml-2" href="{{ url_for('autentificare') }}">Autentificare</a>
             </small>
         </div>

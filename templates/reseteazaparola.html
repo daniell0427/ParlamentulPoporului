@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+    <link href="{{ url_for('static', filename='reseteazaparola.css') }}" type="text/css" rel="stylesheet">
+{% endblock head %}
+
+
+{% block content %}
+    <hr> 
+    <div id="resetpass">
+        <form method="POST" action="" id="resetpass_form">
+            <legend class="border-bottom mb-4 d-flex justify-content-center" style="font-size:50px">Ai uitat parola?</legend>
+            <small class="d-flex justify-content-center text-muted">Reseteaza-ti parola prin 2 pasi</small>
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{form.email(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.email(class="form-control form-control-lg")}}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{form.submit(class="btn btn-outline-info")}}
+            </div> 
+        </form>
+        <div class="d-flex justify-content-center ml-2">
+            <a href="{{url_for('autentificare')}}">Inapoi</a>
+        </div>
+    </div>
+{% endblock content %}
