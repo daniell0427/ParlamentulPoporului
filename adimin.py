@@ -2,7 +2,8 @@
 # importing Flask and other modules
 
 from flask import Flask, request, render_template 
-from webapp.database import *
+from database import *
+
  
 # Flask constructor
 
@@ -38,6 +39,7 @@ def gfg():
        print(contra2)
        print(neu2)
        introdu(tit,pro1,contra1,neu1,pro2,contra2,neu2)
+       
 
     return render_template("admin.html")
  
