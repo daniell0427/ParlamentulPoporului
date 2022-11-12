@@ -49,3 +49,16 @@ def reseteaza_parola():
     if form.validate_on_submit():
         return redirect(url_for('#'))
     return render_template("reseteazaparola.html", title = "Reseteaza Parola", form = form)
+
+
+@app.route("/legi-propuse")
+def legi_propuse():
+    return render_template("legi_propuse.html", title = "Legi Propuse")
+
+@app.route("/legi-recente")
+def legi_recente():
+    return render_template("legi_recente.html", title = "Legi Recente")
+
+@app.route("/legi-in-discutie")
+def legi_in_discutie():
+    return render_template("legi_in_discutie.html", title = "Legi in discutie")
