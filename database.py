@@ -24,3 +24,16 @@ def introdu(tit,pro1,contra1,neu1,pro2,contra2,neu2):
   
   # close the Connection
  # db.close()
+
+def titluri():
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT titlu FROM legi")
+
+  myresult = mycursor.fetchall()
+  i=1
+  return myresult
+  #for x in myresult:
+   # legi[i]=x
+   # i=i+1
+   # print(x)

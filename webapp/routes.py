@@ -1,17 +1,21 @@
 from webapp.form import RegisterForm, LoginForm, ResetPassForm
 from flask import render_template, url_for, flash, redirect
 from webapp import app
+from database import titluri
 
 @app.route("/")
 @app.route("/acasa")
 def acasa():
-    return render_template("index.html")
+    a=titluri()
+    print(a)
+    n=len(a)
+
+    return render_template("index.html", len = len(a), a=a)
 
 
 @app.route("/lege1")
 def lege1():
     return render_template("lege1.html", title = "Legi")
-
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
