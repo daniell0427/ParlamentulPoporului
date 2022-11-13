@@ -1,14 +1,30 @@
 from webapp.form import RegisterForm, LoginForm, ResetPassForm
 from flask import render_template, url_for, flash, redirect
+<<<<<<< HEAD
 from webapp import app, db, bcrypt
 from webapp.models import User
+=======
+from webapp import app
+from database import titluri
+>>>>>>> c251dda763d0026f201f7b5fd492323e75ba2a74
 
 @app.route("/")
 @app.route("/acasa")
 def acasa():
-    return render_template("index.html")
+    a=titluri()
+    print(a)
+    n=len(a)
+
+    return render_template("index.html", len = len(a), a=a)
 
 
+<<<<<<< HEAD
+=======
+@app.route("/lege1")
+def lege1():
+    return render_template("lege1.html", title = "Legi")
+
+>>>>>>> c251dda763d0026f201f7b5fd492323e75ba2a74
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
     form = RegisterForm()
@@ -45,3 +61,16 @@ def reseteaza_parola():
     if form.validate_on_submit():
         return redirect(url_for('#'))
     return render_template("reseteazaparola.html", title = "Reseteaza Parola", form = form)
+
+
+@app.route("/legi-propuse")
+def legi_propuse():
+    return render_template("legi_propuse.html", title = "Legi Propuse")
+
+@app.route("/legi-recente")
+def legi_recente():
+    return render_template("legi_recente.html", title = "Legi Recente")
+
+@app.route("/legi-in-discutie")
+def legi_in_discutie():
+    return render_template("legi_in_discutie.html", title = "Legi in discutie")

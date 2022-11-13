@@ -32,24 +32,26 @@
             <h2 id="tit">Proiecte de legi </h2>
         </div>
         <div class="legi">
+<<<<<<< HEAD
             <div class="lege">
                 <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la Convenția poștală universală și Protocolul ei final, întocmite la Abidjan la 26 august 2021
                 </p></a>
             </div>
+=======
+
+        
+            
+                <!-- For loop logic of jinja template -->
+                {%for i in range(0, len)%}
+                  
+                    <div class="lege">
+                        <a href=""><p>{{a[i][0]}}</p></a>
+                    </div>
+                {%endfor%}
+>>>>>>> c251dda763d0026f201f7b5fd492323e75ba2a74
         </div>
-        <div class="legi">
-            <div class="lege">
-                <a href=""><p>Proiectul de lege pentru aderarea Republicii Moldova la cel de al 11-lea Protocol adițional la Constituția Uniunii Poștale Universale, întocmit la Abidjan la 26 august 2021
-                </p></a>
-            </div>
-            <div class="lege">
-                <a href=""><p>Proiectul de lege pentru ratificarea Acordului de grant dintre Republica Moldova și Banca Europeană de Investiții în vederea realizării Proiectului ,,Eficiența energetică în Republica Moldova”
-                </p></a>
-            </div>
-        </div>
-        <div class="more">
-            <button>Mai multe legi...</button>
-        </div>
-    </div>
+                  
+            
+        
 {% endblock content %}
 
