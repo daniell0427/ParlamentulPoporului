@@ -1,5 +1,6 @@
 from webapp import db
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(20), unique = True, primary_key = True, nullable = False)
