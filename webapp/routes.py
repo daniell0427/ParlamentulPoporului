@@ -1,6 +1,7 @@
 from webapp.form import RegisterForm, LoginForm, ResetPassForm
 from flask import render_template, url_for, flash, redirect
-from webapp import app
+from webapp import app, db, bcrypt
+from webapp.models import User
 
 @app.route("/")
 @app.route("/acasa")
@@ -8,17 +9,16 @@ def acasa():
     return render_template("index.html")
 
 
-@app.route("/lege1")
-def lege1():
-    return render_template("lege1.html", title = "Legi")
-
-
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
     form = RegisterForm()
     if form.validate_on_submit():
-        flash(f'Cont creat pentru {form.nume_utilizator.data}!', 'success')
-        return redirect(url_for('acasa'))
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Contul tau a fost creat cu succes!', 'success')
+        return redirect(url_for('autentificare'))
     return render_template("register.html", form = form, title = "Inregistrare")
 
 
@@ -26,7 +26,7 @@ def inregistrare():
 def autentificare():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'ciocandaniel45@gmail.com' and form.parola.data == 'parola':
+        if form.email.data == 'ciocandaniel45@gmail.com' and form.password.data == 'parola':
             flash('Logare cu succes!', 'success')
             return redirect(url_for('acasa'))
         else:
