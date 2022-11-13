@@ -1,12 +1,10 @@
 from webapp.form import RegisterForm, LoginForm, ResetPassForm
 from flask import render_template, url_for, flash, redirect
-<<<<<<< HEAD
+
 from webapp import app, db, bcrypt
 from webapp.models import User
-=======
-from webapp import app
 from database import titluri
->>>>>>> c251dda763d0026f201f7b5fd492323e75ba2a74
+
 
 @app.route("/")
 @app.route("/acasa")
@@ -22,13 +20,12 @@ def acasa():
     return render_template("index.html", len = len(a),a=a,c=c,b=b)
 
 
-<<<<<<< HEAD
-=======
+
 @app.route("/lege1")
 def lege1():
     return render_template("lege1.html", title = "Legi")
 
->>>>>>> c251dda763d0026f201f7b5fd492323e75ba2a74
+
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
     form = RegisterForm()
