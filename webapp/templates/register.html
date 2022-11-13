@@ -14,16 +14,16 @@
             <legend class="border-bottom mb-4 d-flex justify-content-center", style="font-size:50px ;">Inregistrare</legend>
             <fieldset class="form-group ">
                 <div class="form-group"
-                    {{form.nume_utilizator.label(class="form-control-label") }}
-                    {% if form.nume_utilizator.errors %}
-                        {{form.nume_utilizator(class="form-control form-control-lg is-invalid")}}
+                    {{form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                        {{form.username(class="form-control form-control-lg is-invalid")}}
                         <div class="invalid-feedback">
-                            {% for error in form.nume_utilizator.errors %}
+                            {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{form.nume_utilizator(class="form-control form-control-lg")}}
+                        {{form.username(class="form-control form-control-lg")}}
                     {% endif %}
                 </div>
 
@@ -42,30 +42,30 @@
                 </div>
 
                 <div class="form-group">
-                    {{form.parola.label(class="form-control-label") }}
-                    {% if form.parola.errors %}
-                        {{form.parola(class="form-control form-control-lg is-invalid")}}
+                    {{form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{form.password(class="form-control form-control-lg is-invalid")}}
                         <div class="invalid-feedback">
-                            {% for error in form.parola.errors %}
+                            {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{form.parola(class="form-control form-control-lg")}}
+                        {{form.password(class="form-control form-control-lg")}}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{form.confirma_parola.label(class="form-control-label") }}
-                    {% if form.confirma_parola.errors %}
-                        {{ form.confirma_parola(class="form-control form-control-lg is-invalid")}}
+                    {{form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid")}}
                         <div class="invalid-feedback">
-                            {% for error in form.confirma_parola.errors %}
+                            {% for error in form.confirm_password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{form.confirma_parola(class="form-control form-control-lg")}}
+                        {{form.confirm_password(class="form-control form-control-lg")}}
                     {% endif %}
                 </div>
             </fieldset>
