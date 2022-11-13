@@ -31,18 +31,29 @@
         <div class="bara">
             <h2 id="tit">Proiecte de legi </h2>
         </div>
-        <div class="legi">
+        
 
         
             
                 <!-- For loop logic of jinja template -->
-                {%for i in range(0, len)%}
-                  
-                    <div class="lege">
-                        <a href=""><p>{{a[i][0]}}</p></a>
-                    </div>
+
+                {%for i in range(len-1, len-7, -1)%}
+
+                         
+
+                        {%if i % 2 == b  %}
+                            <div class="legi">
+                        {%endif%}
+                        <div class="lege">
+                            <a href=""><p>{{a[i][0]}}</p></a>
+                        </div>
+                        {%if i % 2 == c%}
+                            </div>
+                        {%endif%}
+                    
+
                 {%endfor%}
-        </div>
+        
                   
             
         

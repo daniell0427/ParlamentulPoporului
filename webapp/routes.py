@@ -9,8 +9,12 @@ def acasa():
     a=titluri()
     print(a)
     n=len(a)
-
-    return render_template("index.html", len = len(a), a=a)
+    c=1
+    b=0
+    if n%2==0: c=0
+    if n%2==0: b=1
+    print (c)
+    return render_template("index.html", len = len(a),a=a,c=c,b=b)
 
 
 @app.route("/lege1")
