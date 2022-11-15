@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, BooleanField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from webapp.models import User
+from database import inregistrare, verificare
 
 
 class RegisterForm(FlaskForm):
@@ -14,14 +15,16 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField('Confirma Parola', 
                         validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Inregistreaza-te')
+    print(username)
+    #inregistrare(username,email,password)
 
     def validate_username(self, username):
-        user = User.query.filter_by(username = username.data).first()
+        user=verificare("username",username)
         if user:
             raise ValidationError('Acest nume este deja luat')
     
     def validate_email(self, email):
-        user = User.query.filter_by(email = email.data).first()
+        user = verificare("email", email)
         if user:
             raise ValidationError('Acest email este deja luat')
 

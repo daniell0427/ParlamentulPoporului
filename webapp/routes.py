@@ -3,7 +3,8 @@ from flask import render_template, url_for, flash, redirect
 
 from webapp import app, db, bcrypt
 from webapp.models import User
-from database import titluri
+from database import titluri, inregistrare
+
 
 
 @app.route("/")
@@ -31,7 +32,7 @@ def inregistrare():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
+        user = inregistrare(username = form.username.data, email = form.email.data, password = hashed_password)
         db.session.add(user)
         db.session.commit()
         flash('Contul tau a fost creat cu succes!', 'success')
