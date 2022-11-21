@@ -21,7 +21,13 @@
                 <img src="{{url_for('static',filename='default-avatar.png')}}" width="100px">
             </div>
             <div>
-                <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
+                    
+                    {%if user!=None %}
+                        <a href="{{ url_for('reseteaza_parola',user=user) }}">{{user}}</a>
+                    {%else%}
+                        <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
+                    {%endif%}
+                
             </div>
         </div>
         

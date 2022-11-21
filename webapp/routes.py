@@ -1,15 +1,16 @@
-from webapp.form import RegisterForm, LoginForm, ResetPassForm
-from flask import render_template, url_for, flash, redirect
 
+from flask import render_template, url_for, flash, redirect,request
+from webapp.form import inreg, autentificarea ,reset_pass
 from webapp import app, db, bcrypt
 from webapp.models import User
-from database import titluri, inregistrare
+from database import titluri, inregistrare ,verifi
 
 
-
+user="eror"
 @app.route("/")
-@app.route("/acasa")
-def acasa():
+@app.route("/acasa/<user>")
+
+def acasa(user=None):
     a=titluri()
     print(a)
     n=len(a)
@@ -17,8 +18,9 @@ def acasa():
     b=0
     if n%2==0: c=0
     if n%2==0: b=1
-    print (c)
-    return render_template("index.html", len = len(a),a=a,c=c,b=b)
+    
+    print(user)
+    return render_template("index.html", len = len(a),a=a,c=c,b=b,user=user)
 
 
 
@@ -29,27 +31,37 @@ def lege1():
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = inregistrare(username = form.username.data, email = form.email.data, password = hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash('Contul tau a fost creat cu succes!', 'success')
-        return redirect(url_for('autentificare'))
-    return render_template("register.html", form = form, title = "Inregistrare")
+    e=""
+    if request.method == "POST":
+
+       
+       
+       user = request.form.get("user")
+       email = request.form.get("email") 
+       password = request.form.get("password") 
+       pass_conf= request.form.get("pass_conf")
+       e=inreg(user,email,password,pass_conf)
+       if e!="Inregistrare complecta": 
+           print(e)
+       else:
+           return redirect(url_for("autentificare"))
+       
+    return render_template("register.html" ,e=e)
 
 
 @app.route("/autentificare", methods=['GET', 'POST'])
 def autentificare():
-    form = LoginForm()
-    if form.validate_on_submit():
-        if form.email.data == 'ciocandaniel45@gmail.com' and form.password.data == 'parola':
-            flash('Logare cu succes!', 'success')
-            return redirect(url_for('acasa'))
-        else:
-            flash('Autentificare invalida. Va rugam sa verificati emailul si parola', 'danger')
-    return render_template("login.html", form = form, title = "Autentificare")
+    eror=""
+    if request.method == "POST":
+        user = request.form.get("user") 
+        password = request.form.get("password") 
+        eror=""
+        eror=autentificarea(user,password )
+        if eror=="" :
+            
+            return redirect(url_for("acasa",user=user))
+
+    return render_template("login.html",e=eror)
     
 
 @app.route("/adauga-proiect")
@@ -57,12 +69,19 @@ def adauga_proiect():
     return render_template("adauga_proiect.html", title = "Adauga Proiect")
 
 
-@app.route("/reseteaza-parola")
-def reseteaza_parola():
-    form = ResetPassForm()
-    if form.validate_on_submit():
-        return redirect(url_for('#'))
-    return render_template("reseteazaparola.html", title = "Reseteaza Parola", form = form)
+@app.route("/reseteaza-parola/<user>",methods=['GET', 'POST'])
+def reseteaza_parola(user):
+    e=""
+    if request.method == "POST":
+      
+      password = request.form.get("password")
+      password_new =request.form.get("new_pass")
+      password_conf=request.form.get("conf_pass") 
+      e=reset_pass(password, password_new,password_conf, user)  
+      if e=="":
+        return redirect(url_for("acasa",user=user))
+    
+    return render_template("reseteazaparola.html",e=e)
 
 
 @app.route("/legi-propuse")

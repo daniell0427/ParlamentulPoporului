@@ -1,4 +1,4 @@
-from database import verificare
+from database import verificare_pass
 username="username"
 nume="e"
-verificare(username,nume)
+verificare_pass("eu","Cristian2704")

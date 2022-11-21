@@ -1,5 +1,6 @@
 import mysql.connector
-  
+from argon2 import PasswordHasher
+verifi=0 
 db = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -71,7 +72,35 @@ def verificare(camp,nume):
     ok=1
     myresult = mycursor.fetchall()
     
-    if myresult:
+    if not(myresult):
       ok=0
     print(ok)
     return ok
+def verify_password(self, password):
+     hasher = PasswordHasher()
+     try:
+         hasher.verify(self, password)
+         return True
+     except Exception:
+         return False
+
+def verificare_pass(password,user):
+    mycursor = db.cursor()
+
+    sql = "SELECT password FROM inregistrare WHERE username ='"+user+"';"
+
+    mycursor.execute(sql)
+
+    myresult = mycursor.fetchall()
+    ph = PasswordHasher()
+    a=verify_password(myresult[0][0],password)
+    return a
+  
+def parola_nou(user,password):
+    mycursor = db.cursor()
+
+    sql = "UPDATE inregistrare SET password = '"+password+"' WHERE username = '"+user+"'"
+
+    mycursor.execute(sql)
+
+    db.commit()

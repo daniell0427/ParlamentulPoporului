@@ -1,42 +1,49 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, BooleanField, SubmitField, ValidationError
-from wtforms.validators import DataRequired, Email, Length, EqualTo
-from webapp.models import User
-from database import inregistrare, verificare
+from database import inregistrare , verificare , verificare_pass , parola_nou
+from argon2 import PasswordHasher
+def password_hash(pass1):
+    ph = PasswordHasher()
+    hash = ph.hash(pass1)
+    return hash
 
 
-class RegisterForm(FlaskForm):
-    username = StringField('Nume de utilizator', 
-                        validators=[DataRequired(), Length(min=2, max=20)])
-    email = EmailField('Email', 
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Parola', 
-                        validators=[DataRequired(), Length(min=8)])
-    confirm_password = PasswordField('Confirma Parola', 
-                        validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Inregistreaza-te')
-    print(username)
-    #inregistrare(username,email,password)
+def inreg( user, email,password ,conf_pass):
+    e=""
+    a=verificare("username",user)
+    if a: 
+        e=e+" Acest nume de utilizator este folosit "
+    a=verificare("email", email)
+    if a:
+        e=e+" Sunteti deja inregistrat "
+    if password!=conf_pass :
+        e=e+" Parola Gresita "
+    if e=="":
+        passwordh=password_hash(password)
+        inregistrare(user,email,passwordh)
+        e="Inregistrare complecta"
+    return e
 
-    def validate_username(self, username):
-        user=verificare("username",username)
-        if user:
-            raise ValidationError('Acest nume este deja luat')
-    
-    def validate_email(self, email):
-        user = verificare("email", email)
-        if user:
-            raise ValidationError('Acest email este deja luat')
+def autentificarea(user, password):
+    e=""
+    a=verificare("username",user)
+    if not(a):
+        e=e+"Acest nume de utilizator nu exista"
+    else :
+        a=verificare_pass(password, user)
+        if a==True:
+            e=""
+        else:
+            e="Parola gresita" 
+    return e
 
-class LoginForm(FlaskForm):
-    email = EmailField('Email', 
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Parola', 
-                        validators=[DataRequired()])
-    rememberme = BooleanField('Tine-ma minte')
-    submit = SubmitField('Autentificare')
-
-class ResetPassForm(FlaskForm):
-    email = EmailField('Email', 
-                        validators=[DataRequired(), Email()])
-    submit = SubmitField('Reseteaza Parola')
+def reset_pass(password_old,password,conf_password ,user):
+    a=verificare_pass(password_old,user)
+    e=""
+    if a==True:
+        if password==conf_password :
+            pas=password_hash(password)
+            a=parola_nou(user,pas)
+        else:
+            e="Paroa de confirmare gresita"
+    else :
+        e="parola gresita"
+    return e
