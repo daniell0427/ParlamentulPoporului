@@ -7,8 +7,20 @@
 
 {% block content %}
 
+     
+    {%for i in range(len-1, -1, -1)%}
+        {%if i % 2 == b  %}
+        <div class="legi">
+        {%endif%}
+        <div class="lege">
+            <a href=""><p>{{a[i][0]}}</p></a>
+        </div>
+        {%if i % 2 == c%}
+            </div>
+        {%endif%}
 
 
+    {%endfor%}
 
 
 

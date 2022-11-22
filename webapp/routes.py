@@ -90,7 +90,15 @@ def legi_propuse():
 
 @app.route("/legi-recente")
 def legi_recente():
-    return render_template("legi_recente.html", title = "Legi Recente")
+    a=titluri()
+    print("da")
+    print(a)
+    n=len(a)
+    c=1
+    b=0
+    if n%2==0: c=0
+    if n%2==0: b=1
+    return render_template("legi_recente.html", title = "Legi Recente", len=len(a),a=a,c=c,b=b)
 
 @app.route("/legi-in-discutie")
 def legi_in_discutie():
