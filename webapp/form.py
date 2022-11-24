@@ -19,7 +19,7 @@ def inreg( user, email,password ,conf_pass):
     if e=="":
         passwordh=password_hash(password)
         inregistrare(user,email,passwordh)
-        e="Inregistrare complecta"
+        e="Inregistrare completa"
     return e
 
 def autentificarea(user, password):

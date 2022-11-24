@@ -104,3 +104,18 @@ def parola_nou(user,password):
     mycursor.execute(sql)
 
     db.commit()
+
+def postare_db(titlu, descriere, username, data):
+  mycursor = db.cursor()
+
+  insertQuery = "INSERT INTO legipropuse (titlu, descriere, username, data) VALUES ('"+titlu+"','"+descriere+"','"+username+"', '"+data+"');"
+  
+  mycursor.execute(insertQuery)
+  
+  print("No of Record Inserted :", mycursor.rowcount)
+  
+  # we can use the id to refer to that row later.
+  print("Inserted Id :", mycursor.lastrowid)
+  
+  # To ensure the Data Insertion, commit database.
+  db.commit()
