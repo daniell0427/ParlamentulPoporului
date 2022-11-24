@@ -1,9 +1,8 @@
-
 from flask import render_template, url_for, flash, redirect,request
 from webapp.form import inreg, autentificarea ,reset_pass
-from webapp import app, db, bcrypt
-from webapp.models import User
-from database import titluri, inregistrare ,verifi
+from webapp import app
+from database import titluri, inregistrare ,verifi, postare_db
+from datetime import date, datetime
 
 
 user="eror"
@@ -23,25 +22,17 @@ def acasa(user=None):
     return render_template("index.html", len = len(a),a=a,c=c,b=b,user=user)
 
 
-
-@app.route("/lege1")
-def lege1():
-    return render_template("lege1.html", title = "Legi")
-
-
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
     e=""
     if request.method == "POST":
-
-       
        
        user = request.form.get("user")
        email = request.form.get("email") 
        password = request.form.get("password") 
        pass_conf= request.form.get("pass_conf")
        e=inreg(user,email,password,pass_conf)
-       if e!="Inregistrare complecta": 
+       if e!="Inregistrare completa": 
            print(e)
        else:
            return redirect(url_for("autentificare"))
@@ -62,11 +53,6 @@ def autentificare():
             return redirect(url_for("acasa",user=user))
 
     return render_template("login.html",e=eror)
-    
-
-@app.route("/adauga-proiect")
-def adauga_proiect():
-    return render_template("adauga_proiect.html", title = "Adauga Proiect")
 
 
 @app.route("/reseteaza-parola/<user>",methods=['GET', 'POST'])
@@ -103,3 +89,17 @@ def legi_recente():
 @app.route("/legi-in-discutie")
 def legi_in_discutie():
     return render_template("legi_in_discutie.html", title = "Legi in discutie")
+
+@app.route("/propune-legi", methods=['GET', 'POST'])
+def propune_legi():
+    if request.method == "POST":
+
+        titlu = request.form.get("titlu")
+        descriere = request.form.get("descriere")
+        username = "nume"
+        now = datetime.now()
+        data = now.strftime('%Y-%m-%d')
+        postare_db(titlu, descriere, username, data)
+        if True:
+            return redirect(url_for("acasa"))
+    return render_template("propune_legi.html", title = "Propune o lege")

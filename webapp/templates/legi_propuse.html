@@ -5,12 +5,14 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='legi_propuse.css') }}" >
 {% endblock head %}
 
+
 {% block content %}
+    <hr>
+    <div id="tit">
+        <h1>Legi propuse</h1>
+    </div>
 
-
-
-
-
-
-
-{% endblock content %}
+    <div id="propune">
+        <a href="{{url_for('propune_legi')}}">Propune o lege</a>
+    </div>
+{% endblock content %} 
