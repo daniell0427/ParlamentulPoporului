@@ -27,16 +27,16 @@
     <body>
         <div id="top">    
             <nav id="nav">
-                <a href="{{ url_for('acasa',user=None) }}"><i class="material-icons" >home</i></a>
+                <a href="{{ url_for('acasa',user=None) }}"><i class="material-icons" id="home">home</i></a>
                 <div>
                     <input type="text"
                     placeholder="Cautare..."
                     id="cautare">
                     <i class="material-icons">search</i>
                 </div>
-                <a href="{{url_for('legi_recente')}}" id="legi_recente">Legi recente</a>    
-                <a href="{{url_for('legi_in_discutie')}}" id="legi_in_discutie">Legi in discutie</a>
-                <a href="{{url_for('legi_propuse')}}" id="legi_propuse">Legi propuse</a>
+                <a href="{{url_for('legi_recente')}}" id="legi_recente" class="link_nav">Legi recente</a>    
+                <a href="{{url_for('legi_in_discutie')}}" id="legi_in_discutie" class="link_nav">Legi in discutie</a>
+                <a href="{{url_for('legi_propuse')}}" id="legi_propuse" class="link_nav">Legi propuse</a>
                 
             </nav>
             
