@@ -5,7 +5,6 @@ from database import titluri, inregistrare ,verifi, postare_db
 from datetime import date, datetime
 
 
-user="eror"
 @app.route("/")
 @app.route("/acasa/<user>")
 
@@ -19,7 +18,7 @@ def acasa(user=None):
     if n%2==0: b=1
     
     print(user)
-    return render_template("index.html", len = len(a),a=a,c=c,b=b,user=user)
+    return render_template("index.html",user=user, len = len(a),a=a,c=c,b=b)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
@@ -70,12 +69,13 @@ def reseteaza_parola(user):
     return render_template("reseteazaparola.html",e=e)
 
 
-@app.route("/legi-propuse")
-def legi_propuse():
-    return render_template("legi_propuse.html", title = "Legi Propuse")
+@app.route("/legi-propuse/<user>")
+def legi_propuse(user=None):
+    print(user)
+    return render_template("legi_propuse.html", title = "Legi Propuse",user=user)
 
-@app.route("/legi-recente")
-def legi_recente():
+@app.route("/legi-recente/<user>")
+def legi_recente(user=None):
     a=titluri()
     print("da")
     print(a)
@@ -84,11 +84,12 @@ def legi_recente():
     b=0
     if n%2==0: c=0
     if n%2==0: b=1
-    return render_template("legi_recente.html", title = "Legi Recente", len=len(a),a=a,c=c,b=b)
+    #print(user)
+    return render_template("legi_recente.html", title = "Legi Recente",user=user, len=len(a),a=a,c=c,b=b)
 
-@app.route("/legi-in-discutie")
-def legi_in_discutie():
-    return render_template("legi_in_discutie.html", title = "Legi in discutie")
+@app.route("/legi-in-discutie/<user>")
+def legi_in_discutie(user=None):
+    return render_template("legi_in_discutie.html", title = "Legi in discutie",user=user)
 
 @app.route("/propune-legi", methods=['GET', 'POST'])
 def propune_legi():
