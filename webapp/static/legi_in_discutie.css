@@ -1,6 +1,6 @@
 body{
     font-family:sans-serif;
-    background-color: rgba(96, 96, 148, 0.832);
+    background-color: rgb(232, 232, 232);
     color: lightgrey;
 }
 
@@ -13,9 +13,10 @@ hr{
 #top{
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
+    font-size: 17px;
     background-color: rgb(17, 16, 75);
-    padding: 20px;
+    padding: 17px;
+    padding-top: 20px;
     margin-top: -6px;
 }
 
@@ -35,12 +36,17 @@ hr{
 
 }
 
-a{
+#home{
+    color:lightgray;
+}
+
+.link_nav{
     color:lightgray;
     text-decoration: none;
 }
-a:hover{
+.link_nav:hover{
     text-decoration: underline;
+    color:lightgray;
 }
 
 #limba{
@@ -48,7 +54,7 @@ a:hover{
     margin: -10px;
 }
 #romana, #rusa, #engleza{
-    font-size: 25px;
+    font-size: 20px;
     border: none;
     background-color: rgb(67, 67, 128);
     color:lightgray
@@ -82,8 +88,88 @@ a:hover{
     color: rgb(46, 46, 46)
 }
 
-#main{
-    background-color: aliceblue;
+
+/*end of navbar*/
+
+h1{
+    font-size: 70px;
+    color: rgb(24, 13, 64);
+    -webkit-text-stroke: 2px rgb(15, 7, 43);
+    text-shadow: 2px 3px 8px black;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid rgb(184, 184, 184);
 }
 
-/*nav-bar ending*/
+#propune{
+    color:lightgray;
+    text-decoration: none;
+    font-size: 30px;
+    background-color: rgb(17, 16, 75);
+    width: auto;
+    border-radius: 7px;
+    display: inline-block;
+    padding: 5px 10px;
+    max-height: 55px;
+    margin-top: 20px;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.317);
+}
+#propune:hover{
+    color:rgb(124, 136, 172);
+    background-color: lightgray;
+    text-decoration: none;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.801);
+}
+#propune:focus{
+    cursor: pointer;
+    background-color: rgb(179, 179, 179);
+    color:rgba(84, 91, 119, 0.621);
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.681);
+}
+
+#flex{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    border-bottom: 3px solid rgb(184, 184, 184);
+}
+
+.lege{
+    font-size: 25px;
+    background-color:white;
+    margin: 0px;
+    min-height: 100px;
+    max-height: 600px;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.597);
+    padding: 10px;
+    border-radius: 7px;
+    margin: 10px;
+}
+
+.lege:hover{
+    text-decoration: underline;
+    background-color: rgb(238, 237, 237);
+}
+
+#legi{
+    background-image: linear-gradient(to bottom right, white, rgb(199, 199, 199));
+    color:black;
+    margin:40px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.807);
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+/*for different sizes:*/
+@media screen and (max-width:800px){
+    .lege{
+        grid-column: span 2
+    }
+}
