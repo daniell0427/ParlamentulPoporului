@@ -121,6 +121,7 @@ a:hover{
     height: 145px;
     background-color: #FFFAFA;
     border: 3px solid rgb(163, 163, 163);
+    box-shadow:0 4px 7px rgba(0, 0, 0, 0.755);
 }
 
 #pfp{
@@ -153,16 +154,17 @@ a:hover{
     padding: 10px;
     border-radius: 5px;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.317);
+    background-image: linear-gradient(to bottom right, white, rgb(199, 199, 199));
 }
 
 .bara{
     color:lightgray;
     display: flex;
     justify-content: center;
-    
     height: 80px;
     background-color: rgb(17, 16, 75);
     border-radius: 4px;
+    box-shadow:0 10px 10px rgba(0, 0, 0, 0.679);
 }
 
 #tit{
@@ -170,44 +172,59 @@ a:hover{
     line-height: 80px;
 }
 
-.legi{
-    display: flex;
-    justify-content: space-around;
+#legi{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
 }
 .lege{
-    color:black;
-    border-radius: 5px;
     font-size: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 20px;
-    background-color: #FFFAFA;
-    box-shadow:0 0 5px rgba(0, 0, 0, 0.317);
-    height: 150px;  
-    width: 670px;  
-    text-align: justify;
-    
+    background-color:white;
+    margin: 0px;
+    min-height: 100px;
+    max-height: 600px;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.597);
+    padding: 10px;
+    border-radius: 7px;
+    margin: 10px;
+    color: black;
 }
 
 .lege:hover{
+    text-decoration: underline;
     background-color: rgb(238, 237, 237);
 }
 
 .lege a{
     color: black;
+    text-decoration: none;
 }
 
-.more button{
+#more{
     font-size: 30px;
-    color:lightgray;
-    background-color: rgb(61, 61, 120);
+    background-color: rgb(17, 16, 75);
     border: none;
-    border-radius: 3px;
-    padding: 5px;
-    margin: 20px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 40px;
+    box-shadow:0 5px 10px rgb(0, 0, 0);
 }
-.more button:hover{
-    background-color:rgb(123, 123, 196) ;
-    color: white;
+#more:hover{
+    background-color:rgb(60, 60, 111) ;
+    text-decoration: none;
+    box-shadow:0 0 20px rgba(0, 0, 0, 0.844)
+}
+
+#more:focus{
+    background-color:rgb(74, 74, 148) ;
+    color:rgb(199, 200, 202);
+}
+
+/*for different sizes:*/
+@media screen and (max-width:800px){
+    .lege{
+        grid-column: span 2
+    }
 }
 

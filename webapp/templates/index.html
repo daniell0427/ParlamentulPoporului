@@ -37,13 +37,6 @@
         <div class="bara">
             <h2 id="tit">Proiecte de legi </h2>
         </div>
-
-        
-
-
-
-
-        
             
                 <!-- For loop logic of jinja template -->
 
@@ -52,19 +45,19 @@
                          
 
                         {%if i % 2 == b  %}
-                            <div class="legi">
+                           <div id="legi">
                         {%endif%}
                         <div class="lege">
                             <a href=""><p>{{a[i][0]}}</p></a>
                         </div>
                         {%if i % 2 == c%}
-                            </div>
+                           </div>
                         {%endif%}
                     
 
                 {%endfor%}
 
-                <button><a href="{{ url_for('legi_recente') }}">Mai multe </a></button>
+                <a href="{{ url_for('legi_recente') }}"id="more">Mai multe </a>
 
                   
             
