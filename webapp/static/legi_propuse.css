@@ -131,7 +131,7 @@ h1{
     margin-left: 40px;
     margin-right: 40px;
     margin-top: 20px;
-    border-bottom: 2px solid rgb(184, 184, 184);
+    border-bottom: 3px solid rgb(184, 184, 184);
 }
 
 .lege{
@@ -147,11 +147,7 @@ h1{
 }
 
 .lege:hover{
-    background-color: white;
     text-decoration: underline;
-}
-
-.lege:hover{
     background-color: rgb(238, 237, 237);
 }
 
