@@ -17,15 +17,12 @@
         
     </div>
     <div id="legi">
-        <div class="lege">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, mollitia rem necessitatibus aliquid voluptatum minima nobis exercitationem debitis voluptas ratione.</div>
-        <div class="lege">a doua lege</div>
-        <div class="lege">a treia lege</div>
-        <div class="lege">a patra lege</div>
-        <div class="lege">a cincea lege</div>
-        <div class="lege">a sasea lege</div>
-        <div class="lege">a saptea lege</div>
-        <div class="lege">a opta lege</div>
-        <div class="lege">a noua lege</div>
-        <div class="lege">a zecea lege</div>
+        {% for n in range(nr-1, -1, -1) %}
+            <div class="lege">
+                <a href="{{url_for('legi_propuse',titlu=titlu[n][0])}}"><p>{{ titlu[n][0] }}</p></a>
+                <p>{{ username[n][0] }}</p>
+                <p>{{ data[n][0] }}</p>
+            </div>
+        {% endfor %}
     </div>
 {% endblock content %} 
