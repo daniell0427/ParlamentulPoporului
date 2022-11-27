@@ -56,3 +56,4 @@ def user_in_db(user):
     else:
         error = ''
     return error
+

@@ -1,37 +1,28 @@
 from flask import render_template, url_for, redirect,request
 from webapp.form import inreg, autentificarea ,reset_pass, user_in_db
 from webapp import app
-from database import titluri, postare_db, get_legi
-from datetime import date, datetime
-
-
-@app.route("/", )
-@app.route("/acasa")
+from database import titluri, postare_db, get_legi, get_data_by_title
+from datetime import datetime
+@app.route("/")
 @app.route("/<user>")
+@app.route("/acasa")
 
 def acasa(user=None):
-    if user == None:
-        error = ''
-    else:
-        error = user_in_db(user)
     
-    if error:
-        return render_template("errorpage.html")
-    else:
-        a=titluri()
-        print(a)
-        n=len(a)
-        c=1
-        b=0
-        if n%2==0: c=0
-        if n%2==0: b=1
-        
-        print(user)
-        return render_template("index.html",user=user, len = len(a),a=a,c=c,b=b)
+    a=titluri()
+    print(a)
+    n=len(a)
+    c=1
+    b=0
+    if n%2==0: c=0
+    if n%2==0: b=1
+    print(user)
+    return render_template("index.html",user=user, len = len(a),a=a,c=c,b=b)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
+
     e=""
     if request.method == "POST":
        
@@ -55,7 +46,7 @@ def autentificare():
         user = request.form.get("user") 
         password = request.form.get("password") 
         eror=""
-        eror=autentificarea(user,password )
+        eror = autentificarea(user,password)
         if eror=="" :
             
             return redirect(url_for("acasa",user=user))
@@ -63,7 +54,7 @@ def autentificare():
     return render_template("login.html",e=eror)
 
 
-@app.route("/reseteaza-parola",methods=['GET', 'POST'])
+@app.route("/reseteaza-parola/<user>",methods=['GET', 'POST'])
 def reseteaza_parola(user):
     e=""
     if request.method == "POST":
@@ -90,7 +81,26 @@ def legi_propuse(titlu=None, user=None):
         print(user)
         return render_template("legi_propuse.html", title = "Legi Propuse",user=user, titlu=titlu, descriere=descriere, username=username, data=data, nr=nr)
     else:
-        return render_template("lege_layout.html")
+        content = get_data_by_title(titlu)
+        titlu = content[0][1]
+        descriere = content[0][2]
+        username = content[0][3]
+        data = content[0][4]
+        if content[0][5] != None:
+            pro = content[0][5]
+        else:
+            pro = 0
+
+        if content[0][6] != None:
+            contra = content[0][6]
+        else:
+            contra = 0
+        
+        if content[0][7] != None:
+            neutru = content[0][7]
+        else:
+            neutru = 0
+        return render_template("lege_layout.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, pro=pro, contra=contra, neutru=neutru)
 
 @app.route("/legi-recente")
 def legi_recente(user=None):

@@ -6,6 +6,29 @@
 {% endblock head %}
 
 {% block content %}
+    <div id="username">
+        <a href=""><p>@{{username}}</p></a>
+    </div>
+    
+    <div id="data">
+        <p>{{data}}</p>
+    </div>
 
+    <div id="title">
+        <h1>{{titlu}}</h1>
+    </div>
+
+    <div id="text">
+        <p>{{descriere}}</p>
+    </div>
+
+    <div id="voturi">
+        <p id="pro">Voturi pro: {{pro}}</p>
+        <button type="submit">Voteaza pro</button>
+        <p id="contra">Voturi contra: {{contra}}</p>
+        <button type="submit">Voteaza pro</button>
+        <p id="neutre">Voturi neutre: {{neutru}}</p>
+        <button type="submit">Voteaza pro</button>
+    </div>
 
 {% endblock content %}

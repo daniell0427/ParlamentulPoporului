@@ -145,3 +145,13 @@ def get_legi(camp):
   myresult = mycursor.fetchall()
 
   return myresult
+
+def get_data_by_title(titlu):
+
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT * FROM legipr_admise WHERE titlu ='"+titlu+"'")
+
+  myresult = mycursor.fetchall()
+
+  return myresult
