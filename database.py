@@ -57,7 +57,7 @@ def username():
   mycursor.execute("SELECT username FROM inregistrare")
 
   myresult = mycursor.fetchall()
-  i=1
+
   return myresult
 
 def verificare(camp,nume):

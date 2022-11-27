@@ -1,24 +1,33 @@
 from flask import render_template, url_for, redirect,request
-from webapp.form import inreg, autentificarea ,reset_pass
+from webapp.form import inreg, autentificarea ,reset_pass, user_in_db
 from webapp import app
 from database import titluri, postare_db, get_legi
 from datetime import date, datetime
 
 
 @app.route("/", )
-@app.route("/acasa/<user>")
+@app.route("/acasa")
+@app.route("/<user>")
 
 def acasa(user=None):
-    a=titluri()
-    print(a)
-    n=len(a)
-    c=1
-    b=0
-    if n%2==0: c=0
-    if n%2==0: b=1
+    if user == None:
+        error = ''
+    else:
+        error = user_in_db(user)
     
-    print(user)
-    return render_template("index.html",user=user, len = len(a),a=a,c=c,b=b)
+    if error:
+        return render_template("errorpage.html")
+    else:
+        a=titluri()
+        print(a)
+        n=len(a)
+        c=1
+        b=0
+        if n%2==0: c=0
+        if n%2==0: b=1
+        
+        print(user)
+        return render_template("index.html",user=user, len = len(a),a=a,c=c,b=b)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
