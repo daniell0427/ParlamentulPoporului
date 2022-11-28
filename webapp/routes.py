@@ -1,14 +1,17 @@
-from flask import render_template, url_for, flash, redirect,request
+from flask import render_template, url_for, flash, redirect,request, session
 from webapp.form import inreg, autentificarea ,reset_pass
 from webapp import app
 from database import titluri, inregistrare ,verifi, postare_db
 from datetime import date, datetime
+from flask_session import Session
 
-
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 @app.route("/")
-@app.route("/acasa/<user>")
+@app.route("/acasa")
 
-def acasa(user=None):
+def acasa():
     a=titluri()
     print(a)
     n=len(a)
@@ -17,8 +20,8 @@ def acasa(user=None):
     if n%2==0: c=0
     if n%2==0: b=1
     
-    print(user)
-    return render_template("index.html",user=user, len = len(a),a=a,c=c,b=b)
+   
+    return render_template("index.html", len = len(a),a=a,c=c,b=b,)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
@@ -48,34 +51,37 @@ def autentificare():
         eror=""
         eror=autentificarea(user,password )
         if eror=="" :
-            
+            session["username"] = user
+
             return redirect(url_for("acasa",user=user))
 
     return render_template("login.html",e=eror)
 
 
-@app.route("/reseteaza-parola/<user>",methods=['GET', 'POST'])
-def reseteaza_parola(user):
+@app.route("/reseteaza-parola",methods=['GET', 'POST'])
+def reseteaza_parola():
     e=""
     if request.method == "POST":
       
       password = request.form.get("password")
       password_new =request.form.get("new_pass")
       password_conf=request.form.get("conf_pass") 
+      user=session.get["username"]
       e=reset_pass(password, password_new,password_conf, user)  
       if e=="":
-        return redirect(url_for("acasa",user=user))
+        return redirect(url_for("acasa"))
     
     return render_template("reseteazaparola.html",e=e)
 
 
-@app.route("/legi-propuse/<user>")
-def legi_propuse(user=None):
-    print(user)
-    return render_template("legi_propuse.html", title = "Legi Propuse",user=user)
+@app.route("/legi-propuse")
+def legi_propuse():
+    print("noroc")
+    
+    return render_template("legi_propuse.html", title = "Legi Propuse")
 
-@app.route("/legi-recente/<user>")
-def legi_recente(user=None):
+@app.route("/legi-recente")
+def legi_recente():
     a=titluri()
     print("da")
     print(a)
@@ -85,11 +91,11 @@ def legi_recente(user=None):
     if n%2==0: c=0
     if n%2==0: b=1
     #print(user)
-    return render_template("legi_recente.html", title = "Legi Recente",user=user, len=len(a),a=a,c=c,b=b)
+    return render_template("legi_recente.html", title = "Legi Recente", len=len(a),a=a,c=c,b=b)
 
-@app.route("/legi-in-discutie/<user>")
-def legi_in_discutie(user=None):
-    return render_template("legi_in_discutie.html", title = "Legi in discutie",user=user)
+@app.route("/legi-in-discutie")
+def legi_in_discutie():
+    return render_template("legi_in_discutie.html", title = "Legi in discutie")
 
 @app.route("/propune-legi", methods=['GET', 'POST'])
 def propune_legi():
@@ -104,3 +110,8 @@ def propune_legi():
         if True:
             return redirect(url_for("acasa"))
     return render_template("propune_legi.html", title = "Propune o lege")
+
+@app.route("/logout")
+def logout():
+    session["username"]=None
+    return redirect(url_for("acasa"))
