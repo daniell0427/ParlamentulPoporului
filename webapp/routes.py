@@ -26,6 +26,7 @@ def acasa():
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
+
     e=""
     if request.method == "POST":
        
@@ -49,7 +50,7 @@ def autentificare():
         user = request.form.get("user") 
         password = request.form.get("password") 
         eror=""
-        eror=autentificarea(user,password )
+        eror = autentificarea(user,password)
         if eror=="" :
             session["username"] = user
 
@@ -73,12 +74,39 @@ def reseteaza_parola():
     
     return render_template("reseteazaparola.html",e=e)
 
-
 @app.route("/legi-propuse")
-def legi_propuse():
-    print("noroc")
-    
-    return render_template("legi_propuse.html", title = "Legi Propuse")
+@app.route("/legi-propuse/")
+@app.route("/legi-propuse/<titlu>")
+def legi_propuse(titlu=None, user=None):
+    if titlu == None:
+        titlu = get_legi("titlu")
+        descriere = get_legi("descriere")
+        username = get_legi("username")
+        data = get_legi("data")
+        nr = len(titlu)
+        print(user)
+        return render_template("legi_propuse.html", title = "Legi Propuse",user=user, titlu=titlu, descriere=descriere, username=username, data=data, nr=nr)
+    else:
+        content = get_data_by_title(titlu)
+        titlu = content[0][1]
+        descriere = content[0][2]
+        username = content[0][3]
+        data = content[0][4]
+        if content[0][5] != None:
+            pro = content[0][5]
+        else:
+            pro = 0
+
+        if content[0][6] != None:
+            contra = content[0][6]
+        else:
+            contra = 0
+        
+        if content[0][7] != None:
+            neutru = content[0][7]
+        else:
+            neutru = 0
+        return render_template("lege_layout.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, pro=pro, contra=contra, neutru=neutru)
 
 @app.route("/legi-recente")
 def legi_recente():
@@ -105,7 +133,7 @@ def propune_legi():
         descriere = request.form.get("descriere")
         username = "nume"
         now = datetime.now()
-        data = now.strftime('%Y-%m-%d')
+        data = now.strftime('%d-%m-%Y')
         postare_db(titlu, descriere, username, data)
         if True:
             return redirect(url_for("acasa"))

@@ -32,12 +32,9 @@ def titluri():
   mycursor.execute("SELECT titlu FROM legi")
 
   myresult = mycursor.fetchall()
-  i=1
+
   return myresult
-  #for x in myresult:
-   # legi[i]=x
-   # i=i+1
-   # print(x)
+
 
 def inregistrare(user,email,password):
   mycursor = db.cursor()
@@ -60,7 +57,7 @@ def username():
   mycursor.execute("SELECT username FROM inregistrare")
 
   myresult = mycursor.fetchall()
-  i=1
+
   return myresult
 
 def verificare(camp,nume):
@@ -119,3 +116,42 @@ def postare_db(titlu, descriere, username, data):
   
   # To ensure the Data Insertion, commit database.
   db.commit()
+
+def get_id_lege(id):
+  mycursor = db.cursor()
+  sql = "SELECT * FROM legipropuse WHERE nr ='"+id+"'"
+  mycursor.execute(sql)
+  myresult = mycursor.fetchall()
+  titlu = myresult[0][1]
+  descriere = myresult[0][2]
+  username = myresult[0][3]
+  data = myresult[0][4]
+  insertQuery = "INSERT INTO legipr_admise (titlu, descriere, username, data) VALUES ('"+titlu+"','"+descriere+"','"+username+"', '"+data+"');"
+  mycursor.execute(insertQuery)
+  
+  print("No of Record Inserted :", mycursor.rowcount)
+  
+  # we can use the id to refer to that row later.
+  print("Inserted Id :", mycursor.lastrowid)
+  
+  # To ensure the Data Insertion, commit database.
+  db.commit()
+
+def get_legi(camp):
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT "+camp+" FROM legipr_admise")
+
+  myresult = mycursor.fetchall()
+
+  return myresult
+
+def get_data_by_title(titlu):
+
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT * FROM legipr_admise WHERE titlu ='"+titlu+"'")
+
+  myresult = mycursor.fetchall()
+
+  return myresult

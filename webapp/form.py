@@ -47,3 +47,13 @@ def reset_pass(password_old,password,conf_password ,user):
     else :
         e="parola gresita"
     return e
+
+def user_in_db(user):
+    error = ''
+    a = verificare("username", user)
+    if not(a):
+        error = "Aceasta pagina este invalida"
+    else:
+        error = ''
+    return error
+
