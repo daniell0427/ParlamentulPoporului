@@ -12,8 +12,11 @@
             <h1>Legi propuse</h1>
         </div>
 
-        
-        <a href="{{url_for('propune_legi')}}" id="propune">Propune o lege</a>
+        {% if session.username %}
+            <a href="{{url_for('propune_legi')}}" id="propune">Propune o lege</a>
+        {% else %}
+            <a href="{{url_for('autentificare')}}" id="propune">Propune o lege</a>
+        {% endif %}
         
     </div>
     <div id="legi">

@@ -1,16 +1,16 @@
 from flask import render_template, url_for, flash, redirect,request, session
 from webapp.form import inreg, autentificarea ,reset_pass
 from webapp import app
-from database import titluri, inregistrare ,verifi, postare_db
-from datetime import date, datetime
+from database import titluri, postare_db, get_data_by_title, get_legi
+from datetime import datetime
 from flask_session import Session
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
 @app.route("/")
 @app.route("/acasa")
-
 def acasa():
     a=titluri()
     print(a)
@@ -20,7 +20,6 @@ def acasa():
     if n%2==0: c=0
     if n%2==0: b=1
     
-   
     return render_template("index.html", len = len(a),a=a,c=c,b=b,)
 
 
@@ -131,7 +130,7 @@ def propune_legi():
 
         titlu = request.form.get("titlu")
         descriere = request.form.get("descriere")
-        username = "nume"
+        username = session["username"]
         now = datetime.now()
         data = now.strftime('%d-%m-%Y')
         postare_db(titlu, descriere, username, data)
