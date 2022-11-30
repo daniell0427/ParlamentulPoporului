@@ -11,7 +11,7 @@ def gfg():
       # getting input with name = fname in HTML form
       
       tit = request.form.get("titlu")
-      if tit == '':
+      if tit != None:
          pro1 = request.form.get("pro_l1") 
          contra1 = request.form.get("contra_l1") 
          neu1 = request.form.get("neu_l1") 

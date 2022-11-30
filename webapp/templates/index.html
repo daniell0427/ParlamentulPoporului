@@ -22,8 +22,8 @@
             </div>
             <div>
                     
-                    {%if user!=None %}
-                        <a href="{{ url_for('reseteaza_parola',user=user) }}">{{user}}</a>
+                    {%if session.username  %}
+                        <a href="{{ url_for('reseteaza_parola') }}">{{session.username}}</a>
                     {%else%}
                         <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
                     {%endif%}
@@ -40,7 +40,7 @@
             
                 <!-- For loop logic of jinja template -->
 
-                {%for i in range(len-1, len-7, -1)%}
+                {%for i in range(len-1, -1, -1)%}
 
                          
 
@@ -57,6 +57,7 @@
                     
 
                 {%endfor%}
+
 
                 <a href="{{ url_for('legi_recente',user=user) }} "id="more">Mai multe </a>
     
