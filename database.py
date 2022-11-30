@@ -155,3 +155,5 @@ def get_data_by_title(titlu):
   myresult = mycursor.fetchall()
 
   return myresult
+
+#Ciocan spala-te

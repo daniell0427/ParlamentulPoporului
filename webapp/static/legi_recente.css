@@ -14,14 +14,15 @@ hr{
     display: flex;
     justify-content: space-between;
     font-size: 17px;
-    background-color: rgb(17, 16, 75);
+    background-image: linear-gradient(to bottom right,rgb(57, 57, 146),rgb(17, 16, 75));
     padding: 17px;
     padding-top: 20px;
     margin-top: -6px;
 }
 
 #nav{
-    width: 135vh;
+    padding-top: 5px;
+    width: 150vh;
     display: flex;
     justify-content: space-around;
     text-decoration: none;
@@ -33,25 +34,33 @@ hr{
     border-radius: 11px;
     border: none;
     height: 25px;
+    padding-left: 0.5em;
+    color: rgb(22, 22, 22);
 
 }
 
-#home{
+#searchButton{
+    background-color: transparent;
+    border:none;
     color:lightgray;
+    margin-left: -100px;
 }
 
-.link_nav{
+a{
     color:lightgray;
     text-decoration: none;
 }
+a:hover{
+    color:lightgray;
+}
+
 .link_nav:hover{
     text-decoration: underline;
-    color:lightgray;
 }
 
 #limba{
     display:flex;
-    margin: -10px;
+    margin: -6px;
 }
 #romana, #rusa, #engleza{
     font-size: 20px;
@@ -63,7 +72,7 @@ hr{
 #romana{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px ;
-    border-right: 5px solid rgb(17, 16, 75);
+    margin-right: 5px;
 }
 
 #rusa{
@@ -72,7 +81,7 @@ hr{
 }
 
 #engleza{
-    border-right: 5px solid rgb(17, 16, 75);
+    margin-right: 5px;
 }
 
 #rusa:hover{
@@ -117,10 +126,8 @@ h1{
 }
 
 .lege{
-    color: black;
-    text-decoration: none;
-    font-size: 25px;
-    background-color:white;
+    font-size: 20px;
+    background-image: linear-gradient(to bottom,white,rgb(230, 230, 230));
     margin: 0px;
     min-height: 100px;
     max-height: 600px;
@@ -128,6 +135,7 @@ h1{
     padding: 10px;
     border-radius: 7px;
     margin: 10px;
+    color: black;
 }
 
 .lege:hover{

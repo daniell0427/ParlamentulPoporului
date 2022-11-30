@@ -10,11 +10,11 @@
 
 
 {% block content %}
-    <hr>
+    
     <div id="logo">
         <div id="abc">
-            <img id="balance" src="{{url_for('static',filename='logo.png')}}" alt="..." width="120px" height="120px">
-            <h1 id="title">Parlamentul Poporului</h1>
+            <img id="balance" src="{{url_for('static',filename='logo.png')}}" alt="..." width="100px" height="100px">
+            <h1 id="title">Parlamentul <br> &nbsp;&nbsp;Poporului</h1>
         </div>
         <div id="cont">
             <div id="pfp">
@@ -50,6 +50,7 @@
                         <div class="lege">
                             <a href=""><p>{{a[i][0]}}</p></a>
                         </div>
+                        
                         {%if i % 2 == c%}
                            </div>
                         {%endif%}
@@ -57,10 +58,9 @@
 
                 {%endfor%}
 
-                <button><a href="{{ url_for('legi_recente',user=user) }}">Mai multe </a></button>
-
-                  
-            
+                <a href="{{ url_for('legi_recente',user=user) }} "id="more">Mai multe </a>
+    
+    </div>                                  
         
 {% endblock content %}
 

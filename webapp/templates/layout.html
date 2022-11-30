@@ -28,12 +28,12 @@
         <div id="top">    
             <nav id="nav">
                 <a href="{{ url_for('acasa',user=user) }}"><i class="material-icons" id="home">home</i></a>
-                <div>
+                
                     <input type="text"
                     placeholder="Cautare..."
                     id="cautare">
-                  <button type="submit" >  <i class="material-icons">search</i></button>
-                </div>
+                  <button type="submit" id="searchButton">  <i class="material-icons">search</i></button>
+                
                 <a href="{{url_for('legi_recente',user=user)}}" id="legi_recente" class="link_nav">Legi recente</a>    
                 <a href="{{url_for('legi_in_discutie',user=user)}}" id="legi_in_discutie" class="link_nav">Legi in discutie</a>
                 <a href="{{url_for('legi_propuse',user=user, titlu=None)}}" id="legi_propuse" class="link_nav">Legi propuse</a>
