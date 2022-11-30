@@ -155,3 +155,12 @@ def get_data_by_title(titlu):
   myresult = mycursor.fetchall()
 
   return myresult
+
+def cautar(caut):
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT titlu FROM legi WHERE titlu LIKE '%"+caut+"%'")
+
+  myresult = mycursor.fetchall()
+
+  return myresult
