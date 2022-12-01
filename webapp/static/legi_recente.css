@@ -43,8 +43,9 @@ hr{
     background-color: transparent;
     border:none;
     color:lightgray;
-    margin-left: -100px;
+    margin-left: -5px;
 }
+
 
 a{
     color:lightgray;

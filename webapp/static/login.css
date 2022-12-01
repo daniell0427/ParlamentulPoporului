@@ -32,8 +32,15 @@ hr{
     border-radius: 11px;
     border: none;
     height: 25px;
-
 }
+
+#searchButton{
+    background-color: transparent;
+    border:none;
+    color:lightgray;
+    margin-left: -5px;
+}
+
 
 a{
     color:lightgray;
