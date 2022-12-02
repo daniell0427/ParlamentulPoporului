@@ -43,7 +43,7 @@ def reset_pass(password_old,password,conf_password ,user):
             pas=password_hash(password)
             a=parola_nou(user,pas)
         else:
-            e="Paroa de confirmare gresita"
+            e="Parloa de confirmare gresita"
     else :
         e="parola gresita"
     return e

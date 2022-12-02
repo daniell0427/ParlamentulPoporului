@@ -1,7 +1,7 @@
-from flask import render_template, url_for, flash, redirect,request, session
+from flask import render_template, url_for, redirect, request, session
 from webapp.form import inreg, autentificarea ,reset_pass
 from webapp import app
-from database import titluri, postare_db, get_data_by_title, get_legi
+from database import titluri, postare_db, get_legi, get_data_by_title, cautar
 from datetime import datetime
 from flask_session import Session
 
@@ -66,7 +66,7 @@ def reseteaza_parola():
       password = request.form.get("password")
       password_new =request.form.get("new_pass")
       password_conf=request.form.get("conf_pass") 
-      user=session.get["username"]
+      user=session.get("username")
       e=reset_pass(password, password_new,password_conf, user)  
       if e=="":
         return redirect(url_for("acasa"))
@@ -142,3 +142,21 @@ def propune_legi():
 def logout():
     session["username"]=None
     return redirect(url_for("acasa"))
+
+@app.route("/cautare", methods = ['POST'])
+def cautare():
+    
+    if request.method == "POST":
+        caut = request.form.get("caut")
+        
+        a=cautar(caut)
+    eror=""
+    n=len(a)
+    if n==0:
+        eror="Ne pare rau nu sa gasit nicio lege"
+    print(n)
+    c=1
+    b=0
+    if n%2==0: c=0
+    if n%2==0: b=1
+    return render_template("legi_recente.html", title = "Cautare",a=a,len=len(a),c=c,b=b ,eror=eror)
