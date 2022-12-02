@@ -5,17 +5,26 @@
 {% endblock head %}
 
 {% block content %}
-<form action="" method="post">
-    <label for="user">Nume utilizator</label><br>
-    <input type="text" name="user" id=""><br>
-    <label for="email">Email</label><br>
-    <input type="email" name="email" id=""><br>
-    <label for="password">Parola</label><br>
-    <input type="password" name="password" id=""><br>
-    <label for="pass_conf">Confirmare parola</label><br>
-    <input type="password" name="pass_conf" id=""><br>
-    <button type="submit">Inregistrare</button>
-</form>
- <a href="{{ url_for('autentificare') }}">Autentificare</a>
+<div id="main">
+    <div id="container">
+        <h1>Inregistrare</h1>
+        <form action="" method="post" id="form">
+        
+            <label for="user" class="label">Nume de utilizator</label>
+            <input type="text" name="user" id="" class="input">
+            <label for="email" class="label">Email</label>
+            <input type="email" name="email" id=""class="input">
+            <label for="password" class="label">Parola</label>
+            <input type="password" name="password" id="" class="input">
+            <label for="pass_conf" class="label">Confirmare parola</label>
+            <input type="password" name="pass_conf" id="" class="input">
+            <button type="submit" id="inregistreazate">Inregistreaza-te</button>
+        
+        </form>
+       
+        <span id="autentificare">Ai cont deja?<a href="{{ url_for('autentificare') }}" id="autentificate">Autentifica-te</a> </span>
+
+    </div>
+</div>
 <div>{{e}}</div>
 {% endblock content %}

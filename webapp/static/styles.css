@@ -29,14 +29,16 @@ hr{
 }
 
 #cautare{
-    font-size:20px;
+    font-size:25px;
     background-color: lightgrey;
-    border-radius: 11px;
+    border-radius: 15px;
     border: none;
-    height: 25px;
+    height: 30px;
     padding-left: 0.5em;
+    padding-top: 10px;
+    padding-bottom: 5px;
     color: rgb(22, 22, 22);
-    margin-top: -5px;
+
 
 }
 
@@ -157,11 +159,18 @@ a:hover{
 }
 
 #inregistrare:hover{
-    background-color: rgb(143, 143, 227);
-    color:rgb(24, 24, 97);
+    color:rgb(124, 136, 172);
+    background-color: lightgray;
     text-decoration: none;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.371);
 }
 
+#inregistrare:focus{
+    cursor: pointer;
+    background-color: rgb(179, 179, 179);
+    color:rgba(84, 91, 119, 0.621);
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.374);
+}
 
 #main{
     background-color: #FFFAFA;
