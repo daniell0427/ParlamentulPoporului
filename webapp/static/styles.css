@@ -36,6 +36,7 @@ hr{
     height: 25px;
     padding-left: 0.5em;
     color: rgb(22, 22, 22);
+    margin-top: -5px;
 
 }
 
@@ -43,7 +44,7 @@ hr{
     background-color: transparent;
     border:none;
     color:lightgray;
-    margin-left: -100px;
+    margin-left: -5px;
 }
 
 a{
@@ -221,6 +222,7 @@ a:hover{
 #more{
     font-size: 30px;
     background-color: rgb(17, 16, 75);
+    width: 5.1em;
     border: none;
     border-radius: 5px;
     padding: 10px;
