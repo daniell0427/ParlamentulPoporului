@@ -24,11 +24,38 @@
 
     <div id="voturi">
         <p id="pro">Voturi pro: {{pro}}</p>
-        <button type="submit">Voteaza pro</button>
         <p id="contra">Voturi contra: {{contra}}</p>
-        <button type="submit">Voteaza contra</button>
         <p id="neutre">Voturi neutre: {{neutru}}</p>
-        <button type="submit">Voteaza neutru</button>
+        <br>
+        <button class="button" id="button">Voteaza</button>
+
     </div>
+
+    <!--Modal section!-->
+
+    <div class="modal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            <h1>Voteaza acum</h1>
+            <hr style="height: 1px; margin-left: -10px; margin-top: -5px;">
+            <form action="">
+                <label for="phone">
+                    Va rog introduceti numarul dvs de telefon:
+                </label><br>
+                <input type="tel" name="phone" id="phone" pattern="[0-9]{9}" required><br> 
+                <button type="submit" class="button">Trimite</button> 
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('button').addEventListener('click', function() {
+            document.querySelector('.modal').style.display = 'flex';
+        });
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.querySelector('.modal').style.display = 'none';
+        });
+    </script>
 
 {% endblock content %}
