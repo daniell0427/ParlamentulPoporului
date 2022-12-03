@@ -1,9 +1,10 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from webapp.form import inreg, autentificarea ,reset_pass
-from webapp import app
+from webapp import app, otp, mail
 from database import titluri, postare_db, get_legi, get_data_by_title, cautar
 from datetime import datetime
 from flask_session import Session
+from flask_mail import Message
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -36,7 +37,10 @@ def inregistrare():
             if e!="Inregistrare completa": 
                 print(e)
             else:
-                return redirect(url_for("autentificare"))
+                msg = Message(subject='OTP', sender='parlamentulpoporului@gmail.com', recipients=[email])
+                msg.body = str(otp)
+                mail.send(msg)
+                return render_template('email_verification.html', email=email)
         return render_template("register.html" ,e=e)
     else:
         return redirect(url_for("acasa"))
@@ -165,3 +169,4 @@ def cautare():
     if n%2==0: c=0
     if n%2==0: b=1
     return render_template("legi_recente.html", title = "Cautare",a=a,len=len(a),c=c,b=b ,eror=eror)
+

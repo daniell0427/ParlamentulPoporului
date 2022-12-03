@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+    <link href="{{ url_for('static', filename='email_verification.css') }}" type="text/css" rel="stylesheet">
+{% endblock head %}
+
+
+{% block content %}
+    <hr>
+    <div id="main" class="main">
+        <h1>Verificarea Email</h1>
+        <p>Pe adresa de email {{email}} am trimis un cod de 6 cifre. Inserati-l in campul rezervat pentru a verifica email-ul!</p>
+        <form action="" method="post">
+            <label for="otp">Codul de 6 cifre: </label><br>
+            <input type="number" name="otp" id="otp" placeholder="123456">
+            <button type="submit" id="button">Verifica</button>
+        </form>
+    </div>
+{% endblock content %}
