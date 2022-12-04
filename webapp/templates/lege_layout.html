@@ -36,7 +36,12 @@
             </div>    
         </div>
 
-        <button class="button" id="button">Voteaza</button>
+    <div id="voturi">
+        <p id="pro">Voturi pro: {{pro}}</p>
+        <p id="contra">Voturi contra: {{contra}}</p>
+        <p id="neutre">Voturi neutre: {{neutru}}</p>
+        <br>
+        <button class="button1" id="button1">Voteaza</button>
 
     </div>
 
@@ -52,13 +57,13 @@
                     Va rog introduceti numarul dvs de telefon:
                 </label><br>
                 <input type="tel" name="phone" id="phone" pattern="[0-9]{9}" required><br> 
-                <button type="submit" class="button">Trimite</button> 
+                <button type="submit" class="button2" id="button2">Trimite</button> 
             </form>
         </div>
     </div>
 
     <script>
-        document.getElementById('button').addEventListener('click', function() {
+        document.getElementById('button1').addEventListener('click', function() {
             document.querySelector('.modal').style.display = 'flex';
         });
 
