@@ -103,15 +103,16 @@ a:hover{
 /*nav-bar end*/
 
 
-#abc{
-    display:flex;
-    padding-inline: 20px;
 
-}
 #logo{
     margin-top: 0px;
     display: flex;
     justify-content: space-between;
+}
+
+#abc{
+    display:flex;
+    padding-inline: 20px;
 }
 
 #balance{
@@ -137,10 +138,11 @@ a:hover{
     padding: 5px;
     border-radius: 10px;
     border: none;
-    height: 145px;
+    height: 123px;
     background-color: #FFFAFA;
     border: 3px solid rgb(163, 163, 163);
     box-shadow:0 4px 7px rgba(0, 0, 0, 0.755);
+    margin-top: 15px;
 }
 
 #pfp{
@@ -149,7 +151,7 @@ a:hover{
 
 #inregistrare{
     background-color: rgb(40, 40, 138);
-    font-size: 16px;
+    font-size: 12px;
     padding-inline: 10px ;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -176,7 +178,7 @@ a:hover{
     background-color: #FFFAFA;
     height: auto;
     margin: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.317);

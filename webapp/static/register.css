@@ -29,13 +29,16 @@ hr{
 }
 
 #cautare{
-    font-size:20px;
+    font-size:25px;
     background-color: lightgrey;
-    border-radius: 11px;
+    border-radius: 15px;
     border: none;
-    height: 25px;
+    height: 30px;
     padding-left: 0.5em;
+    padding-top: 10px;
+    padding-bottom: 5px;
     color: rgb(22, 22, 22);
+
 
 }
 
@@ -45,7 +48,6 @@ hr{
     color:lightgray;
     margin-left: -5px;
 }
-
 
 a{
     color:lightgray;
@@ -98,8 +100,7 @@ a:hover{
     color: rgb(46, 46, 46)
 }
 
-
-/*end of navbar*/
+/*nav-bar end*/
 
 #container{
     display:flex;
