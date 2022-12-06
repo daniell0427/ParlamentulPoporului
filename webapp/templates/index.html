@@ -39,7 +39,7 @@
         </div>
             
                 <!-- For loop logic of jinja template -->
-
+            <div>
                 {%for i in range(len-1, -1, -1)%}
 
                          
@@ -57,10 +57,10 @@
                     
 
                 {%endfor%}
-
-                               
-        <a href="{{ url_for('legi_recente',user=user) }} "id="more">Mai multe </a>
-    
+            </div>
+        <div>                 
+            <a href="{{ url_for('legi_recente',user=user) }} "id="more">Mai multe </a>
+        </div>
     </div>                                  
         
 {% endblock content %}
