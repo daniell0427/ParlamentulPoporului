@@ -165,7 +165,7 @@ h1{
 }
 
 #legi{
-    background-image: linear-gradient(to bottom right, white, rgb(199, 199, 199));
+    background-color: white;
     color:black;
     margin:40px;
     background-color: white;
@@ -181,4 +181,8 @@ h1{
     .lege{
         grid-column: span 2
     }
+}
+
+p{
+    color: black;
 }
