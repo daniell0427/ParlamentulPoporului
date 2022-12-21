@@ -38,7 +38,7 @@
 
                 <div id="pcn">
                     <strong>Voturi:</strong>
-                    <strong id="pro">Pro:  <span id="proNumber">4{{pro}}</span></strong>
+                    <strong id="pro">Pro:  <span id="proNumber">10{{pro}}</span></strong>
                     <strong id="contra">Contra:  <span id="contraNumber">2{{contra}}</span></strong>
                     <strong id="neutre">Neutre:  <span id="neutruNumber">3{{neutru}}</span></strong>
                 </div>    
@@ -58,14 +58,13 @@
 
     <div class="modal">
         <div class="modal-content">
-            <div class="close">+</div>
-            <h1>Voteaza acum</h1>
-            <hr style="height: 1px; margin-left: -10px; margin-top: -5px;">
-            <form action="">
+            <i id="close" class="material-icons">close</i>
+            <h1 id="votenow">Voteaza acum</h1>
+            <form id="form" action="">
                 <label for="phone">
-                    Va rog introduceti numarul dvs de telefon:
-                </label><br>
-                <input type="tel" name="phone" id="phone" pattern="[0-9]{9}" required><br> 
+                    Va rugam introduceti numarul dvs de telefon:
+                </label>
+                <input type="tel" name="phone" id="phone" pattern="[0-9]{9}" required>
                 <button type="submit" class="button2" id="button2">Trimite</button> 
             </form>
         </div>
@@ -76,7 +75,7 @@
             document.querySelector('.modal').style.display = 'flex';
         });
 
-        document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('close').addEventListener('click', function() {
             document.querySelector('.modal').style.display = 'none';
         });
 
