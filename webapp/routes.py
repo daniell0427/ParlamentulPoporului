@@ -1,10 +1,10 @@
 from flask import render_template, url_for, redirect, request, session, flash
-from webapp.form import inreg, autentificarea ,reset_pass
-from webapp import app, otp, mail
+from webapp.form import inreg, autentificarea ,reset_pass, send_otp
+from webapp import app
 from database import titluri, postare_db, get_legi, get_data_by_title, cautar
 from datetime import datetime
 from flask_session import Session
-from flask_mail import Message
+
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -37,10 +37,8 @@ def inregistrare():
             if e!="Inregistrare completa": 
                 print(e)
             else:
-                msg = Message(subject='OTP', sender='parlamentulpoporului@gmail.com', recipients=[email])
-                msg.body = str(otp)
-                mail.send(msg)
-                return render_template('email_verification.html', email=email)
+                #Verificare email:
+                return redirect(url_for('email_verification', email = email))
         return render_template("register.html" ,e=e)
     else:
         return redirect(url_for("acasa"))
@@ -64,9 +62,15 @@ def autentificare():
         return redirect(url_for("acasa"))
 
 
-@app.route("/reseteaza-parola",methods=['GET', 'POST'])
+
+@app.route("/account",methods=['GET', 'POST'])
+def account():
+    email = session["username"]
+    return render_template("account.html", email = email )
+
+@app.route("/reset-password",methods=['GET', 'POST'])
 def reseteaza_parola():
-    if session["username"] == None:
+    if session["username"] != None:
         e=""
         if request.method == "POST":
             password = request.form.get("password")
@@ -169,4 +173,15 @@ def cautare():
     if n%2==0: c=0
     if n%2==0: b=1
     return render_template("legi_recente.html", title = "Cautare",a=a,len=len(a),c=c,b=b ,eror=eror)
+
+@app.route("/verificare-email/<email>" , methods=["GET","POST"])
+def email_verification(email):
+    msg = send_otp(email)
+    if request.method == "POST":
+        otp = request.form.get("otp")
+        if otp == msg:
+            return redirect(url_for("autentificare"))
+        else:
+            print("Otp invalid")
+    return render_template('email_verification.html', email=email, msg=msg)
 

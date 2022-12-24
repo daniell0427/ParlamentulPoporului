@@ -1,5 +1,8 @@
 from database import inregistrare , verificare , verificare_pass , parola_nou
 from argon2 import PasswordHasher
+from flask_mail import Message
+from webapp import otp, mail
+
 def password_hash(pass1):
     ph = PasswordHasher()
     hash = ph.hash(pass1)
@@ -57,3 +60,8 @@ def user_in_db(user):
         error = ''
     return error
 
+def send_otp(email):
+    msg = Message(subject='OTP', sender='parlamentulpoporului@gmail.com', recipients=[email])
+    msg.body = str(otp)
+    mail.send(msg)
+    return str(otp)

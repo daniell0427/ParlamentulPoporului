@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+    <link href="{{ url_for('static', filename='account.css') }}" type="text/css" rel="stylesheet">
+{% endblock head %}
+
+
+{% block content %}
+    <a href="{{ url_for('email_verification', email = email }}">Verificare Email</a>
+    <a href="{{ url_for('reseteaza_parola') }}">Reseteaza Parola</a>
+    <a href="{{ url_for('logout') }}">Iesire</a>
+{% endblock content %}

@@ -1,0 +1,91 @@
+body{
+    font-family:sans-serif;
+    background-color: rgb(232, 232, 232);
+    color: lightgrey;
+}
+
+hr{
+    height: 4px;
+    border: none;
+    background-color: rgb(17, 16, 75);
+}
+
+#top{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    background-color: rgb(17, 16, 75);
+    padding: 20px;
+    margin-top: -6px;
+}
+
+#nav{
+    width: 135vh;
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+#cautare{
+    font-size:20px;
+    background-color: lightgrey;
+    border-radius: 11px;
+    border: none;
+    height: 25px;
+
+}
+
+#searchButton{
+    background-color: transparent;
+    border:none;
+    color:lightgray;
+    margin-left: -5px;
+}
+
+
+a{
+    color:lightgray;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+#limba{
+    display:flex;
+    margin: -10px;
+}
+#romana, #rusa, #engleza{
+    font-size: 25px;
+    border: none;
+    background-color: rgb(67, 67, 128);
+    color:lightgray
+}
+
+#romana{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px ;
+    border-right: 5px solid rgb(17, 16, 75);
+}
+
+#rusa{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#engleza{
+    border-right: 5px solid rgb(17, 16, 75);
+}
+
+#rusa:hover{
+    background-color: rgb(211, 13, 13);
+    color: rgb(46, 46, 46)
+}
+#romana:hover{
+    background-color:  rgb(0, 25, 212);
+    color: rgb(46, 46, 46)
+}
+#engleza:hover{
+    background-color: rgb(207, 207, 0);
+    color: rgb(46, 46, 46)
+}
