@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session, flash
-from webapp.form import inreg, autentificarea ,reset_pass, send_otp
+from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
 from webapp import app
-from database import titluri, postare_db, get_legi, get_data_by_title, cautar
+from database import titluri, postare_db, get_legi, get_data_by_title, cautar, get_data_by_username
 from datetime import datetime
 from flask_session import Session
 
@@ -10,9 +10,21 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+def global_variables():
+    if session["username"]:
+        global username
+        global email
+        global verified
+        username = session.get('username')
+        email = session.get('email')
+        verified = get_data_by_username('verified', username)
+
+
+
 @app.route("/")
 @app.route("/acasa")
 def acasa():
+    global_variables()
     a=titluri()
     print(a)
     n=len(a)
@@ -29,16 +41,20 @@ def inregistrare():
     if session["username"] == None:
         e=""
         if request.method == "POST":
-            user = request.form.get("user")
+            global username
+            username = request.form.get("user")
+            global email
             email = request.form.get("email") 
             password = request.form.get("password") 
             pass_conf= request.form.get("pass_conf")
-            e=inreg(user,email,password,pass_conf)
+            global verified
+            verified = "False"
+            e=inreg(username,email,password,pass_conf,verified)
             if e!="Inregistrare completa": 
                 print(e)
             else:
                 #Verificare email:
-                return redirect(url_for('email_verification', email = email))
+                return redirect(url_for('email_verification'))
         return render_template("register.html" ,e=e)
     else:
         return redirect(url_for("acasa"))
@@ -49,13 +65,17 @@ def autentificare():
     if session["username"] == None:
         eror=""
         if request.method == "POST":
-            user = request.form.get("user") 
+            global username
+            username = request.form.get("user") 
             password = request.form.get("password") 
+            global email
+            email = get_data_by_username("email", username)
             eror=""
-            eror = autentificarea(user,password)
+            eror = autentificarea(email, username,password)
             if eror=="" :
-                session["username"] = user
-                return redirect(url_for("acasa",user=user))
+                session["username"] = username
+                session["email"] = email
+                return redirect(url_for("acasa",user=username))
 
         return render_template("login.html",e=eror)
     else:
@@ -65,8 +85,13 @@ def autentificare():
 
 @app.route("/account",methods=['GET', 'POST'])
 def account():
-    email = session["username"]
-    return render_template("account.html", email = email )
+    global email
+    global username
+    try:
+        verified = get_data_by_username('verified', username)
+    except:
+        return render_template("except_page.html")
+    return render_template("account.html", email = email, verified = verified)
 
 @app.route("/reset-password",methods=['GET', 'POST'])
 def reseteaza_parola():
@@ -76,8 +101,8 @@ def reseteaza_parola():
             password = request.form.get("password")
             password_new =request.form.get("new_pass")
             password_conf=request.form.get("conf_pass") 
-            user=session.get("username")
-            e=reset_pass(password, password_new,password_conf, user)  
+            global email
+            e=reset_pass(password, password_new, password_conf, email)  
             if e=="":
                 return redirect(url_for("acasa"))
         return render_template("reseteazaparola.html",e=e)
@@ -136,7 +161,7 @@ def legi_in_discutie():
 
 @app.route("/propune-legi", methods=['GET', 'POST'])
 def propune_legi():
-    if session["username"] != None:
+    if session["username"] != None and verified == 'True':
         if request.method == "POST":
 
             titlu = request.form.get("titlu")
@@ -149,10 +174,16 @@ def propune_legi():
                 return redirect(url_for("acasa"))
         return render_template("propune_legi.html", title = "Propune o lege")
     else:
-        return redirect(url_for('autentificare'))
+        if session["username"] == None:
+            flash('Trebuie sa va autentificati pentru a accesa Propune Legi!', 'danger')
+            return redirect(url_for('autentificare'))
+        else:
+            flash('Trebuie sa va verificati email-ul pentru a accesa Propune Legi!', 'danger')
+            return redirect(url_for('legi_propuse'))
 
 @app.route("/logout")
 def logout():
+    session["email"]=None
     session["username"]=None
     return redirect(url_for("acasa"))
 
@@ -174,14 +205,24 @@ def cautare():
     if n%2==0: b=1
     return render_template("legi_recente.html", title = "Cautare",a=a,len=len(a),c=c,b=b ,eror=eror)
 
-@app.route("/verificare-email/<email>" , methods=["GET","POST"])
-def email_verification(email):
-    msg = send_otp(email)
-    if request.method == "POST":
-        otp = request.form.get("otp")
-        if otp == msg:
-            return redirect(url_for("autentificare"))
-        else:
-            print("Otp invalid")
+@app.route("/verificare-email" , methods=["GET","POST"])
+def email_verification():
+    global email
+    global verified
+    if verified == 'False':
+        msg = send_otp(email)
+        if request.method == "POST":
+            otp = request.form.get("otp")
+            if otp == msg:
+                try:
+                    inregistrare_changes_db('verified', 'True', email)
+                except:
+                    print('Ne pare rau, a aparut o eroare! Incercati mai tarziu.')
+                return redirect(url_for("autentificare"))
+            else:
+                print("Otp invalid")
+    else:
+        return redirect(url_for('acasa'))
+
     return render_template('email_verification.html', email=email, msg=msg)
 
