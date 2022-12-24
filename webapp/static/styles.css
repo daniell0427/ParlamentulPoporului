@@ -29,14 +29,16 @@ hr{
 }
 
 #cautare{
-    font-size:20px;
+    font-size:25px;
     background-color: lightgrey;
-    border-radius: 11px;
+    border-radius: 15px;
     border: none;
-    height: 25px;
+    height: 30px;
     padding-left: 0.5em;
+    padding-top: 10px;
+    padding-bottom: 5px;
     color: rgb(22, 22, 22);
-    margin-top: -5px;
+
 
 }
 
@@ -101,15 +103,16 @@ a:hover{
 /*nav-bar end*/
 
 
-#abc{
-    display:flex;
-    padding-inline: 20px;
 
-}
 #logo{
     margin-top: 0px;
     display: flex;
     justify-content: space-between;
+}
+
+#abc{
+    display:flex;
+    padding-inline: 20px;
 }
 
 #balance{
@@ -135,10 +138,11 @@ a:hover{
     padding: 5px;
     border-radius: 10px;
     border: none;
-    height: 145px;
+    height: 123px;
     background-color: #FFFAFA;
     border: 3px solid rgb(163, 163, 163);
     box-shadow:0 4px 7px rgba(0, 0, 0, 0.755);
+    margin-top: 15px;
 }
 
 #pfp{
@@ -147,7 +151,7 @@ a:hover{
 
 #inregistrare{
     background-color: rgb(40, 40, 138);
-    font-size: 16px;
+    font-size: 12px;
     padding-inline: 10px ;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -157,17 +161,24 @@ a:hover{
 }
 
 #inregistrare:hover{
-    background-color: rgb(143, 143, 227);
-    color:rgb(24, 24, 97);
+    color:rgb(124, 136, 172);
+    background-color: lightgray;
     text-decoration: none;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.371);
 }
 
+#inregistrare:focus{
+    cursor: pointer;
+    background-color: rgb(179, 179, 179);
+    color:rgba(84, 91, 119, 0.621);
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.374);
+}
 
 #main{
     background-color: #FFFAFA;
     height: auto;
     margin: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.317);

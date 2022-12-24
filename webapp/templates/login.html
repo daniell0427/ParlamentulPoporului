@@ -7,15 +7,23 @@
 
 
 {% block content %}
-       <form action="" method="post">
+    <div id="main">
+        <div id="container">
+            <h1>Autentificare</h1>
+            <form action="" method="post"id="form">
+                <label for="user" class="label">Nume utilizator</label>
+                <input type="text" name="user" id="" class="input">
+                <label for="password" class="label">Parola</label>
+                <input type="password" name="password" id="" class="input">
+                <span id="tinemaminte"><input type="checkbox" id="checkbox">Tine-ma minte</span>
+                <button type="submit" id="autentificare">Autentificare</button>
+            </form>
+            <a href="" id="aup">Ai uitat parola?</a>
+            <span id="nuaicont">Nu ai cont?<a href="{{ url_for('inregistrare') }}" id="inregistreazate">Inregistreaza-te</a></span>
 
-        <label for="user">Nume utilizator</label><br>
-        <input type="text" name="user" id=""><br>
-        <label for="password">Parola</label><br>
-        <input type="password" name="password" id=""><br>
-        <button type="submit">Autentificare</button>
-       </form>
+        </div>
+    </div>    
        <div>
         {{e}}
-       </div>
+    </div>
 {% endblock content %}

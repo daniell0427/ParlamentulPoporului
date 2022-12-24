@@ -1,7 +1,7 @@
 body{
     font-family:sans-serif;
     background-color: rgb(232, 232, 232);
-    color: black;
+    color: lightgrey;
 }
 
 hr{
@@ -13,32 +13,25 @@ hr{
 #top{
     display: flex;
     justify-content: space-between;
-    font-size: 17px;
-    background-image: linear-gradient(to bottom right,rgb(57, 57, 146),rgb(17, 16, 75));
-    padding: 17px;
-    padding-top: 20px;
+    font-size: 20px;
+    background-color: rgb(17, 16, 75);
+    padding: 20px;
     margin-top: -6px;
 }
 
 #nav{
-    padding-top: 5px;
-    width: 150vh;
+    width: 135vh;
     display: flex;
     justify-content: space-around;
     text-decoration: none;
 }
 
 #cautare{
-    font-size:25px;
+    font-size:20px;
     background-color: lightgrey;
-    border-radius: 15px;
+    border-radius: 11px;
     border: none;
-    height: 30px;
-    padding-left: 0.5em;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    color: rgb(22, 22, 22);
-
+    height: 25px;
 
 }
 
@@ -49,24 +42,21 @@ hr{
     margin-left: -5px;
 }
 
+
 a{
     color:lightgray;
     text-decoration: none;
 }
 a:hover{
-    color:lightgray;
-}
-
-.link_nav:hover{
     text-decoration: underline;
 }
 
 #limba{
     display:flex;
-    margin: -6px;
+    margin: -10px;
 }
 #romana, #rusa, #engleza{
-    font-size: 20px;
+    font-size: 25px;
     border: none;
     background-color: rgb(67, 67, 128);
     color:lightgray
@@ -75,7 +65,7 @@ a:hover{
 #romana{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px ;
-    margin-right: 5px;
+    border-right: 5px solid rgb(17, 16, 75);
 }
 
 #rusa{
@@ -84,7 +74,7 @@ a:hover{
 }
 
 #engleza{
-    margin-right: 5px;
+    border-right: 5px solid rgb(17, 16, 75);
 }
 
 #rusa:hover{
@@ -100,55 +90,11 @@ a:hover{
     color: rgb(46, 46, 46)
 }
 
-/*nav-bar end*/
-
-#all{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#main{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-
-
-.modal {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7 );
-    position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
-
-.modal-content{
+.main{
     width: 500px;
     height: 200px;
     background-color: white;
     border-radius: 8px;
     color: black;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-bottom: -20px;
-    position: relative;
 }
 
-.button{
-    background-color: dodgerblue;
-    border-radius: 10px;
-}
-
-.close{
-    position: absolute;
-    top: 0;
-    right: 14px;
-    font-size: 42px;
-    transform: rotate(45deg);
-    cursor: pointer;
-}
