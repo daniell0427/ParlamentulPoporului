@@ -1,7 +1,7 @@
 body{
     font-family:sans-serif;
     background-color: rgb(232, 232, 232);
-    color: black;
+    color: lightgrey;
 }
 
 hr{
@@ -13,25 +13,32 @@ hr{
 #top{
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
-    background-color: rgb(17, 16, 75);
-    padding: 20px;
+    font-size: 17px;
+    background-image: linear-gradient(to bottom right,rgb(57, 57, 146),rgb(17, 16, 75));
+    padding: 17px;
+    padding-top: 20px;
     margin-top: -6px;
 }
 
 #nav{
-    width: 135vh;
+    padding-top: 5px;
+    width: 150vh;
     display: flex;
     justify-content: space-around;
     text-decoration: none;
 }
 
 #cautare{
-    font-size:20px;
+    font-size:25px;
     background-color: lightgrey;
-    border-radius: 11px;
+    border-radius: 15px;
     border: none;
-    height: 25px;
+    height: 30px;
+    padding-left: 0.5em;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: rgb(22, 22, 22);
+
 
 }
 
@@ -42,21 +49,24 @@ hr{
     margin-left: -5px;
 }
 
-
 a{
     color:lightgray;
     text-decoration: none;
 }
 a:hover{
+    color:lightgray;
+}
+
+.link_nav:hover{
     text-decoration: underline;
 }
 
 #limba{
     display:flex;
-    margin: -10px;
+    margin: -6px;
 }
 #romana, #rusa, #engleza{
-    font-size: 25px;
+    font-size: 20px;
     border: none;
     background-color: rgb(67, 67, 128);
     color:lightgray
@@ -65,7 +75,7 @@ a:hover{
 #romana{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px ;
-    border-right: 5px solid rgb(17, 16, 75);
+    margin-right: 5px;
 }
 
 #rusa{
@@ -74,7 +84,7 @@ a:hover{
 }
 
 #engleza{
-    border-right: 5px solid rgb(17, 16, 75);
+    margin-right: 5px;
 }
 
 #rusa:hover{
@@ -89,6 +99,7 @@ a:hover{
     background-color: rgb(207, 207, 0);
     color: rgb(46, 46, 46)
 }
+
 
 /*end of navbar*/
 

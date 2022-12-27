@@ -36,10 +36,10 @@ def titluri():
   return myresult
 
 
-def inregistrare(user,email,password):
+def inregistrare(user,email,password,verified):
   mycursor = db.cursor()
 
-  insertQuery = "INSERT INTO inregistrare (username, email, password) VALUES ('"+user+"','"+email+"','"+password+"');"
+  insertQuery = "INSERT INTO inregistrare (username, email, password, verified) VALUES ('"+user+"','"+email+"','"+password+"','"+verified+"');"
   
   mycursor.execute(insertQuery)
   
@@ -81,10 +81,10 @@ def verify_password(self, password):
      except Exception:
          return False
 
-def verificare_pass(password,user):
+def verificare_pass(password,email):
     mycursor = db.cursor()
 
-    sql = "SELECT password FROM inregistrare WHERE username ='"+user+"';"
+    sql = "SELECT password FROM inregistrare WHERE email ='"+email+"';"
 
     mycursor.execute(sql)
 
@@ -93,10 +93,10 @@ def verificare_pass(password,user):
     a=verify_password(myresult[0][0],password)
     return a
   
-def parola_nou(user,password):
+def inregistrare_changes_db(camp, value, email):
     mycursor = db.cursor()
 
-    sql = "UPDATE inregistrare SET password = '"+password+"' WHERE username = '"+user+"'"
+    sql = "UPDATE inregistrare SET "+camp+" = '"+value+"' WHERE email = '"+email+"'"
 
     mycursor.execute(sql)
 
@@ -164,3 +164,13 @@ def cautar(caut):
   myresult = mycursor.fetchall()
 
   return myresult
+
+def get_data_by_username(camp, nume):
+    mycursor = db.cursor()
+    sql = "SELECT "+camp+" FROM inregistrare WHERE username = '"+nume+"'"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchone()[0]
+    try:
+      return myresult
+    except:
+      print("An exception occurred")
