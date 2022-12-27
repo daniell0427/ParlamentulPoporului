@@ -192,7 +192,7 @@ a:hover{
     height: 80px;
     background-image: linear-gradient(to bottom,rgb(57, 57, 146),rgb(17, 16, 75));
     border-radius: 4px;
-    box-shadow:0 10px 10px rgba(0, 0, 0, 0.679);
+    box-shadow:0 5px 10px rgba(0, 0, 0, 0.679);
 }
 
 #tit{
