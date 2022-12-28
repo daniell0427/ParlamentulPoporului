@@ -1,124 +1,113 @@
 body{
     font-family:sans-serif;
     background-color: rgb(232, 232, 232);
-    color: lightgrey;
 }
 
-hr{
-    height: 4px;
-    border: none;
-    background-color: rgb(17, 16, 75);
+#navimage{
+    height: 22vh;
+    width: 140vw;
+    filter: blur(12px);
+    -webkit-filter: blur(12px);
+    margin-left: -20px;
+
 }
 
-#top{
+.toptop{
+   background-size: 100%;
+   object-fit: cover;
+   height: 25vh;
+   width: 100%;
+   display: block;
+   position: absolute;
+   top: -20px;
+   overflow: hidden;
+}
+
+.nav-scrolled{
+    background-color: rgb(12, 12, 38);
+    /*background-image: url("newscreenshot.png");*/
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.639);
+}
+
+header{
     display: flex;
-    justify-content: space-between;
-    font-size: 17px;
-    background-image: linear-gradient(to bottom right,rgb(57, 57, 146),rgb(17, 16, 75));
-    padding: 17px;
-    padding-top: 20px;
-    margin-top: -6px;
+    /*background-image: linear-gradient(to bottom right,rgb(57, 57, 146),rgb(17, 16, 75));*/
+    z-index: 2;
+    width: 100%;
+    height: 14vh;
+    align-items: center;
+    top: 0;
+    position: fixed;
+    transition: background 250ms ease-in;
+    transition: transform 0.5s;
+}
+
+.nav--hidden{
+    transform: translateY(-140px);
+    box-shadow: none;
+}
+
+#logo{
+    width: 200px;
+    margin-left: 40px;
 }
 
 #nav{
-    padding-top: 5px;
-    width: 150vh;
     display: flex;
+    align-items: center;
     justify-content: space-around;
     text-decoration: none;
+    width: 100%;
 }
 
 #cautare{
-    font-size:25px;
-    background-color: lightgrey;
-    border-radius: 15px;
+    font-size:20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 17px;
     border: none;
-    height: 30px;
     padding-left: 0.5em;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    color: rgb(22, 22, 22);
+    color: rgb(64, 64, 64);
+    height: 30px;
+}
 
-
+#cautareForm{
+    display: flex;
+    align-items:center;
 }
 
 #searchButton{
     background-color: transparent;
     border:none;
-    color:lightgray;
-    margin-left: -5px;
+    color:white;
+    margin-top: 7px;
 }
 
-a{
-    color:lightgray;
-    text-decoration: none;
-}
-a:hover{
-    color:lightgray;
-}
-
-.link_nav:hover{
-    text-decoration: underline;
+#searchButton i{
+    font-size: 35px;
 }
 
 #limba{
-    display:flex;
-    margin: -6px;
-}
-#romana, #rusa, #engleza{
-    font-size: 20px;
-    border: none;
-    background-color: rgb(67, 67, 128);
-    color:lightgray
+    font-size: 30px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
 }
 
-#romana{
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px ;
-    margin-right: 5px;
+#limba:hover{
+    color:rgb(255, 39, 39);
 }
 
-#rusa{
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+a{
+    color:white;
+    text-decoration: none;
+}
+a:hover{
+    color:rgb(255, 39, 39);
+    text-decoration: none;
 }
 
-#engleza{
-    margin-right: 5px;
-}
-
-#rusa:hover{
-    background-color: rgb(211, 13, 13);
-    color: rgb(46, 46, 46)
-}
-#romana:hover{
-    background-color:  rgb(0, 25, 212);
-    color: rgb(46, 46, 46)
-}
-#engleza:hover{
-    background-color: rgb(207, 207, 0);
-    color: rgb(46, 46, 46)
-}
 
 /*nav-bar end*/
-
-
-
-#logo{
-    margin-top: 0px;
-    display: flex;
-    justify-content: space-between;
-}
-
-#abc{
-    display:flex;
-    padding-inline: 20px;
-}
-
-#balance{
-    filter: drop-shadow(3px 3px 3px black);
-    margin-top:25px;
-}
 
 #title{
     font-size: 3rem;
@@ -130,55 +119,11 @@ a:hover{
     font-family: georgia;
 }
 
-
-#cont{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-    border-radius: 10px;
-    border: none;
-    height: 123px;
-    background-color: #FFFAFA;
-    border: 3px solid rgb(163, 163, 163);
-    box-shadow:0 4px 7px rgba(0, 0, 0, 0.755);
-    margin-top: 15px;
-}
-
-#pfp{
-    margin-bottom: 5px;
-}
-
-#inregistrare{
-    background-color: rgb(40, 40, 138);
-    font-size: 12px;
-    padding-inline: 10px ;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border: none;
-    border-radius: 5px;
-
-}
-
-#inregistrare:hover{
-    color:rgb(124, 136, 172);
-    background-color: lightgray;
-    text-decoration: none;
-    box-shadow:0 0 5px rgba(0, 0, 0, 0.371);
-}
-
-#inregistrare:focus{
-    cursor: pointer;
-    background-color: rgb(179, 179, 179);
-    color:rgba(84, 91, 119, 0.621);
-    box-shadow:0 0 5px rgba(0, 0, 0, 0.374);
-}
-
 #main{
     background-color: #FFFAFA;
     height: auto;
     margin: 30px;
-    margin-top: 20px;
+    margin-top: 25vh;
     padding: 10px;
     border-radius: 5px;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.317);

@@ -11,27 +11,7 @@
 
 {% block content %}
     
-    <div id="logo">
-        <div id="abc">
-            <img id="balance" src="{{url_for('static',filename='logo.png')}}" alt="..." width="100px" height="100px">
-            <h1 id="title">Parlamentul <br> &nbsp;&nbsp;Poporului</h1>
-        </div>
-        <div id="cont">
-            <div id="pfp">
-                <img src="{{url_for('static',filename='default-avatar.png')}}" width="80px">
-            </div>
-            <div>
-                    
-                    {%if session.username  %}
-                        <a href="{{ url_for('account') }}">{{session.username}}</a>
-                    {%else%}
-                        <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
-                    {%endif%}
-                
-            </div>
-        </div>
-        
-    </div>
+  
     
     <div id="main">
         <div class="bara">
