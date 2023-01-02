@@ -1,6 +1,6 @@
 body{
     font-family:sans-serif;
-    background-color: rgb(232, 232, 232);
+    background-color: white;
 }
 
 #navimage{
@@ -9,6 +9,7 @@ body{
     filter: blur(12px);
     -webkit-filter: blur(12px);
     margin-left: -20px;
+    margin-top: -40px;
 
 }
 
@@ -18,7 +19,7 @@ body{
    height: 25vh;
    width: 100%;
    display: block;
-   position: absolute;
+   position:static;
    top: -20px;
    overflow: hidden;
 }
@@ -97,11 +98,11 @@ header{
     color:rgb(255, 39, 39);
 }
 
-a{
+header a{
     color:white;
     text-decoration: none;
 }
-a:hover{
+header a:hover{
     color:rgb(255, 39, 39);
     text-decoration: none;
 }

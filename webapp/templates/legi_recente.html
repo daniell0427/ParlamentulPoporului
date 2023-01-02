@@ -6,26 +6,26 @@
 {% endblock head %}
 
 {% block content %}
-<div id="tit">
-    <h1>{{title}}</h1>
-</div>
-<div id="legi">
+    <div id="main">                    
+        <h1 id="tit">Legi recente</h1>
 
-    {%for i in range(len-1, -1, -1)%}
-        {%if i % 2 == b  %}
-        
-        {%endif%}
-        <div class="lege">
-            <a href=""><p>{{a[i][0]}}</p></a>
+        <div id="legi">
+
+            {%for i in range(len-1, -1, -1)%}
+                {%if i % 2 == b  %}
+                
+                {%endif%}
+                <div class="lege">
+                    <a href=""><p>{{a[i][0]}}</p></a>
+                </div>
+                {%if i % 2 == c%}
+                
+                {%endif%}
+
+
+            {%endfor%}
+            <h2>{{eror}}</h2>
         </div>
-        {%if i % 2 == c%}
-        
-        {%endif%}
-
-
-    {%endfor%}
-    <h2>{{eror}}</h2>
-</div>
-
+    </div>   
 
 {% endblock content %}

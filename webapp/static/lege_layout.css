@@ -1,10 +1,6 @@
-*{
-    color:black;
-}
-
 body{
     font-family:sans-serif;
-    background-color: rgb(232, 232, 232);
+    background-color: white;
 }
 
 #navimage{
@@ -13,6 +9,7 @@ body{
     filter: blur(12px);
     -webkit-filter: blur(12px);
     margin-left: -20px;
+    margin-top: -40px;
 
 }
 
@@ -22,7 +19,7 @@ body{
    height: 25vh;
    width: 100%;
    display: block;
-   position: absolute;
+   position:static;
    top: -20px;
    overflow: hidden;
 }
@@ -30,7 +27,7 @@ body{
 .nav-scrolled{
     background-color: rgb(12, 12, 38);
     /*background-image: url("newscreenshot.png");*/
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.402);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.639);
 }
 
 header{
@@ -88,7 +85,6 @@ header{
 
 #searchButton i{
     font-size: 35px;
-    color:white;
 }
 
 #limba{
@@ -98,19 +94,15 @@ header{
     cursor: pointer;
 }
 
-#limba p{
-    color: white;
-}
-
 #limba:hover{
     color:rgb(255, 39, 39);
 }
 
-nav a{
+header a{
     color:white;
     text-decoration: none;
 }
-nav a:hover{
+header a:hover{
     color:rgb(255, 39, 39);
     text-decoration: none;
 }

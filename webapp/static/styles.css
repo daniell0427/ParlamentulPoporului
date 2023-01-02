@@ -1,6 +1,6 @@
 body{
     font-family:sans-serif;
-    background-color: rgb(232, 232, 232);
+    background-color: white;
 }
 
 #navimage{
@@ -9,6 +9,7 @@ body{
     filter: blur(12px);
     -webkit-filter: blur(12px);
     margin-left: -20px;
+    margin-top: -40px;
 
 }
 
@@ -18,7 +19,7 @@ body{
    height: 25vh;
    width: 100%;
    display: block;
-   position: absolute;
+   position:static;
    top: -20px;
    overflow: hidden;
 }
@@ -120,47 +121,34 @@ a:hover{
 }
 
 #main{
-    background-color: #FFFAFA;
-    height: auto;
-    margin: 30px;
-    margin-top: 25vh;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow:0 0 10px rgba(0, 0, 0, 0.317);
-    background-image: linear-gradient(to bottom right, white, rgb(199, 199, 199));
+    margin-inline: 10vh;
 }
 
-.bara{
-    color:lightgray;
-    display: flex;
-    justify-content: center;
-    height: 80px;
-    background-image: linear-gradient(to bottom,rgb(57, 57, 146),rgb(17, 16, 75));
-    border-radius: 4px;
-    box-shadow:0 5px 10px rgba(0, 0, 0, 0.679);
-}
 
 #tit{
     text-align: center;
-    line-height: 80px;
+    font-size: 60px;
+    font-weight: 500;
+    color:#0C1836;
+    text-shadow: 2px 2px 5px#0c18369c;
+    padding-bottom: 10px;
+    border-bottom: 4px solid #0C1836;
 }
 
 #legi{
     display:grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px;
+    margin-inline: 10vh;
 }
 .lege{
     font-size: 20px;
-    background-image: linear-gradient(to bottom,white,rgb(230, 230, 230));
-    margin: 0px;
+    background-color: white;
     min-height: 100px;
     max-height: 600px;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.597);
     padding: 10px;
-    border-radius: 7px;
-    margin: 10px;
+    border-radius: 2px;
     color: black;
 }
 
