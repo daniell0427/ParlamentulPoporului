@@ -1,3 +1,7 @@
+:root{
+    --blue: rgb(12, 12, 38); 
+}
+
 body{
     font-family:sans-serif;
     background-color: white;
@@ -126,26 +130,27 @@ header a:hover{
 
 
 #propune{
-    color:lightgray;
-    text-decoration: none;
     font-size: 25px;
-    background-color: rgb(17, 16, 75);
-    width: auto;
-    border-radius: 7px;
-    box-shadow:0 0 10px rgba(0, 0, 0, 0.317);
+    border: 3px solid var(--blue);
+    background-color: transparent;
+    border-radius: 2px;
     padding: 10px 20px;
-}
-#propune:hover{
-    color:rgb(124, 136, 172);
-    background-color: lightgray;
+    color: var(--blue);
+    transition: all 0.2s ease-in-out;
     text-decoration: none;
-    box-shadow:0 0 15px rgba(0, 0, 0, 0.801);
 }
+
+#propune:hover{
+    color: white;
+    background-color: var(--blue);
+    text-decoration: none;
+}
+
 #propune:focus{
     cursor: pointer;
-    background-color: rgb(179, 179, 179);
-    color:rgba(84, 91, 119, 0.621);
-    box-shadow:0 0 15px rgba(0, 0, 0, 0.681);
+    border-color: #0c1836a8;
+    background-color:rgb(177, 7, 7);
+    color:white;
 }
 
 #flex{
