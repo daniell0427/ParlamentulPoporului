@@ -17,11 +17,13 @@
         </div>
         <div id="legi">
             {% for n in range(nr-1, -1, -1) %}
+            <a href="{{url_for('legi_propuse',titlu=titlu[n][0])}}">
                 <div class="lege">
-                    <a href="{{url_for('legi_propuse',titlu=titlu[n][0])}}"><p>{{ titlu[n][0] }}</p></a>
-                    <p>{{ username[n][0] }}</p>
-                    <p>{{ data[n][0] }}</p>
+                    <p class="p">{{ titlu[n][0] }}</p>
+                    <p class="p">{{ username[n][0] }}</p>
+                    <p class="p">{{ data[n][0] }}</p>
                 </div>
+            </a>
             {% endfor %}
         </div>
     </div>
