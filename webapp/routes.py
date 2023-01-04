@@ -11,7 +11,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 def global_variables():
-    if session["username"]:
+    if session.get('username'):
         global username
         global email
         global verified
@@ -23,11 +23,47 @@ def global_variables():
 
 @app.route("/")
 @app.route("/acasa")
-def acasa():
+@app.route("/acasa/")
+@app.route("/acasa/<titlu>")
+def acasa(titlu=None):
     global_variables()
     titles=titluri()
-    i=6
-    return render_template("index.html", len = len(titles),titles=titles, i=i)
+    if titlu == None:
+        titles=titluri()
+        return render_template("index.html", len = len(titles),titles=titles)
+    else:
+        content = get_data_by_title("legi", titlu)
+        titlu = content[0][1]
+        if content[0][2] != None:
+            pro_lect1 = content[0][2]
+        else:
+            pro_lect1 = 0
+
+        if content[0][3] != None:
+            con_lect1 = content[0][3]
+        else:
+            con_lect1 = 0
+        
+        if content[0][4] != None:
+            neu_lect1 = content[0][4]
+        else:
+            neu_lect1 = 0
+        
+        if content[0][5] != None:
+            pro_lect2 = content[0][5]
+        else:
+            pro_lect2 = 0
+
+        if content[0][6] != None:
+            con_lect2 = content[0][6]
+        else:
+            con_lect2 = 0
+        
+        if content[0][7] != None:
+            neu_lect2 = content[0][7]
+        else:
+            neu_lect2 = 0
+        return render_template("layout_lege.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
@@ -103,105 +139,102 @@ def reseteaza_parola():
     else:
         return redirect(url_for('acasa'))
 
-@app.route("/legi-propuse")
-@app.route("/legi-propuse/")
-@app.route("/legi-propuse/<titlu>")
-def legi_propuse(titlu=None):
-    if titlu == None:
-        titlu = get_legi("titlu")
-        descriere = get_legi("descriere")
-        username = get_legi("username")
-        data = get_legi("data")
-        nr = len(titlu)
-        return render_template("legi_propuse.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, nr=nr)
-    else:
-        content = get_data_by_title("legipr_admise", titlu)
-        titlu = content[0][1]
-        descriere = content[0][2]
-        username = content[0][3]
-        data = content[0][4]
-        if content[0][5] != None:
-            pro = content[0][5]
-        else:
-            pro = 0
+# @app.route("/legi-propuse")
+# @app.route("/legi-propuse/")
+# @app.route("/legi-propuse/<titlu>")
+# def legi_propuse(titlu=None):
+#     if titlu == None:
+#         titlu = get_legi("titlu")
+#         descriere = get_legi("descriere")
+#         username = get_legi("username")
+#         data = get_legi("data")
+#         nr = len(titlu)
+#         return render_template("legi_propuse.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, nr=nr)
+#     else:
+#         content = get_data_by_title("legipr_admise", titlu)
+#         titlu = content[0][1]
+#         descriere = content[0][2]
+#         username = content[0][3]
+#         data = content[0][4]
+#         if content[0][5] != None:
+#             pro = content[0][5]
+#         else:
+#             pro = 0
 
-        if content[0][6] != None:
-            contra = content[0][6]
-        else:
-            contra = 0
+#         if content[0][6] != None:
+#             contra = content[0][6]
+#         else:
+#             contra = 0
         
-        if content[0][7] != None:
-            neutru = content[0][7]
-        else:
-            neutru = 0
-        return render_template("layout_lege_propusa.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, pro=pro, contra=contra, neutru=neutru)
+#         if content[0][7] != None:
+#             neutru = content[0][7]
+#         else:
+#             neutru = 0
+#         return render_template("layout_lege_propusa.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, pro=pro, contra=contra, neutru=neutru)
 
-@app.route("/legi-recente")
-@app.route("/legi-recente/")
-@app.route("/legi-recente/<titlu>")
-def legi_recente(titlu=None):
-    if titlu == None:
-        titles=titluri()
-        return render_template("legi_recente.html", title = "Legi Recente", len=len(titles), titles=titles)
-    else:
-        content = get_data_by_title("legi", titlu)
-        titlu = content[0][1]
-        if content[0][2] != None:
-            pro_lect1 = content[0][2]
-        else:
-            pro_lect1 = 0
+# @app.route("/legi-recente")
+# @app.route("/legi-recente/")
+# @app.route("/legi-recente/<titlu>")
+# def legi_recente(titlu=None):
+#     if titlu == None:
+#         titles=titluri()
+#         return render_template("legi_recente.html", title = "Legi Recente", len=len(titles), titles=titles)
+#     else:
+#         content = get_data_by_title("legi", titlu)
+#         titlu = content[0][1]
+#         if content[0][2] != None:
+#             pro_lect1 = content[0][2]
+#         else:
+#             pro_lect1 = 0
 
-        if content[0][3] != None:
-            con_lect1 = content[0][3]
-        else:
-            con_lect1 = 0
+#         if content[0][3] != None:
+#             con_lect1 = content[0][3]
+#         else:
+#             con_lect1 = 0
         
-        if content[0][4] != None:
-            neu_lect1 = content[0][4]
-        else:
-            neu_lect1 = 0
+#         if content[0][4] != None:
+#             neu_lect1 = content[0][4]
+#         else:
+#             neu_lect1 = 0
         
-        if content[0][5] != None:
-            pro_lect2 = content[0][5]
-        else:
-            pro_lect2 = 0
+#         if content[0][5] != None:
+#             pro_lect2 = content[0][5]
+#         else:
+#             pro_lect2 = 0
 
-        if content[0][6] != None:
-            con_lect2 = content[0][6]
-        else:
-            con_lect2 = 0
+#         if content[0][6] != None:
+#             con_lect2 = content[0][6]
+#         else:
+#             con_lect2 = 0
         
-        if content[0][7] != None:
-            neu_lect2 = content[0][7]
-        else:
-            neu_lect2 = 0
-        return render_template("layout_lege_recenta.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2)
+#         if content[0][7] != None:
+#             neu_lect2 = content[0][7]
+#         else:
+#             neu_lect2 = 0
+#         return render_template("layout_lege_recenta.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2)
 
-@app.route("/legi-in-discutie")
-def legi_in_discutie():
-    return render_template("legi_in_discutie.html", title = "Legi in discutie")
 
-@app.route("/propune-legi", methods=['GET', 'POST'])
-def propune_legi():
-    if session["username"] != None and verified == 'True':
-        if request.method == "POST":
+# @app.route("/propune-legi", methods=['GET', 'POST'])
+# def propune_legi():
+#     if session["username"] != None and verified == 'True':
+#         if request.method == "POST":
 
-            titlu = request.form.get("titlu")
-            descriere = request.form.get("descriere")
-            username = session["username"]
-            now = datetime.now()
-            data = now.strftime('%d-%m-%Y')
-            postare_db(titlu, descriere, username, data)
-            if True:
-                return redirect(url_for("acasa"))
-        return render_template("propune_legi.html", title = "Propune o lege")
-    else:
-        if session["username"] == None:
-            flash('Trebuie sa va autentificati pentru a accesa Propune Legi!', 'danger')
-            return redirect(url_for('autentificare'))
-        else:
-            flash('Trebuie sa va verificati email-ul pentru a accesa Propune Legi!', 'danger')
-            return redirect(url_for('legi_propuse'))
+#             titlu = request.form.get("titlu")
+#             descriere = request.form.get("descriere")
+#             username = session["username"]
+#             now = datetime.now()
+#             data = now.strftime('%d-%m-%Y')
+#             postare_db(titlu, descriere, username, data)
+#             if True:
+#                 return redirect(url_for("acasa"))
+#         return render_template("propune_legi.html", title = "Propune o lege")
+#     else:
+#         if session["username"] == None:
+#             flash('Trebuie sa va autentificati pentru a accesa Propune Legi!', 'danger')
+#             return redirect(url_for('autentificare'))
+#         else:
+#             flash('Trebuie sa va verificati email-ul pentru a accesa Propune Legi!', 'danger')
+#             return redirect(url_for('legi_propuse'))
 
 @app.route("/logout")
 def logout():
@@ -225,7 +258,7 @@ def cautare():
     b=0
     if n%2==0: c=0
     if n%2==0: b=1
-    return render_template("legi_recente.html", title = "Cautare",a=a,len=len(a),c=c,b=b ,eror=eror)
+    return render_template("legi_recente.html", title = "Cautare",titles=a,len=len(a),c=c,b=b ,eror=eror)
 
 @app.route("/verificare-email" , methods=["GET","POST"])
 def email_verification():

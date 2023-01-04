@@ -37,21 +37,19 @@
                     id="cautare" name="caut">
                     <button type="submit" id="searchButton">  <i class="material-icons" >search</i></button>
                 </form>
-                <a href="{{url_for('legi_recente')}}" id="legi_recente" class="link_nav">Legi recente</a>    
-                <a href="{{url_for('legi_in_discutie')}}" id="legi_in_discutie" class="link_nav">Legi in discutie</a>
-                <a href="{{url_for('legi_propuse', titlu=None)}}" id="legi_propuse" class="link_nav">Legi propuse</a>
-                <div>
-                    
+
+
+                <div>  
                     {%if session.username  %}
                         <a href="{{ url_for('account') }}">Cont</a>
                     {%else%}
                         <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
                     {%endif%}
+                </div>
                 
-                </div>
-                <div id="limba">
+                <!-- <div id="limba">
                     <p class="active-locale">RO</p>
-                </div>
+                </div> -->
 
             </nav>
             
