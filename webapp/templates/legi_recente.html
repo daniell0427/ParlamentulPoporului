@@ -12,9 +12,12 @@
         <div id="legi">
 
             {%for i in range(len-1, -1, -1)%}
+
+            <a href="{{url_for('legi_recente',titlu=titles[i][0])}}">
                 <div class="lege">
-                    <a href="{{url_for('legi_recente',titlu=titles[i][0])}}"><p>{{titles[i][0]}}</p></a>
+                    <p>{{titles[i][0]}}</p>
                 </div>
+            </a>
             {%endfor%}
             <h2>{{eror}}</h2>
         </div>
