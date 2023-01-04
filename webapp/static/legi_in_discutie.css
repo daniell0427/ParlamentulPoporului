@@ -141,7 +141,7 @@ header a:hover{
     transition: all 0.4s ease-in-out;
 }
 .lege:hover{
-    text-decoration: underline;
+    text-decoration: none;
     transform: translateY(-5px);
     transform: scale(1.025);
 }
