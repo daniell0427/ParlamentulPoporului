@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout_lege_recenta.css') }}" >
+{% endblock head %}
+
+{% block content %}
+
+    <div id="all">
+        <div id="title">
+            <h1>{{titlu}}</h1>
+        </div>
+
+        <div id="main">
+
+            <div id="voturi">
+
+                <div id="pcn">
+                    <strong>Voturi:</strong>
+                    <div id="lect1">
+                        <strong id="pro">Pro lectura 1:  <span id="proNumber">{{pro_lect1}}</span></strong>
+                        <strong id="contra">Contra lectura 1:  <span id="contraNumber">{{con_lect1}}</span></strong>
+                        <strong id="neutre">Neutre lectura 1:  <span id="neutruNumber">{{neu_lect1}}</span></strong>
+                    </div>
+
+                    <div id="lect2">
+                        <strong id="pro">Pro lectura 2:  <span id="proNumber">{{pro_lect2}}</span></strong>
+                        <strong id="contra">Contra lectura 2:  <span id="contraNumber">{{con_lect2}}</span></strong>
+                        <strong id="neutre">Neutre lectura 2:  <span id="neutruNumber">{{neu_lect2}}</span></strong>
+                    </div>
+                    
+                </div>    
+                
+                <div class="pieChart"></div>
+
+            </div>   
+
+        </div>
+
+    </div>
+
+    
+    <!--JavaScript-->
+    <script>
+
+        //pentru pie chart
+        let pro = parseInt(document.getElementById("proNumber").textContent);
+        let contra = parseInt(document.getElementById("contraNumber").textContent);
+        let neutru = parseInt(document.getElementById("neutruNumber").textContent);
+
+        let sum = pro_lect1 + con_lect1 + neu_lect1;
+
+        let procentajPro = (100 * pro_lect1)/sum;
+
+        let procentajContra = (100 * con_lect1)/sum;
+
+        let procentajNeutru = (100 * neu_lect1)/sum;
+
+        document.documentElement.style.setProperty("--procentajPro", procentajPro);
+        document.documentElement.style.setProperty("--procentajContra", procentajContra);
+        document.documentElement.style.setProperty("--procentajNeutru", procentajNeutru);
+
+    </script>
+
+{% endblock content %}

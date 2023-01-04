@@ -25,11 +25,9 @@ def global_variables():
 @app.route("/acasa")
 def acasa():
     global_variables()
-    a=titluri()
-    print(a)
+    titles=titluri()
     i=6
-    
-    return render_template("index.html", len = len(a),a=a, i=i)
+    return render_template("index.html", len = len(titles),titles=titles, i=i)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
@@ -117,7 +115,7 @@ def legi_propuse(titlu=None):
         nr = len(titlu)
         return render_template("legi_propuse.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, nr=nr)
     else:
-        content = get_data_by_title(titlu)
+        content = get_data_by_title("legipr_admise", titlu)
         titlu = content[0][1]
         descriere = content[0][2]
         username = content[0][3]
@@ -136,20 +134,48 @@ def legi_propuse(titlu=None):
             neutru = content[0][7]
         else:
             neutru = 0
-        return render_template("lege_layout.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, pro=pro, contra=contra, neutru=neutru)
+        return render_template("layout_lege_propusa.html", title = "Legi Propuse", titlu=titlu, descriere=descriere, username=username, data=data, pro=pro, contra=contra, neutru=neutru)
 
 @app.route("/legi-recente")
-def legi_recente():
-    a=titluri()
-    print("da")
-    print(a)
-    n=len(a)
-    c=1
-    b=0
-    if n%2==0: c=0
-    if n%2==0: b=1
-    #print(user)
-    return render_template("legi_recente.html", title = "Legi Recente", len=len(a),a=a,c=c,b=b)
+@app.route("/legi-recente/")
+@app.route("/legi-recente/<titlu>")
+def legi_recente(titlu=None):
+    if titlu == None:
+        titles=titluri()
+        return render_template("legi_recente.html", title = "Legi Recente", len=len(titles), titles=titles)
+    else:
+        content = get_data_by_title("legi", titlu)
+        titlu = content[0][1]
+        if content[0][2] != None:
+            pro_lect1 = content[0][2]
+        else:
+            pro_lect1 = 0
+
+        if content[0][3] != None:
+            con_lect1 = content[0][3]
+        else:
+            con_lect1 = 0
+        
+        if content[0][4] != None:
+            neu_lect1 = content[0][4]
+        else:
+            neu_lect1 = 0
+        
+        if content[0][5] != None:
+            pro_lect2 = content[0][5]
+        else:
+            pro_lect2 = 0
+
+        if content[0][6] != None:
+            con_lect2 = content[0][6]
+        else:
+            con_lect2 = 0
+        
+        if content[0][7] != None:
+            neu_lect2 = content[0][7]
+        else:
+            neu_lect2 = 0
+        return render_template("layout_lege_recenta.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2)
 
 @app.route("/legi-in-discutie")
 def legi_in_discutie():

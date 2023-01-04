@@ -146,11 +146,11 @@ def get_legi(camp):
 
   return myresult
 
-def get_data_by_title(titlu):
+def get_data_by_title(camp, titlu):
 
   mycursor = db.cursor()
 
-  mycursor.execute("SELECT * FROM legipr_admise WHERE titlu ='"+titlu+"'")
+  mycursor.execute("SELECT * FROM "+camp+" WHERE titlu ='"+titlu+"'")
 
   myresult = mycursor.fetchall()
 
