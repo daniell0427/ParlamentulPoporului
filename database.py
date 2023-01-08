@@ -11,7 +11,7 @@ db = mysql.connector.connect(
 def introdu(tit,pro1,contra1,neu1,pro2,contra2,neu2):
   mycursor = db.cursor()
 
-  insertQuery = "INSERT INTO legi (titlu, pro_l1, contra_l1, neu_l1, pro_l2, contra_l2, neu_l2) VALUES ('"+tit+"',"+pro1+","+contra1+","+neu1+","+pro2+","+contra2+","+neu2+");"
+  insertQuery = "INSERT INTO legi (titlu, pro_l1, contra_l1, neu_l1, pro_l2, contra_l2, neu_l2) VALUES ('"+tit+"','"+pro1+"','"+contra1+"','"+neu1+"','"+pro2+"','"+contra2+"','"+neu2+"');"
   
   mycursor.execute(insertQuery)
   

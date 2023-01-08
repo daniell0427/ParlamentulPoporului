@@ -1,4 +1,4 @@
-from database import verificare_pass
-username="username"
-nume="e"
-verificare_pass("eu","Cristian2704")
+import pandas as pd
+data = pd.read_excel('input.xlsx')
+a=data['Denumire'].tolist()
+print(a[1])
