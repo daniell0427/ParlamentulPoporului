@@ -7,7 +7,9 @@
 
 
 {% block content %}
+
     <div id="links">
+        
         {% if verified == "False" %}
             <a href="{{ url_for('email_verification', email = email) }}">Verificare Email</a>
         {% endif %}

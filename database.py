@@ -174,3 +174,17 @@ def get_data_by_username(camp, nume):
       return myresult
     except:
       print("An exception occurred")
+
+def verificare_legi(nume):
+    mycursor = db.cursor()
+
+    sql = "SELECT * FROM legi WHERE titlu='"+nume+"'"
+
+    mycursor.execute(sql)
+    ok=1
+    myresult = mycursor.fetchall()
+    
+    if not(myresult):
+      ok=0
+    print(ok)
+    return ok

@@ -1,34 +1,26 @@
 from webapp_admin import app
 from flask import request, render_template 
 from database import *
+import pandas as pd
 
 @app.route('/', methods =["GET", "POST"])
 
 def gfg():
-
    if request.method == "POST":
-
-      # getting input with name = fname in HTML form
-      
-      tit = request.form.get("titlu")
-      if tit != None:
-         pro1 = request.form.get("pro_l1") 
-         contra1 = request.form.get("contra_l1") 
-         neu1 = request.form.get("neu_l1") 
-         pro2 = request.form.get("pro_l2") 
-         contra2 = request.form.get("contra_l2") 
-         neu2 = request.form.get("neu_l2") 
-         print(tit)
-         print(pro1)
-         print(contra1)
-         print(neu1)
-         print(pro2)
-         print(contra2)
-         print(neu2)
-         introdu(tit,pro1,contra1,neu1,pro2,contra2,neu2)
-      else:
-         id_lege = request.form.get("id_lege")
-         get_id_lege(id_lege)
-      
-
+      a=request.form.get("file1")
+      print(a)
+      data = pd.read_excel(a)
+      tit=data['Denumire'].tolist()
+      pro1=data['Lectura 1'].tolist()
+      cont1=data['Unnamed: 2'].tolist()
+      neu1=data['Unnamed: 3'].tolist()
+      pro2=data['Lectura 2'].tolist()
+      cont2=data['Unnamed: 5'].tolist()
+      neu2=data['Unnamed: 6'].tolist()
+      len1=len(tit)
+      for i in range(1, len(tit) ):
+         b=verificare_legi(tit[i])
+         if b==0:
+            introdu(str(tit[i]),str(pro1[i]),str(cont1[i]),str(neu1[i]),str(pro2[i]),str(cont2[i]),str(neu2[i]))
+         print(b)
    return render_template("admin.html")

@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pagina Admin</title>
 </head>
 <body>
     <form action="" method="post">
-     <label for="titlu">Titlu: </label>
-     <input type="text" name="titlu" id=""><br>
-
-     <label for="pro_l1">Voturi pro lectura 1: </label>
-     <input type="number" name="pro_l1" id=""> <br>
-     <label for="contra_l1">Voturi contra lectura 1: </label>
-     <input type="number" name="contra_l1" id=""> <br>
-     <label for="neu_l1">Voturi neutre lectura 1: </label>
-     <input type="number" name="neu_l1" id=""> <br>
-
-     <label for="pro_l2">Voturi pro lectura 2: </label>
-     <input type="number" name="pro_l2" id=""> <br>
-     <label for="contra_l2">Voturi contra lectura 2: </label>
-     <input type="number" name="contra_l2" id=""> <br>
-     <label for="neu_l2">Voturi neutre lectura 2: </label>
-     <input type="number" name="neu_l2" id=""> <br>
-     <button type="submit">Trimite</button>
+        <label for="file1">Alege fisierul excel (.xlsx)</label>
+        <input id="file1" name="file1" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+        <button type="submit" onclick="myFunction()">Trimite</button>
+        
     </form>
+    <a href="{{ url_for('logout') }}">Iesire</a>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("file1").value;
+          document.getElementById("demo").innerHTML = x;
+          
+        }
+    </script>
 </body>
 </html>

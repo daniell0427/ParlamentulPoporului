@@ -1,9 +1,10 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
 from webapp import app
-from database import titluri, postare_db, get_legi, get_data_by_title, cautar, get_data_by_username
+from database import titluri, postare_db, get_legi, get_data_by_title, cautar, get_data_by_username,introdu,verificare_legi
 from datetime import datetime
 from flask_session import Session
+import pandas as pd
 
 
 app.config["SESSION_PERMANENT"] = False
@@ -11,14 +12,14 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 def global_variables():
-    if session.get('username'):
+    
+    if session.get('username')!=None:
         global username
         global email
         global verified
         username = session.get('username')
         email = session.get('email')
         verified = get_data_by_username('verified', username)
-
 
 
 @app.route("/")
@@ -28,6 +29,7 @@ def global_variables():
 def acasa(titlu=None):
     global_variables()
     titles=titluri()
+
     if titlu == None:
         titles=titluri()
         return render_template("index.html", len = len(titles),titles=titles)
@@ -68,7 +70,8 @@ def acasa(titlu=None):
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
-    if session["username"] == None:
+    
+    if session.get("username")  == None:
         e=""
         if request.method == "POST":
             global username
@@ -92,21 +95,30 @@ def inregistrare():
 
 @app.route("/autentificare", methods=['GET', 'POST'])
 def autentificare():
-    if session["username"] == None:
+    if session.get("username") == None:
         eror=""
         if request.method == "POST":
             global username
             username = request.form.get("user") 
             password = request.form.get("password") 
             global email
-            email = get_data_by_username("email", username)
-            eror=""
-            eror = autentificarea(email, username,password)
-            if eror=="" :
-                session["username"] = username
-                session["email"] = email
-                return redirect(url_for("acasa",user=username))
-
+            print(username)
+            print(password)
+            if username=="Admin" and password=="parlamentulpoporului":
+                session['username']="Admin"
+                return redirect(url_for("admin"))
+            else:
+                email = get_data_by_username("email", username)
+                eror=""
+                eror = autentificarea(email, username,password)
+                if eror=="" :
+                    if username=="Admin" and password=="parlamentulpoporului":
+                        return redirect(url_for("admin"))
+                    else :
+                        session["username"] = username
+                        session["email"] = email
+                    return redirect(url_for("acasa",user=username))
+                        
         return render_template("login.html",e=eror)
     else:
         return redirect(url_for("acasa"))
@@ -281,3 +293,23 @@ def email_verification():
 
     return render_template('email_verification.html', email=email, msg=msg)
 
+@app.route("/admin" , methods=["GET","POST"])
+def admin():
+    if request.method == "POST":
+        a=request.form.get("file1")
+        print(a)
+        data = pd.read_excel(a)
+        tit=data['Denumire'].tolist()
+        pro1=data['Lectura 1'].tolist()
+        cont1=data['Unnamed: 2'].tolist()
+        neu1=data['Unnamed: 3'].tolist()
+        pro2=data['Lectura 2'].tolist()
+        cont2=data['Unnamed: 5'].tolist()
+        neu2=data['Unnamed: 6'].tolist()
+        len1=len(tit)
+        for i in range(1, len(tit) ):
+            b=verificare_legi(tit[i])
+            if b==0:
+                introdu(str(tit[i]),str(pro1[i]),str(cont1[i]),str(neu1[i]),str(pro2[i]),str(cont2[i]),str(neu2[i]))
+            print(b)
+    return render_template("admin.html")

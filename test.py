@@ -1,4 +1,4 @@
-import pandas as pd
-data = pd.read_excel('input.xlsx')
-a=data['Denumire'].tolist()
-print(a[1])
+from webapp.form import password_hash
+
+a=password_hash("parlametulpoporului")
+print(a)
