@@ -35,6 +35,15 @@ def titluri():
 
   return myresult
 
+def select_id():
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT nr FROM legi")
+
+  myresult = mycursor.fetchall()
+
+  return myresult
+
 
 def inregistrare(user,email,password,verified):
   mycursor = db.cursor()
@@ -146,11 +155,11 @@ def get_legi(camp):
 
   return myresult
 
-def get_data_by_title(camp, titlu):
+def get_data_by_id(camp, id):
 
   mycursor = db.cursor()
 
-  mycursor.execute("SELECT * FROM "+camp+" WHERE titlu ='"+titlu+"'")
+  mycursor.execute("SELECT * FROM "+camp+" WHERE nr ='"+id+"'")
 
   myresult = mycursor.fetchall()
 

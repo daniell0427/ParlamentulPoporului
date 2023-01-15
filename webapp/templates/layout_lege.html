@@ -41,26 +41,5 @@
     </div>
 
     
-    <!--JavaScript-->
-    <script>
-
-        //pentru pie chart
-        let pro = parseInt(document.getElementById("proNumber").textContent);
-        let contra = parseInt(document.getElementById("contraNumber").textContent);
-        let neutru = parseInt(document.getElementById("neutruNumber").textContent);
-
-        let sum = pro_lect1 + con_lect1 + neu_lect1;
-
-        let procentajPro = (100 * pro_lect1)/sum;
-
-        let procentajContra = (100 * con_lect1)/sum;
-
-        let procentajNeutru = (100 * neu_lect1)/sum;
-
-        document.documentElement.style.setProperty("--procentajPro", procentajPro);
-        document.documentElement.style.setProperty("--procentajContra", procentajContra);
-        document.documentElement.style.setProperty("--procentajNeutru", procentajNeutru);
-
-    </script>
 
 {% endblock content %}

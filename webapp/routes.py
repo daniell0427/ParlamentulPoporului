@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
 from webapp import app
-from database import titluri, postare_db, get_legi, get_data_by_title, cautar, get_data_by_username,introdu,verificare_legi
+from database import titluri, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -25,43 +25,44 @@ def global_variables():
 @app.route("/")
 @app.route("/acasa")
 @app.route("/acasa/")
-@app.route("/acasa/<titlu>")
-def acasa(titlu=None):
+@app.route("/acasa/<id>")
+def acasa(id=None):
     global_variables()
     titles=titluri()
 
-    if titlu == None:
+    if id == None:
         titles=titluri()
-        return render_template("index.html", len = len(titles),titles=titles)
+        ids = select_id()
+        return render_template("index.html", len = len(titles),titles=titles, ids=ids)
     else:
-        content = get_data_by_title("legi", titlu)
+        content = get_data_by_id("legi", id)
         titlu = content[0][1]
-        if content[0][2] != None:
+        if content[0][2] != None and content[0][2] != "nan":
             pro_lect1 = content[0][2]
         else:
             pro_lect1 = 0
 
-        if content[0][3] != None:
+        if content[0][3] != None and content[0][3] != "nan":
             con_lect1 = content[0][3]
         else:
             con_lect1 = 0
         
-        if content[0][4] != None:
+        if content[0][4] != None and content[0][4] != "nan":
             neu_lect1 = content[0][4]
         else:
             neu_lect1 = 0
         
-        if content[0][5] != None:
+        if content[0][5] != None and content[0][5] != "nan":
             pro_lect2 = content[0][5]
         else:
             pro_lect2 = 0
 
-        if content[0][6] != None:
+        if content[0][6] != None and content[0][6] != "nan":
             con_lect2 = content[0][6]
         else:
             con_lect2 = 0
         
-        if content[0][7] != None:
+        if content[0][7] != None and content[0][7] != "nan":
             neu_lect2 = content[0][7]
         else:
             neu_lect2 = 0
