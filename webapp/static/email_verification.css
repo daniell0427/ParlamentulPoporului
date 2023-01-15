@@ -118,6 +118,11 @@ nav a:hover{
 
 /*nav-bar end*/
 
+#all{
+    display: grid;
+    place-content: center;
+}
+
 .main{
     width: 500px;
     min-height: 250px;
