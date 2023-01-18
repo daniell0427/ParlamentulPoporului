@@ -1,10 +1,11 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
 from webapp import app
-from database import titluri, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id
+from database import titluri,select,set_vot,vot_db,validvot, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
+import time
 
 
 app.config["SESSION_PERMANENT"] = False
@@ -35,6 +36,7 @@ def acasa(id=None):
         ids = select_id()
         return render_template("index.html", len = len(titles),titles=titles, ids=ids)
     else:
+        session['id']=id
         content = get_data_by_id("legi", id)
         titlu = content[0][1]
         if content[0][2] != None and content[0][2] != "nan":
@@ -66,7 +68,23 @@ def acasa(id=None):
             neu_lect2 = content[0][7]
         else:
             neu_lect2 = 0
-        return render_template("layout_lege.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2)
+        id_user=get_data_by_username("id",session['username'])
+        a=validvot(id_user)
+        ok=True
+        c=str(session['id'])
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        for x in a:
+            b=x[0]
+            b=str(b)
+            print(b)
+            print('---------------------')
+            print(session['id'])
+            if c==b :
+                print("da")
+                ok=False
+                
+        print(ok)
+        return render_template("layout_lege.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2,ok=ok)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
@@ -314,3 +332,43 @@ def admin():
                 introdu(str(tit[i]),str(pro1[i]),str(cont1[i]),str(neu1[i]),str(pro2[i]),str(cont2[i]),str(neu2[i]))
             print(b)
     return render_template("admin.html")
+
+@app.route("/acasa/pro" , methods=["GET","POST"])
+def pro():
+    print('provot')
+    a=select(session['id'],"pro_popor")
+    b=a[0][0]
+    b=b+1
+    set_vot(b,session['id'],"pro_popor")
+    a=get_data_by_username("id",session['username'])
+    print(a)
+    vot_db(a,session['id'],"pro")
+    print(session['id'])
+    return redirect(url_for('acasa',id=session['id']))
+
+@app.route("/acasa/contra" , methods=["GET","POST"])
+def contra():
+    print('provot')
+    a=select(session['id'],"contra_popor")
+    b=a[0][0]
+    b=b+1
+    
+    set_vot(b,session['id'],"contra_popor")
+    a=get_data_by_username("id",session['username'])
+    print(a)
+    vot_db(a,session['id'],"contra")
+    print(session['id'])
+    return redirect(url_for('acasa',id=session['id']))
+
+@app.route("/acasa/neutru" , methods=["GET","POST"])
+def neutru():
+    print('provot')
+    a=select(session['id'],"neu_popor")
+    b=a[0][0]
+    b=b+1
+    set_vot(b,session['id'],"neu_popor")
+    a=get_data_by_username("id",session['username'])
+    print(a)
+    vot_db(a,session['id'],"neutru")
+    print(session['id'])
+    return redirect(url_for('acasa',id=session['id']))

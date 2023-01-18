@@ -197,3 +197,45 @@ def verificare_legi(nume):
       ok=0
     print(ok)
     return ok
+
+def select(id,camp):
+  mycursor = db.cursor()
+
+  sql = "SELECT "+camp+" FROM legi WHERE nr ="+id+""
+
+
+  mycursor.execute(sql)
+  myresult = mycursor.fetchall()
+  return myresult
+
+def set_vot(nr,id,camp):
+  
+  mycursor = db.cursor()
+  nr=str(nr)
+  camp=str(camp)
+  id=str(id)
+  sql = "UPDATE legi SET "+camp+" = "+nr+" WHERE nr = "+id+""
+
+  mycursor.execute(sql)
+
+  db.commit()
+
+def vot_db(id_user,id_legi,vot):
+  mycursor = db.cursor()
+  id_legi=str(id_legi)
+  id_user=str(id_user)
+  insertQuery = "INSERT INTO vot(id_user,id_lege,vot) VALUES ("+id_user+","+id_legi+",'"+vot+"');"
+  
+  mycursor.execute(insertQuery)
+
+  db.commit()
+
+def validvot(id):
+  mycursor = db.cursor()
+  id=str(id)
+  sql = "SELECT id_lege FROM vot WHERE id_user ="+id+""
+
+
+  mycursor.execute(sql)
+  myresult = mycursor.fetchall()
+  return myresult

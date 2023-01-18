@@ -34,7 +34,37 @@
                 
                 <div class="pieChart"></div>
 
-            </div>   
+            </div>  
+            
+            {%if session.get('username')!=None and ok==True %} 
+            <div>
+                <form action="" method="post" id="form1" onclick="return vot()">
+
+                    <button id="pro1" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
+                    <button id="contra1" onclick="val('contra')"><a href="{{url_for('contra')}}">Contra</a></button>
+                    <button id="neutru1" onclick="val('nuetru')"><a href="{{url_for('neutru')}}">Neutru</a></button>
+
+                </form>
+                <script>
+                    a=''
+                    function val(b){
+                        a=b
+                        
+                    }
+                    function vot(){
+
+                        let text = "Esti singur de alegerea ta\n Ai vot "+a;
+                        if (confirm(text) == true) {
+                            document.getElementById("form1").submit();
+                        }else{
+                            
+                            return false
+                        }
+                    }
+                </script>
+            </div>
+
+            {%endif%}
 
         </div>
 
