@@ -1,12 +1,9 @@
-import os
+from database import select
 
-def find_files(filename, search_path):
-   result = []
-
-# Wlaking top-down from the root
-   for root, dir, files in os.walk(search_path):
-      if filename in files:
-         result.append(os.path.join(root, filename))
-   return result
-
-print(find_files("input.xlsx","C:"))
+a=select('549')
+b=a[0][0]
+c=a[0][1]
+d=a[0][2]
+print(b)
+print(c)
+print(d)

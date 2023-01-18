@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
 from webapp import app
-from database import titluri,select,set_vot,vot_db,validvot, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id
+from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -336,9 +336,23 @@ def admin():
 @app.route("/acasa/pro" , methods=["GET","POST"])
 def pro():
     print('provot')
-    a=select(session['id'],"pro_popor")
+    a=select(session['id'])
     b=a[0][0]
+    c=a[0][1]
+    d=a[0][2]
     b=b+1
+    max=0
+    vot_max=''
+    if b>max:
+        max=b
+        vot_max='pro'
+    if c>max:
+        max=c
+        vot_max='contra'
+    if d>max :
+        max=d
+        vot_max='neutru'
+    set_vot_popor(vot_max,session['id'])
     set_vot(b,session['id'],"pro_popor")
     a=get_data_by_username("id",session['username'])
     print(a)
@@ -349,10 +363,23 @@ def pro():
 @app.route("/acasa/contra" , methods=["GET","POST"])
 def contra():
     print('provot')
-    a=select(session['id'],"contra_popor")
+    a=select(session['id'])
     b=a[0][0]
-    b=b+1
-    
+    c=a[0][1]
+    d=a[0][2]
+    c=c+1
+    max=0
+    vot_max=''
+    if b>max:
+        max=b
+        vot_max='pro'
+    if c>max:
+        max=c
+        vot_max='contra'
+    if d>max :
+        max=d
+        vot_max='neutru'
+    set_vot_popor(vot_max,session['id'])
     set_vot(b,session['id'],"contra_popor")
     a=get_data_by_username("id",session['username'])
     print(a)
@@ -363,10 +390,24 @@ def contra():
 @app.route("/acasa/neutru" , methods=["GET","POST"])
 def neutru():
     print('provot')
-    a=select(session['id'],"neu_popor")
+    a=select(session['id'])
     b=a[0][0]
-    b=b+1
-    set_vot(b,session['id'],"neu_popor")
+    c=a[0][1]
+    d=a[0][2]
+    d=d+1
+    max=0
+    vot_max=''
+    if b>max:
+        max=b
+        vot_max='pro'
+    if c>max:
+        max=c
+        vot_max='contra'
+    if d>max :
+        max=d
+        vot_max='neutru'
+    set_vot_popor(vot_max,session['id'])
+    set_vot(d,session['id'],"neu_popor")
     a=get_data_by_username("id",session['username'])
     print(a)
     vot_db(a,session['id'],"neutru")

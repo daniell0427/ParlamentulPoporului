@@ -10,8 +10,37 @@ db = mysql.connector.connect(
 # getting the cursor by cursor() method
 def introdu(tit,pro1,contra1,neu1,pro2,contra2,neu2):
   mycursor = db.cursor()
+  max1=0
+  a=''
+  if pro1!='nan':
+    if pro2!='nan':
+      pro_2=int(pro2)
+      contra_2=int(contra2)
+      neu_2=int(neu2)
+      if pro_2>max1:
+        max1=pro_2
+        a='pro'
+      if contra_2>max1:
+        max1=contra_2
+        a='contra'
+      if neu_2>max1:
+        max1=neu_2
+        a='neutru'
+    else:
+      pro_1=int(pro1)
+      contra_1=int(contra1)
+      neu_1=int(neu1)
+      if pro_1>max1:
+        max1=pro_1
+        a='pro'
+      if contra_1>max1:
+        max1=contra_1
+        a='contra'
+      if neu_1>max1:
+        max1=neu_1
+        a='neutru'
 
-  insertQuery = "INSERT INTO legi (titlu, pro_l1, contra_l1, neu_l1, pro_l2, contra_l2, neu_l2) VALUES ('"+tit+"','"+pro1+"','"+contra1+"','"+neu1+"','"+pro2+"','"+contra2+"','"+neu2+"');"
+  insertQuery = "INSERT INTO legi (titlu, pro_l1, contra_l1, neu_l1, pro_l2, contra_l2, neu_l2,max_parlament) VALUES ('"+tit+"','"+pro1+"','"+contra1+"','"+neu1+"','"+pro2+"','"+contra2+"','"+neu2+"','"+a+"');"
   
   mycursor.execute(insertQuery)
   
@@ -198,10 +227,10 @@ def verificare_legi(nume):
     print(ok)
     return ok
 
-def select(id,camp):
+def select(id):
   mycursor = db.cursor()
 
-  sql = "SELECT "+camp+" FROM legi WHERE nr ="+id+""
+  sql = "SELECT pro_popor,contra_popor,neu_popor FROM legi WHERE nr ="+id+""
 
 
   mycursor.execute(sql)
@@ -239,3 +268,14 @@ def validvot(id):
   mycursor.execute(sql)
   myresult = mycursor.fetchall()
   return myresult
+
+def set_vot_popor(max_vot,id):
+  
+  mycursor = db.cursor()
+
+  id=str(id)
+  sql = "UPDATE legi SET max_popor= '"+max_vot+"' WHERE nr = "+id+""
+
+  mycursor.execute(sql)
+
+  db.commit()
