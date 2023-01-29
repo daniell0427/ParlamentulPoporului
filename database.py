@@ -279,3 +279,13 @@ def set_vot_popor(max_vot,id):
   mycursor.execute(sql)
 
   db.commit()
+
+def get_id_by_title(camp, title):
+
+  mycursor = db.cursor()
+
+  mycursor.execute("SELECT nr FROM "+camp+" WHERE titlu ='"+title+"'")
+
+  myresult = mycursor.fetchall()
+
+  return myresult

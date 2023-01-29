@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
 from webapp import app
-from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id
+from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id, get_id_lege, get_id_by_title
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -68,22 +68,26 @@ def acasa(id=None):
             neu_lect2 = content[0][7]
         else:
             neu_lect2 = 0
-        id_user=get_data_by_username("id",session['username'])
-        a=validvot(id_user)
-        ok=True
-        c=str(session['id'])
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        for x in a:
-            b=x[0]
-            b=str(b)
-            print(b)
-            print('---------------------')
-            print(session['id'])
-            if c==b :
-                print("da")
-                ok=False
-                
-        print(ok)
+
+        ok = None
+
+        if session.get("username"):
+            id_user=get_data_by_username("id",session['username'])
+            a=validvot(id_user)
+            ok=True
+            c=str(session['id'])
+            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            for x in a:
+                b=x[0]
+                b=str(b)
+                print(b)
+                print('---------------------')
+                print(session['id'])
+                if c==b :
+                    print("da")
+                    ok=False
+            print(ok)
+
         return render_template("layout_lege.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2,ok=ok)
 
 
@@ -278,18 +282,17 @@ def cautare():
     
     if request.method == "POST":
         caut = request.form.get("caut")
-        
         a=cautar(caut)
+    ids = []
+    for i in a:
+        id = get_id_by_title("legi", i[0])
+        id = id[0]
+        ids.append(id)
     eror=""
     n=len(a)
     if n==0:
         eror="Ne pare rau nu sa gasit nicio lege"
-    print(n)
-    c=1
-    b=0
-    if n%2==0: c=0
-    if n%2==0: b=1
-    return render_template("legi_recente.html", title = "Cautare",titles=a,len=len(a),c=c,b=b ,eror=eror)
+    return render_template("index.html", title = "Cautare",titles=a,len=len(a), eror=eror, ids=ids)
 
 @app.route("/verificare-email" , methods=["GET","POST"])
 def email_verification():
@@ -337,9 +340,18 @@ def admin():
 def pro():
     print('provot')
     a=select(session['id'])
-    b=a[0][0]
-    c=a[0][1]
-    d=a[0][2]
+    if a[0][0] != None:
+        b=a[0][0]
+    else:
+        b = 0
+    if a[0][1] != None:
+        c=a[0][1]
+    else:
+        c = 0
+    if a[0][2] != None:
+        d=a[0][2]
+    else:
+        d = 0
     b=b+1
     max=0
     vot_max=''
@@ -364,9 +376,18 @@ def pro():
 def contra():
     print('provot')
     a=select(session['id'])
-    b=a[0][0]
-    c=a[0][1]
-    d=a[0][2]
+    if a[0][0] != None:
+        b=a[0][0]
+    else:
+        b = 0
+    if a[0][1] != None:
+        c=a[0][1]
+    else:
+        c = 0
+    if a[0][2] != None:
+        d=a[0][2]
+    else:
+        d = 0
     c=c+1
     max=0
     vot_max=''
@@ -380,7 +401,7 @@ def contra():
         max=d
         vot_max='neutru'
     set_vot_popor(vot_max,session['id'])
-    set_vot(b,session['id'],"contra_popor")
+    set_vot(c,session['id'],"contra_popor")
     a=get_data_by_username("id",session['username'])
     print(a)
     vot_db(a,session['id'],"contra")
@@ -391,9 +412,18 @@ def contra():
 def neutru():
     print('provot')
     a=select(session['id'])
-    b=a[0][0]
-    c=a[0][1]
-    d=a[0][2]
+    if a[0][0] != None:
+        b=a[0][0]
+    else:
+        b = 0
+    if a[0][1] != None:
+        c=a[0][1]
+    else:
+        c = 0
+    if a[0][2] != None:
+        d=a[0][2]
+    else:
+        d = 0
     d=d+1
     max=0
     vot_max=''

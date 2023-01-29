@@ -35,8 +35,10 @@
                 <div class="pieChart"></div>
 
             </div>  
-            
-            {%if session.get('username')!=None and ok==True %} 
+  
+        </div>
+
+        {%if session.get('username')!=None and ok==True %} 
             <div>
                 <form action="" method="post" id="form1" onclick="return vot()">
 
@@ -53,7 +55,7 @@
                     }
                     function vot(){
 
-                        let text = "Esti singur de alegerea ta\n Ai vot "+a;
+                        let text = "Esti sigur de alegerea ta\n Ai vot "+a;
                         if (confirm(text) == true) {
                             document.getElementById("form1").submit();
                         }else{
@@ -64,10 +66,13 @@
                 </script>
             </div>
 
-            {%endif%}
+        {%endif%}
 
-        </div>
-
+        {%if session.get('username')== None %}
+            <div>
+                <button id=""><a href="{{url_for('autentificare')}}">Voteaza</a></button>
+            </div>
+        {%endif%}
     </div>
 
     
