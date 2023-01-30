@@ -10,7 +10,6 @@
 {% endblock head %}
 
 {% block content %}
-<div class = "error">{{error}}</div>
 <div id="main">
     <div id="container">
         <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPP.png')}}" id="logo"></a>
@@ -24,7 +23,7 @@
             <input type="email" name="email" id=""class="input" required>
 
             <label for="phone" class="label">Numar de telefon</label>
-            <input type="tel" id="phone" name="phone" class="input" required>
+            <input type="tel" id="phone" pattern="((6|7)[0-9]{7}|0[0-9]{8})" name="phone" class="input" required>
 
             <label for="password" class="label">Parola</label>
             <input type="password" name="password" id="" class="input" minlength="8" required>
@@ -46,14 +45,10 @@
 <!-- ^^  form code  ^^ -->
 <script>
     const phoneInputField = document.querySelector("#phone");
-    const phoneInput = window.intlTelInput(phoneInputField, {
-        utilsScript:
-        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-    });
+    const phoneInput = window.intlTelInput(phoneInputField);
     var input = document.querySelector("#phone");
     window.intlTelInput(input, {
-    onlyCountries: ["md"],
-    utilsScript: "../../build/js/utils.js?1638200991544" // just for formatting/placeholders etc
+    onlyCountries: ["md"]
     });
 </script>
 

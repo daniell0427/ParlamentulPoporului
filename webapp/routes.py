@@ -447,3 +447,19 @@ def neutru():
     vot_db(a,session['id'],"neutru")
     print(session['id'])
     return redirect(url_for('acasa',id=session['id']))
+
+# @app.route("/update_account",methods=['GET', 'POST'])
+# def update_account():
+#     if session["username"] != None:
+#         e=""
+#         if request.method == "POST":
+#             password = request.form.get("password")
+#             password_new =request.form.get("new_pass")
+#             password_conf=request.form.get("conf_pass") 
+#             global email
+#             e=reset_pass(password, password_new, password_conf, email)  
+#             if e=="":
+#                 return redirect(url_for("acasa"))
+#         return render_template("reseteazaparola.html",e=e)
+#     else:
+#         return redirect(url_for('acasa'))
