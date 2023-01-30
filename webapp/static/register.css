@@ -55,6 +55,8 @@ body{
     width: 11em;
 }
 
+
+
 h1{
     color: black;
     font-weight: 600;
@@ -67,7 +69,11 @@ h1{
     margin-block: 5px;
 }
 
-
+#eroare_nume{
+    font-size: 10px;
+    color:red;
+    display: none;
+}
 
 #inregistreazate{
     color: rgb(13, 190, 239);

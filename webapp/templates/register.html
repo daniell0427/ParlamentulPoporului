@@ -7,6 +7,7 @@
      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
      />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
 {% endblock head %}
 
 {% block content %}
@@ -17,19 +18,20 @@
         <form action="inregistrare" method="post" id="form" onsubmit="process(event)">
         
             <label for="user" class="label">Nume de utilizator</label>
-            <input type="text" name="user" id="" class="input" minlength="3" maxlength="25" required>
+            <input type="text" name="user" id="numeUtilizator" class="input" minlength="3" maxlength="25" required>
+            <div id="eroare_nume">Acest nume este folosit</div>
 
             <label for="email" class="label">Email</label>
-            <input type="email" name="email" id=""class="input" required>
+            <input type="email" name="email" id="emailSelectat"class="input" required>
 
             <label for="phone" class="label">Numar de telefon</label>
             <input type="tel" id="phone" name="phone" class="input" required>
 
             <label for="password" class="label">Parola</label>
-            <input type="password" name="password" id="" class="input" minlength="8" required>
+            <input type="password" name="password" id="parolaSelectata" class="input" minlength="8" required>
 
             <label for="pass_conf" class="label">Confirmare parola</label>
-            <input type="password" name="pass_conf" id="" class="input" required>
+            <input type="password" name="pass_conf" id="confirmareParolaSelectata" class="input" required>
 
             <button type="submit" id="inregistreazate">Inregistreaza-te</button>
         
@@ -43,19 +45,31 @@
 
 
 <!-- ^^  form code  ^^ -->
+
+
+
+{% if taken_username %}
+
+    <script>
+        let eroare_nume = document.getElementById("eroare_nume");
+        eroare_nume.style.display = "block";
+    </script>
+
+{% endif %}
+
+
 <script>
-  const phoneInputField = document.querySelector("#phone");
-  const phoneInput = window.intlTelInput(phoneInputField, {
-    utilsScript:
-      "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-  });
-
-  
-
-
-
-</script>
-
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+    onlyCountries: ["md"],
+    utilsScript: "../../build/js/utils.js?1638200991544" // just for formatting/placeholders etc
+    });
+    	
+</script>   
 {% endblock content %}
-
 
