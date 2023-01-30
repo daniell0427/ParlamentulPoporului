@@ -2,23 +2,36 @@
 
 {% block head %}
     <link href="{{ url_for('static', filename='register.css') }}" type="text/css" rel="stylesheet">
+    <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 {% endblock head %}
 
 {% block content %}
+<div class = "error">{{error}}</div>
 <div id="main">
     <div id="container">
         <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPP.png')}}" id="logo"></a>
         <h1>Inregistrare</h1>
-        <form action="inregistrare" method="post" id="form">
+        <form action="inregistrare" method="post" id="form" onsubmit="process(event)">
         
             <label for="user" class="label">Nume de utilizator</label>
-            <input type="text" name="user" id="" class="input" minlength="3" maxlength="25">
+            <input type="text" name="user" id="" class="input" minlength="3" maxlength="25" required>
+
             <label for="email" class="label">Email</label>
-            <input type="email" name="email" id=""class="input">
+            <input type="email" name="email" id=""class="input" required>
+
+            <label for="phone" class="label">Numar de telefon</label>
+            <input type="tel" id="phone" name="phone" class="input" required>
+
             <label for="password" class="label">Parola</label>
-            <input type="password" name="password" id="" class="input" minlength="8">
+            <input type="password" name="password" id="" class="input" minlength="8" required>
+
             <label for="pass_conf" class="label">Confirmare parola</label>
-            <input type="password" name="pass_conf" id="" class="input">
+            <input type="password" name="pass_conf" id="" class="input" required>
+
             <button type="submit" id="inregistreazate">Inregistreaza-te</button>
         
         </form>
@@ -27,5 +40,18 @@
 
     </div>
 </div>
-<div>{{e}}</div>
+
+
+
+<!-- ^^  form code  ^^ -->
+<script>
+  const phoneInputField = document.querySelector("#phone");
+  const phoneInput = window.intlTelInput(phoneInputField, {
+    utilsScript:
+      "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+  });
+</script>
+
 {% endblock content %}
+
+

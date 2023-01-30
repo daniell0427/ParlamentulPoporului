@@ -95,23 +95,24 @@ def acasa(id=None):
 def inregistrare():
     
     if session.get("username")  == None:
-        e=""
+        error=""
         if request.method == "POST":
             global username
             username = request.form.get("user")
             global email
             email = request.form.get("email") 
+            phone = request.form.get("phone")
             password = request.form.get("password") 
             pass_conf= request.form.get("pass_conf")
             global verified
             verified = "False"
-            e=inreg(username,email,password,pass_conf,verified)
-            if e!="Inregistrare completa": 
-                print(e)
+            error=inreg(username,email,phone,password,pass_conf,verified)
+            if error!="Inregistrare completa": 
+                print(error)
             else:
                 #Verificare email:
                 return redirect(url_for('email_verification'))
-        return render_template("register.html" ,e=e)
+        return render_template("register.html" ,error=error)
     else:
         return redirect(url_for("acasa"))
 

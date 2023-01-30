@@ -74,10 +74,10 @@ def select_id():
   return myresult
 
 
-def inregistrare(user,email,password,verified):
+def inregistrare(user,email,phone,password,verified):
   mycursor = db.cursor()
 
-  insertQuery = "INSERT INTO inregistrare (username, email, password, verified) VALUES ('"+user+"','"+email+"','"+password+"','"+verified+"');"
+  insertQuery = "INSERT INTO inregistrare (username, email,phone, password, verified) VALUES ('"+user+"','"+email+"','"+phone+"','"+password+"','"+verified+"');"
   
   mycursor.execute(insertQuery)
   
