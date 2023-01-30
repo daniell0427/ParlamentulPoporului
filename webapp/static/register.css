@@ -67,15 +67,7 @@ h1{
     margin-block: 5px;
 }
 
-.error{
-    color: black;
-    font-size: 20px;
-    text-align: center;
-    width: 400px;
-    border-radius: 5px;
-    background-color:rgb(204,51,0,0.8);
-    padding-block: 5px;
-}
+
 
 #inregistreazate{
     color: rgb(13, 190, 239);

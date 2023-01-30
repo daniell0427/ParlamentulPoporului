@@ -10,7 +10,6 @@
 {% endblock head %}
 
 {% block content %}
-<div class = "error">{{error}}</div>
 <div id="main">
     <div id="container">
         <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPP.png')}}" id="logo"></a>
@@ -50,6 +49,11 @@
     utilsScript:
       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
   });
+
+  
+
+
+
 </script>
 
 {% endblock content %}

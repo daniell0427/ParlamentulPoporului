@@ -28,7 +28,7 @@
     <body>
         
         <header>
-            <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='logoNouPP.png')}}" id="logo"></a>
+            <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPPWhite.png.png')}}" id="logo"></a>
             
             <nav id="nav" >
                 <form action="/cautare" method="post" id="cautareForm">
@@ -37,7 +37,8 @@
                     id="cautare" name="caut">
                     <button type="submit" id="searchButton">  <i class="material-icons" >search</i></button>
                 </form>
-
+                <a href="">Proiecte</a>
+                <a  href="">Statistica</a>
 
                 <div>  
                     {%if session.get("username")!=None  %}
