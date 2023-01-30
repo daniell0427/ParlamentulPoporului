@@ -96,6 +96,9 @@ def inregistrare():
     
     if session.get("username")  == None:
         error=""
+        taken_username = False
+        taken_email = False
+        taken_phone = False
         if request.method == "POST":
             global username
             username = request.form.get("user")
@@ -106,13 +109,13 @@ def inregistrare():
             pass_conf= request.form.get("pass_conf")
             global verified
             verified = "False"
-            error=inreg(username,email,phone,password,pass_conf,verified)
+            error, taken_username, taken_email, taken_phone=inreg(username,email,phone,password,pass_conf,verified)
             if error!="Inregistrare completa": 
                 print(error)
             else:
                 #Verificare email:
                 return redirect(url_for('email_verification'))
-        return render_template("register.html" ,error=error)
+        return render_template("register.html" ,error=error, taken_username=taken_username, taken_email=taken_email, taken_phone=taken_phone)
     else:
         return redirect(url_for("acasa"))
 

@@ -11,26 +11,34 @@ def password_hash(pass1):
 
 def inreg(user, email, phone, password, conf_pass, verified):
     e=""
-    if user != None:
-        a=verificare("username",user)
-        if a: 
-            e=e+" Acest nume de utilizator este folosit! "
+    taken_username = False 
+    taken_email = False
+    taken_phone = False
+
+    a=verificare("username",user)
+    if a: 
+        e=e+" Acest nume de utilizator este folosit! "
+        taken_username = True
 
     a=verificare("email", email)
     if a:
         e=e+" Acest email este deja folosit! "
+        taken_email = True
 
     phone_nr = phone_restructure(str(phone))
     a=verificare("phone", phone_nr)
     if a:
         e=e+" Acest numar de telfon este deja folosit! "
+        taken_phone = True
+    
     if password!=conf_pass :
         e=e+" Parola Gresita "
     if e=="":
         passwordh=password_hash(password)
         inregistrare(user,email,phone_nr,passwordh,verified)
         e="Inregistrare completa"
-    return e
+        
+    return e, taken_username, taken_email, taken_phone
 
 def phone_restructure(phone_nr):
     if phone_nr[0] == '+':
