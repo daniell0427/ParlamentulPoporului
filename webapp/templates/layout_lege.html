@@ -25,7 +25,7 @@
                 bold: true,
             },
         
-          colors: ['#24d600', 'red', 'blue'],
+          colors: ['#00e500', 'red', 'blue'],
           legend: {
                 textStyle: {
                     fontSize: 16,
@@ -68,7 +68,7 @@
                 bold: true,
             },
         
-          colors: ['#24d600', 'red', 'blue'],
+          colors: ['#00e500', 'red', 'blue'],
           legend: {
                 textStyle: {
                     fontSize: 16,
@@ -109,7 +109,7 @@
                 bold: true,
             },
         
-          colors: ['#24d600', 'red', 'blue'],
+          colors: ['#00e500', 'red', 'blue'],
           legend: {
                 textStyle: {
                     fontSize: 16,
@@ -152,7 +152,7 @@
             
         <div id="voturiContainer">
             <div class="piechartLabel">Lectura 1</div>
-            <div class="piechartLabel">Lecutura 2</div>
+            <div class="piechartLabel">Lectura 2</div>
             <div class="piechartLabel">Votul Poporului</div>
             <div id="piechart1" class="piechart" ></div>
             <div id="piechart2" class="piechart" ></div>
@@ -165,9 +165,9 @@
             <div>
                 <form action="" method="post" id="form1" onclick="return vot()">
 
-                    <button id="pro1" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
-                    <button id="contra1" onclick="val('contra')"><a href="{{url_for('contra')}}">Contra</a></button>
-                    <button id="neutru1" onclick="val('nuetru')"><a href="{{url_for('neutru')}}">Neutru</a></button>
+                    <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
+                    <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
+                    <button id="neutru1" class="buttonVote" onclick="val('nuetru')"><a href="{{url_for('neutru')}}">Neu</a></button>
 
                 </form>
                 <script>
