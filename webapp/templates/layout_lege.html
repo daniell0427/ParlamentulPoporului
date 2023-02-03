@@ -4,46 +4,159 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout_lege.css') }}" >
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Pro: 11',     11],
+          ['Contra: 2',      2],
+          ['Neutri: 4',  4],
+        ]);
+
+        var options = {
+          title: 'Lectura 1',
+          titleTextStyle: {
+                fontSize: 30,
+                bold: true,
+            },
+        
+          colors: ['#24d600', 'red', 'blue'],
+          legend: {
+                textStyle: {
+                    fontSize: 16,
+                    }
+          },
+          width: 320,
+          height: 300,
+          chartArea: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+            
+        
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+  
+        function drawChart() {
+  
+          var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Pro: 19',     19],
+            ['Contra: 10',      10],
+            ['Neutri: 3',  3],
+          ]);
+  
+          var options = {
+          title: 'Lectura 2',
+          titleTextStyle: {
+                fontSize: 30,
+                bold: true,
+            },
+        
+          colors: ['#24d600', 'red', 'blue'],
+          legend: {
+                textStyle: {
+                    fontSize: 16,
+                    }
+          },
+          width: 320,
+          height: 300,
+          chartArea: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+        };
+  
+          var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+  
+          chart.draw(data, options);
+        }
+      </script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+  
+        function drawChart() {
+  
+          var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Pro: 24',     24],
+            ['Contra: 16',      16],
+            ['Neutri: 8',  8],
+          ]);
+  
+          var options = {
+          title: 'Lectura 1',
+          titleTextStyle: {
+                fontSize: 30,
+                bold: true,
+            },
+        
+          colors: ['#24d600', 'red', 'blue'],
+          legend: {
+                textStyle: {
+                    fontSize: 16,
+                    }
+          },
+          width: 320,
+          height: 300,
+          chartArea: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+        };
+  
+          var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
+  
+          chart.draw(data, options);
+        }
+      </script>
 {% endblock head %}
 
 {% block content %}
 
     <div id="all">
+
         <h1 id="title">Lege</h1>
+
         <div id="main">
-            <div id="video"></div>
+            <div id="video">
+                <iframe width="460" height="260" src="https://www.youtube.com/embed/JAoHXelq2-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
             <div id="descriere">{{titlu}}</div>
         </div>
+
+        <div id="voturiTitleContainer">
+            <div id="voturiTitle">Voturi</div>
+            <div class="line"></div>
+        </div>    
             
-        <div id="voturi">
-
-            <div id="votLectura1"> 
-                <div id="piechart"></div>
-            </div>
-            <div id="votLectura2"></div>
-            <div id="votPopor"></div>
-
-
-
-
-            <!--<div id="pcn">
-                <strong>Voturi:</strong>
-                <div id="lect1">
-                    <strong id="pro">Pro lectura 1:  <span id="proNumber">{{pro_lect1}}</span></strong>
-                    <strong id="contra">Contra lectura 1:  <span id="contraNumber">{{con_lect1}}</span></strong>
-                    <strong id="neutre">Neutre lectura 1:  <span id="neutruNumber">{{neu_lect1}}</span></strong>
-                </div>
-
-                <div id="lect2">
-                    <strong id="pro">Pro lectura 2:  <span id="proNumber">{{pro_lect2}}</span></strong>
-                    <strong id="contra">Contra lectura 2:  <span id="contraNumber">{{con_lect2}}</span></strong>
-                    <strong id="neutre">Neutre lectura 2:  <span id="neutruNumber">{{neu_lect2}}</span></strong>
-                </div>
-                
-            </div>    
-            
-            <div class="pieChart"></div>-->
-
+        <div id="voturiContainer">
+            <div class="piechartLabel">Lectura 1</div>
+            <div class="piechartLabel">Lecutura 2</div>
+            <div class="piechartLabel">Votul Poporului</div>
+            <div id="piechart1" class="piechart" ></div>
+            <div id="piechart2" class="piechart" ></div>
+            <div id="piechart3" class="piechart" ></div>
         </div>  
   
       
@@ -80,41 +193,10 @@
 
         {%if session.get('username')== None %}
             <div>
-                <button id=""><a href="{{url_for('autentificare')}}">Voteaza</a></button>
+                <a href="{{url_for('autentificare')}}"><button id="voteaza">Voteaza</button></a>
             </div>
         {%endif%}
     </div>
-    <script>
-        
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Pro: 9',     9],
-            ['Contra: 5',      5],
-            ['Neutri: 20',  20],
-        ]);
-
-        var options = {
-            title: 'Voturi lectura 1 ',
-            titleTextStyle: {
-                fontSize: 50,
-                color: '#000',
-                bold: true,
-                italic: false,
-                alignment: 'center'
-            },
-            colors: ['#24d600', 'red', 'blue'],
-            chartArea: {width: '50%', height: '50%', top: 0, right: 0},
-            border: {width:1, color:'black'},
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-        }
-    </script>
 
 {% endblock content %}
+
