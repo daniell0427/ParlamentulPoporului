@@ -17,10 +17,8 @@ def global_variables():
     if session.get('username')!=None:
         global username
         global email
-        global verified
         username = session.get('username')
         email = session.get('email')
-        verified = get_data_by_username('verified', username)
 
 
 @app.route("/")
@@ -107,9 +105,9 @@ def inregistrare():
             phone = request.form.get("phone")
             password = request.form.get("password") 
             pass_conf= request.form.get("pass_conf")
-            global verified
-            verified = "False"
-            error, taken_username, taken_email, taken_phone=inreg(username,email,phone,password,pass_conf,verified)
+            global passwordh
+            global phone_nr
+            error, taken_username, taken_email, taken_phone, passwordh, phone_nr=inreg(username,email,phone,password,pass_conf)
             if error!="Inregistrare completa": 
                 print(error)
             else:
@@ -155,12 +153,7 @@ def autentificare():
 @app.route("/account",methods=['GET', 'POST'])
 def account():
     global email
-    global username
-    try:
-        verified = get_data_by_username('verified', username)
-    except:
-        return render_template("except_page.html")
-    return render_template("account.html", email = email, verified = verified)
+    return render_template("account.html", email = email)
 
 @app.route("/reset-password",methods=['GET', 'POST'])
 def reseteaza_parola():
@@ -255,7 +248,7 @@ def reseteaza_parola():
 
 # @app.route("/propune-legi", methods=['GET', 'POST'])
 # def propune_legi():
-#     if session["username"] != None and verified == 'True':
+#     if session["username"] != None:
 #         if request.method == "POST":
 
 #             titlu = request.form.get("titlu")
@@ -301,21 +294,14 @@ def cautare():
 @app.route("/verificare-email" , methods=["GET","POST"])
 def email_verification():
     global email
-    global verified
-    if verified == 'False':
-        msg = send_otp(email)
-        if request.method == "POST":
-            otp = request.form.get("otp")
-            if otp == msg:
-                try:
-                    inregistrare_changes_db('verified', 'True', email)
-                except:
-                    print('Ne pare rau, a aparut o eroare! Incercati mai tarziu.')
-                return redirect(url_for("autentificare"))
-            else:
-                print("Otp invalid")
-    else:
-        return redirect(url_for('acasa'))
+    msg = send_otp(email)
+    if request.method == "POST":
+        otp = request.form.get("otp")
+        print(msg, " ", otp)
+        if otp == msg:
+            return redirect(url_for("autentificare"))
+        else:
+            print("Otp invalid")
 
     return render_template('email_verification.html', email=email, msg=msg)
 

@@ -9,7 +9,7 @@ def password_hash(pass1):
     return hash
 
 
-def inreg(user, email, phone, password, conf_pass, verified):
+def inreg(user, email, phone, password, conf_pass):
     e=""
     taken_username = False 
     taken_email = False
@@ -35,10 +35,9 @@ def inreg(user, email, phone, password, conf_pass, verified):
         e=e+" Parola Gresita "
     if e=="":
         passwordh=password_hash(password)
-        inregistrare(user,email,phone_nr,passwordh,verified)
         e="Inregistrare completa"
         
-    return e, taken_username, taken_email, taken_phone
+    return e, taken_username, taken_email, taken_phone,passwordh, phone_nr
 
 def phone_restructure(phone_nr):
     if phone_nr[0] == '+':

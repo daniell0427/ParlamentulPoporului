@@ -16,10 +16,8 @@
                 <input type="text" name="otp" id="otp" placeholder="123456">
                 <button type="submit" id="button">Verifica</button>
             </form>
-            <div class="later">
-                <p>Doriti sa verificati mai tarziu?</p>
-                <a href="{{ url_for('inregistrare') }}">Inregistrare</a>
-            </div>
+            <p>Nu ati primit codul?</p>
+            <a href="url_for('email_verification')">Re-trimite</a>
         </div>
     </div>  
 {% endblock content %}

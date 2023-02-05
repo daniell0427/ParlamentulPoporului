@@ -25,9 +25,6 @@
             </form>
 
             <div id="links">
-                {% if verified == "False" %}
-                    <a href="{{ url_for('email_verification', email = email) }}">Verificare Email</a>
-                {% endif %}
                 <a href="{{ url_for('reseteaza_parola') }}">Reseteaza Parola</a>
                 <a href="{{ url_for('logout') }}">Iesire</a>
             </div>
