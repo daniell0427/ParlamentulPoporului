@@ -80,22 +80,6 @@
             document.querySelector('.modal').style.display = 'none';
         });
 
-        //pentru pie chart
-        let pro = parseInt(document.getElementById("proNumber").textContent);
-        let contra = parseInt(document.getElementById("contraNumber").textContent);
-        let neutru = parseInt(document.getElementById("neutruNumber").textContent);
-
-        let sum = pro + contra + neutru;
-
-        let procentajPro = (100 * pro)/sum;
-
-        let procentajContra = (100 * contra)/sum;
-
-        let procentajNeutru = (100 * neutru)/sum;
-
-        document.documentElement.style.setProperty("--procentajPro", procentajPro);
-        document.documentElement.style.setProperty("--procentajContra", procentajContra);
-        document.documentElement.style.setProperty("--procentajNeutru", procentajNeutru);
 
     </script>
 

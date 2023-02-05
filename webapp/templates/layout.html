@@ -37,12 +37,10 @@
                     id="cautare" name="caut">
                     <button type="submit" id="searchButton">  <i class="material-icons" >search</i></button>
                 </form>
-                <a href="">Proiecte</a>
-                <a  href="">Statistica</a>
 
                 <div>  
                     {%if session.get("username")!=None  %}
-                        <a href="{{ url_for('account') }}">Cont</a>
+                        <a href="{{ url_for('account') }}"><i class="fa-regular fa-user account_icon"></i></a>
                     {%else%}
                         <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
                     {%endif%}
@@ -89,7 +87,7 @@
             const sectionOne = document.querySelector(".toptop");
 
              const sectionOneOptions = {
-                rootMargin: "-100px 0px 0px 0px"
+                rootMargin: "-160px 0px 0px 0px"
             };
 
             const sectionOneObserver = new IntersectionObserver
@@ -114,14 +112,16 @@
                 let lastScrollY = window.scrollY;
 
                 window.addEventListener("scroll", () => {
-                    if (lastScrollY < window.scrollY) {
-                        nav.classList.add("nav--hidden");
-                    } else {
-                        nav.classList.remove("nav--hidden");
-                    }
+            
+                if (lastScrollY < window.scrollY) {
+                    nav.classList.add("nav--hidden");
+                } else {
+                    nav.classList.remove("nav--hidden");
+                }
                     lastScrollY = window.scrollY;
                 });
             }
+            
             
 
 
