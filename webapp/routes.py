@@ -6,13 +6,18 @@ from datetime import datetime
 from flask_session import Session
 import pandas as pd
 import time
+from twilio.rest import Client 
+import random
 
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
+global b
+b=1
 def global_variables():
+    global a
+    
     
     if session.get('username')!=None:
         global username
@@ -27,14 +32,25 @@ def global_variables():
 @app.route("/acasa")
 @app.route("/acasa/")
 @app.route("/acasa/<id>")
-def acasa(id=None):
+@app.route("/acasa/<ver>")
+def acasa(id=None, ver=None):
     global_variables()
     titles=titluri()
-
     if id == None:
+        global a
         titles=titluri()
         ids = select_id()
-        return render_template("index.html", len = len(titles),titles=titles, ids=ids)
+        a=len(titles)//10
+        global b
+        
+        if ver=='1' and a>b:
+            b+=1
+            print("eu")
+            ver=None
+        if b*10+len(titles)%10==len(titles):
+            ver='2'
+        c=b
+        return render_template("index.html", len = len(titles),titles=titles, ids=ids,ver=ver,b=c)
     else:
         session['id']=id
         content = get_data_by_id("legi", id)
@@ -315,7 +331,7 @@ def email_verification():
             else:
                 print("Otp invalid")
     else:
-        return redirect(url_for('acasa'))
+        return redirect(url_for('sms'))
 
     return render_template('email_verification.html', email=email, msg=msg)
 
@@ -463,3 +479,22 @@ def neutru():
 #         return render_template("reseteazaparola.html",e=e)
 #     else:
 #         return redirect(url_for('acasa'))
+
+@app.route("/verificare_telefon" , methods=["GET","POST"])
+def sms():
+    account_sid = 'ACfd8f42b2319e166669e54f00026c5def' 
+    auth_token = 'f87372936a5c70c361aa9e50722f20b8' 
+    client = Client(account_sid, auth_token) 
+    a=random.randint(1000,9999)
+    message = client.messages.create(  
+                                messaging_service_sid='MGa91850e937131d1178348517855ca354', 
+                                body=a,      
+                                to="2222"
+                            ) 
+    verific=request.form.get("numar")
+    if a==verific:
+        redirect(url_for("acasa"))
+    else:
+        redirect(url_for("sms"))
+    return render_template("phone_verification.html",phone=phone)
+    
