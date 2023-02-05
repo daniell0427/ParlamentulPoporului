@@ -15,9 +15,10 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 global b
 b=1
+##session['ver']
 def global_variables():
     global a
-    
+    session['ver']='1'
     
     if session.get('username')!=None:
         global username
@@ -32,8 +33,8 @@ def global_variables():
 @app.route("/acasa")
 @app.route("/acasa/")
 @app.route("/acasa/<id>")
-@app.route("/acasa/<ver>")
-def acasa(id=None, ver=None):
+@app.route("/acasa/")
+def acasa(id=None):
     global_variables()
     titles=titluri()
     if id == None:
@@ -42,15 +43,15 @@ def acasa(id=None, ver=None):
         ids = select_id()
         a=len(titles)//10
         global b
-        
-        if ver=='1' and a>b:
+        global ver
+        if session['ver']=='1' and a>b:
             b+=1
             print("eu")
-            ver=None
+            session['ver']=None
         if b*10+len(titles)%10==len(titles):
-            ver='2'
+            session['ver']='2'
         c=b
-        return render_template("index.html", len = len(titles),titles=titles, ids=ids,ver=ver,b=c)
+        return render_template("index.html", len = len(titles),titles=titles, ids=ids,b=c)
     else:
         session['id']=id
         content = get_data_by_id("legi", id)
