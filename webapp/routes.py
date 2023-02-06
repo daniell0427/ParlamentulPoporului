@@ -38,6 +38,7 @@ def acasa(id=None):
         ids = select_id()
         a=len(titles)//10
         global b
+        b = int(b)
         global ver
         if session['ver']=='1' and a>b:
             b+=1

@@ -12,7 +12,8 @@ body{
 }
 
 #logo{
-    width: 160px;
+    margin-top: 30px;
+    width: 180px;
 }
 
 
@@ -21,7 +22,6 @@ body{
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 100%;
     height: 100vh;
-    
 }
 
 #leftSide{
@@ -50,6 +50,7 @@ body{
     flex-direction: column;
     margin-top: 20px;
     justify-content: space-evenly;
+
 }
 
 #title{
@@ -96,9 +97,8 @@ body{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-content: center;
-    margin-top: 0;
     margin-block: 20px;
+    width: 100%;
 }
 
 #links a{
@@ -109,6 +109,7 @@ body{
     border: 2px solid #5C5C5C;
     text-align: center;
     padding: 10px;
+    width: auto;
 }
 
 #rightSide{
@@ -121,10 +122,16 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     height: 100%;
     border-block: 2px solid #5C5C5C;
     margin-block: 40px;
+}
+
+#rightContent{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #statistica{
@@ -137,7 +144,7 @@ body{
     padding-inline: 350px ;
 }
 
-.asdf{
+.nrDeLegiContainer{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -146,9 +153,9 @@ body{
 
 #nrDeLegi{
     font-size: 22px;
-    color:#989898;
+    color:white;
     border-bottom: 2px solid #5C5C5C;
-    padding-inline: 50px
+    padding-inline: 70px
 }
 
 #voturilePersonale{
@@ -179,4 +186,61 @@ body{
     display: flex;
     gap:5px;
     align-items: center;
+    color: var(--gray);
 }
+
+#compatibilitate{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.textAbovePieCharts{
+    font-size: 17px;
+    padding-bottom: 5px ;
+    padding-inline: 30px;
+    color: var(--gray);
+    border-bottom: 2px solid var(--gray);
+}
+
+.pieContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie{
+    --b:22px;
+    --c:var(--gray);
+    --w:150px;
+    
+    width: var(--w);
+    aspect-ratio: 1;
+    position: relative;
+    display: inline-grid;
+    margin: 5px;
+    place-content: center;
+    font-size: 25px;
+    text-align: center;
+  }
+  
+  .pie:before, .pie:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .pie:before{
+    inset: 0;
+    background: radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat, conic-gradient(var(--c) calc(var(--p)*1%), #0000 0);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+    mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+    
+  }
+  
+  .pie:after{
+    inset: calc(50% - var(--b)/2);
+    background: var(--c);
+    transform: rotate(calc(var(--p) * 3.6deg))
+    translateY(calc(50% - var(--w)/2));
+  }
