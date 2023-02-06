@@ -383,7 +383,7 @@ def admin():
     return render_template("admin.html")
 
 @app.route("/acasa/pro" , methods=["GET","POST"])
-def pro():
+def pro_vot():
     print('provot')
     a=select(session['id'])
     if a[0][0] != None:
@@ -455,7 +455,7 @@ def contra():
     return redirect(url_for('acasa',id=session['id']))
 
 @app.route("/acasa/neutru" , methods=["GET","POST"])
-def neutru():
+def neutru_vot():
     print('provot')
     a=select(session['id'])
     if a[0][0] != None:
@@ -471,6 +471,9 @@ def neutru():
     else:
         d = 0
     d=d+1
+    print("???????????????????")
+    print(b)
+    print("????????????????????????????")
     max=0
     vot_max=''
     if b>max:

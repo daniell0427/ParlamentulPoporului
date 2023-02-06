@@ -11,9 +11,16 @@ db = mysql.connector.connect(
 def introdu(tit,pro,contra,neu):
   mycursor = db.cursor()
   a=''
+
+  if int(contra)<int(pro):
+     a='pro'
+  elif int(neu)<int(contra):
+     a='contra'
+  else:
+     a='neu'
  
 
-  insertQuery = "INSERT INTO legi (titlu, pro, contra, neu) VALUES ('"+tit+"','"+pro+"','"+contra+"','"+neu+"');"
+  insertQuery = "INSERT INTO legi (titlu, pro, contra, neu,max_parlament) VALUES ('"+tit+"','"+pro+"','"+contra+"','"+neu+"','"+a+"');"
   
   mycursor.execute(insertQuery)
   
