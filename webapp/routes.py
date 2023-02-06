@@ -105,7 +105,7 @@ def acasa(id=None):
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
 def inregistrare():
-    
+    global_variables()
     if session.get("username")  == None:
         error=""
         taken_username = False
@@ -134,6 +134,7 @@ def inregistrare():
 
 @app.route("/autentificare", methods=['GET', 'POST'])
 def autentificare():
+    global_variables()
     if session.get("username") == None:
         eror=""
         if request.method == "POST":
@@ -165,6 +166,7 @@ def autentificare():
 
 @app.route("/account",methods=['GET', 'POST'])
 def account():
+    global_variables()
     if session.get('username'):
         global email
         return render_template("account.html", email = email)
@@ -173,6 +175,7 @@ def account():
 
 @app.route("/reset-password",methods=['GET', 'POST'])
 def reseteaza_parola():
+    global_variables()
     if session["username"] != None:
         e=""
         if request.method == "POST":
@@ -286,6 +289,7 @@ def reseteaza_parola():
 
 @app.route("/logout")
 def logout():
+    global_variables()
     global username
     username = None
     global email
@@ -315,6 +319,7 @@ def cautare():
 
 @app.route("/verificare-email" , methods=["GET","POST"])
 def email_verification():
+    global_variables()
     if session.get('username'):
         return redirect(url_for("acasa"))
     else:
@@ -477,6 +482,7 @@ def neutru():
 
 @app.route("/verificare-telefon" , methods=["GET","POST"])
 def sms():
+    global_variables()
     if session.get('username'):
         return redirect(url_for("acasa"))
     else:
