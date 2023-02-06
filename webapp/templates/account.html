@@ -19,18 +19,56 @@
                     <form action="account" method="post" id="form">
                         
                         <label for="username" class="label">Nume utilizator</label>
-                        <input type="text" name="user" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
+                        <input type="text" name="user" pattern="^[a-zA-Z0-9._]+$" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
 
                         <label for="email" class="label">Email</label>
                         <input type="text" name="email" value="{{ session.get('email') }}" id="" class="input" required>
 
                         <button type="submit" id="update">Actualizati</button>
                     </form>
-
-            <div id="links">
-                <a href="{{ url_for('reseteaza_parola') }}">Reseteaza Parola</a>
-                <a href="{{ url_for('logout') }}">Iesire</a>
+                    <div id="links">
+                        <a href="{{ url_for('reseteaza_parola') }}">Reseteaza Parola</a>
+                        <a href="{{ url_for('logout') }}">Iesire</a>
+                    </div>
+                </div>
+                
             </div>
-        </div>    
+            
+        </div>  
+        
+        <div id="rightSide">
+            <div id="rightMain">
+                <div id="statistica">Statistica</div>
+                <div id="rightContent">
+                    <div class="nrDeLegiContainer">
+                        <div id="nrDeLegi">Numarul de legi votate: 36</div>
+                        <div id="voturilePersonale">
+                            <div class="personalVotContainer">
+                                <div id="greenCircle" class="voteCircle"></div>
+                                <div id="voturiPro" >Pro: 21</div>
+                            </div>
+                            <div class="personalVotContainer">
+                                <div id="redCircle" class="voteCircle"></div>
+                                <div id="voturiContra">Contra: 11</div>
+                            </div>
+                            <div class="personalVotContainer">
+                                <div id="blueCircle" class="voteCircle"></div>
+                                <div id="voturiNeutre">Neutre: 4</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="compatibilitate">
+                        <div class="textAbovePieCharts">Compatibilitate cu ceilalti utilizatori</div>
+                        <div class="textAbovePieCharts">Compatibilitate cu parlamentarii</div>
+                        <div class="pieContainer">
+                            <div class="pie" style="--p:90">90%</div>
+                        </div>
+                        <div class="pieContainer">
+                            <div class="pie" style="--p:60">60%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>    
 {% endblock content %}

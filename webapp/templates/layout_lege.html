@@ -10,12 +10,18 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-
+        pro= {{ pro | tojson }}
+        contra={{ contra | tojson }}
+        neu= {{ neu | tojson }}
+        console.log(neu)
+        pro1=parseInt(pro)
+        cont1=parseInt(contra)
+        neu1=parseInt(neu)
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Pro: 11',     11],
-          ['Contra: 2',      2],
-          ['Neutri: 4',  4],
+          ["Pro: "+pro,    pro1],
+          ['Contra: '+contra,      cont1],
+          ['Neutri: '+neu,  neu1],
         ]);
 
         var options = {
@@ -56,9 +62,9 @@
   
           var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Pro: 19',     19],
-            ['Contra: 10',      10],
-            ['Neutri: 3',  3],
+            ['Pro: 19',     55],
+            ['Contra: 10',      0],
+            ['Neutri: 3',  46],
           ]);
   
           var options = {
@@ -94,12 +100,14 @@
         google.charts.setOnLoadCallback(drawChart);
   
         function drawChart() {
-  
+            pro_pop={{ pro_pop | tojson }}
+            con_pop={{ con_pop | tojson }}
+            neu_pop={{ neu_pop | tojson }}
           var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Pro: 24',     24],
-            ['Contra: 16',      16],
-            ['Neutri: 8',  8],
+            ['Pro: '+pro_pop.toString(),     pro_pop],
+            ['Contra: '+con_pop.toString(),      con_pop],
+            ['Neutri: '+neu_pop.toString(),  neu_pop],
           ]);
   
           var options = {
@@ -152,43 +160,46 @@
             
         <div id="voturiContainer">
             <div class="piechartLabel">Lectura 1</div>
-            <div class="piechartLabel">Lectura 2</div>
+            
             <div class="piechartLabel">Votul Poporului</div>
             <div id="piechart1" class="piechart" ></div>
-            <div id="piechart2" class="piechart" ></div>
+            
             <div id="piechart3" class="piechart" ></div>
         </div>  
   
       
 
         {%if session.get('username')!=None and ok==True %} 
-            <div>
-                <form action="" method="post" id="form1" onclick="return vot()">
+          <div>
+              <form action="" method="post" id="form1" onclick="return vot()">
 
-                    <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
-                    <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
-                    <button id="neutru1" class="buttonVote" onclick="val('nuetru')"><a href="{{url_for('neutru')}}">Neu</a></button>
+                  <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
+                  <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
+                  <button id="neutru1" class="buttonVote" onclick="val('neutru')"><a href="{{url_for('neutru')}}">Neu</a></button>
 
-                </form>
-                <script>
-                    a=''
-                    function val(b){
-                        a=b
-                        
-                    }
-                    function vot(){
+              </form>
+              <script>
+                  a=''
+                  function val(b){
+                      a=b
+                      
+                  }
+                  function vot(){
 
-                        let text = "Esti sigur de alegerea ta\n Ai vot "+a;
-                        if (confirm(text) == true) {
-                            document.getElementById("form1").submit();
-                        }else{
-                            
-                            return false
-                        }
-                    }
-                </script>
-            </div>
-
+                      let text = "Esti sigur de alegerea ta?\n Votul tau este "+a;
+                      if (confirm(text) == true) {
+                          document.getElementById("form1").submit();
+                      }else{
+                          
+                          return false
+                      }
+                  }
+              </script>
+          </div>
+        {% elif session.get('username')!=None and ok==False %}
+          <div id="votultau">
+            <h2>Ai votat {something}</h2>
+          </div>
         {%endif%}
 
         {%if session.get('username')== None %}

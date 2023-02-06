@@ -10,14 +10,13 @@
             <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPP.png')}}" id="logo"></a>
             <h1>Autentificare</h1>
             <form action="" method="post"id="form">
-                <label for="user" class="label">Nume utilizator</label>
-                <input type="text" name="user" id="" class="input">
+                <label for="user" class="label">Nume utilizator/Email</label>
+                <input type="text" autocapitalize="off" name="user" id="" class="input" maxlength="75">
                 <label for="password" class="label">Parola</label>
                 <input type="password" name="password" id="" class="input">
-                <span id="tinemaminte"><input type="checkbox" id="checkbox">Tine-ma minte</span>
                 <button type="submit" id="autentificare">Autentificare</button>
             </form>
-            <a href="" id="aup">Ai uitat parola?</a>
+            <a href="{{ url_for('forgot_password') }}" id="aup">Ai uitat parola?</a>
             <span id="nuaicont">Nu ai cont?<a href="{{ url_for('inregistrare') }}" id="inregistreazate">Inregistreaza-te</a></span>
 
         </div>
