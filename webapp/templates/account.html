@@ -14,6 +14,7 @@
         <div id="leftSide">
             <a href="{{ url_for('acasa') }}" id="home"><img src="{{url_for('static',filename='newLogoPPWhite.png.png')}}" id="logo"></a>
             <div id="container">
+                <h2>{{error_em}} {{error_us}}</h2>
                 <div id="title">Informatii Personale</div>
                 <div id="boxes">
                     <form action="account" method="post" id="form">
@@ -28,7 +29,7 @@
                     </form>
 
             <div id="links">
-                <a href="{{ url_for('reseteaza_parola') }}">Reseteaza Parola</a>
+                <a href="{{ url_for('reseteaza_parola', exceptie='') }}">Reseteaza Parola</a>
                 <a href="{{ url_for('logout') }}">Iesire</a>
             </div>
         </div>    

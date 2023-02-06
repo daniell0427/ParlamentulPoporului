@@ -1,7 +1,7 @@
-from flask import render_template, url_for, redirect, request, session, flash
-from webapp.form import verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user
+from flask import render_template, url_for, redirect, request, session
+from webapp.form import verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user, verify_changes, password_hash
 from webapp import app
-from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id, get_id_lege, get_id_by_title
+from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -85,18 +85,13 @@ def acasa(id=None):
 
         if session.get("username"):
             id_user=get_data_by_username("id",session['username'])
-            a=validvot(id_user)
+            legi_votate_ids=validvot(id_user)
             ok=True
-            c=str(session['id'])
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            for x in a:
-                b=x[0]
-                b=str(b)
-                print(b)
-                print('---------------------')
-                print(session['id'])
-                if c==b :
-                    print("da")
+            id=str(session['id'])
+            for id_lege in legi_votate_ids:
+                id_lege = id_lege[0]
+                id_lege = str(id_lege)
+                if id==id_lege:
                     ok=False
             print(ok)
 
@@ -168,25 +163,47 @@ def autentificare():
 def account():
     global_variables()
     if session.get('username'):
+        error_em = None
+        error_us = None
         global email
-        return render_template("account.html", email = email)
+        global username
+        if request.method == "POST":
+            username_form = request.form.get('user')
+            email_form = request.form.get('email')
+            gl_username, gl_email, error_us, error_em = verify_changes(username, username_form, email, email_form)
+            email = gl_email
+            username = gl_username
+        return render_template("account.html", email = email, error_em = error_em, error_us = error_us)
     else:
         return redirect(url_for('autentificare'))
 
 @app.route("/reset-password",methods=['GET', 'POST'])
-def reseteaza_parola():
+@app.route("/reset-password/",methods=['GET', 'POST'])
+@app.route("/reset-password/<exceptie>",methods=['GET', 'POST'])
+def reseteaza_parola(exceptie = None):
     global_variables()
-    if session["username"] != None:
+    if session["username"] != None or exceptie != None:
+        global email
         e=""
-        if request.method == "POST":
-            password = request.form.get("password")
-            password_new =request.form.get("new_pass")
-            password_conf=request.form.get("conf_pass") 
-            global email
-            e=reset_pass(password, password_new, password_conf, email)  
-            if e=="":
-                return redirect(url_for("acasa"))
-        return render_template("reseteazaparola.html",e=e)
+        if exceptie:
+            if request.method == 'POST':
+                password_new =request.form.get("new_pass")
+                password_conf=request.form.get("conf_pass")
+                if password_new == password_conf:
+                    pas=password_hash(password_new)
+                    inregistrare_changes_db('password',pas,email)
+                    return redirect(url_for('autentificare'))
+                else:
+                    e = 'Parolele nu coincid'
+        else:
+            if request.method == "POST":
+                password = request.form.get("password")
+                password_new =request.form.get("new_pass")
+                password_conf=request.form.get("conf_pass") 
+                e=reset_pass(password, password_new, password_conf, email)  
+                if e=="":
+                    return redirect(url_for("acasa"))
+        return render_template("reseteazaparola.html",e=e, exceptie=exceptie)
     else:
         return redirect(url_for('acasa'))
 
@@ -317,10 +334,10 @@ def cautare():
         eror="Ne pare rau nu sa gasit nicio lege"
     return render_template("index.html", title = "Cautare",titles=a,len=len(a), eror=eror, ids=ids)
 
-@app.route("/verificare-email" , methods=["GET","POST"])
-def email_verification():
+@app.route("/verificare-email/<exceptie>" , methods=["GET","POST"])
+def email_verification(exceptie = None):
     global_variables()
-    if session.get('username'):
+    if session.get('username') and exceptie == None:
         return redirect(url_for("acasa"))
     else:
         global email
@@ -329,7 +346,10 @@ def email_verification():
             otp = request.form.get("otp")
             print(msg, " ", otp)
             if otp == msg:
-                return redirect(url_for("sms"))
+                if exceptie == "forgot-password":
+                    return redirect(url_for('reseteaza_parola', exceptie = "forgot-password"))
+                else:
+                    return redirect(url_for("sms"))
             else:
                 print("Otp invalid")
 
@@ -348,7 +368,6 @@ def admin():
         pro2=data['Lectura 2'].tolist()
         cont2=data['Unnamed: 5'].tolist()
         neu2=data['Unnamed: 6'].tolist()
-        len1=len(tit)
         for i in range(1, len(tit) ):
             b=verificare_legi(tit[i])
             if b==0:
@@ -499,5 +518,20 @@ def sms():
             else:
                 print("Otp invalid")
     return render_template("phone_verification.html",phone=phone_nr)
+
+@app.route('/forgot-password', methods=["GET", "POST"])
+def forgot_password():
+    exceptie = "forgot-password"
+    var = None
+    error = None
+    global email
+    if request.method == 'POST':
+        email = request.form.get('email')
+        var = verificare('email', email)
+    if var:
+        return redirect(url_for('email_verification', exceptie = exceptie))
+    else:
+        error = "Email inexistent"
+    return render_template('forgot_password.html')
 
     

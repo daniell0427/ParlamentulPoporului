@@ -17,7 +17,7 @@
                 <span id="tinemaminte"><input type="checkbox" id="checkbox">Tine-ma minte</span>
                 <button type="submit" id="autentificare">Autentificare</button>
             </form>
-            <a href="" id="aup">Ai uitat parola?</a>
+            <a href="{{ url_for('forgot_password') }}" id="aup">Ai uitat parola?</a>
             <span id="nuaicont">Nu ai cont?<a href="{{ url_for('inregistrare') }}" id="inregistreazate">Inregistreaza-te</a></span>
 
         </div>

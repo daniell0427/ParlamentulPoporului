@@ -162,33 +162,36 @@
       
 
         {%if session.get('username')!=None and ok==True %} 
-            <div>
-                <form action="" method="post" id="form1" onclick="return vot()">
+          <div>
+              <form action="" method="post" id="form1" onclick="return vot()">
 
-                    <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
-                    <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
-                    <button id="neutru1" class="buttonVote" onclick="val('nuetru')"><a href="{{url_for('neutru')}}">Neu</a></button>
+                  <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
+                  <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
+                  <button id="neutru1" class="buttonVote" onclick="val('neutru')"><a href="{{url_for('neutru')}}">Neu</a></button>
 
-                </form>
-                <script>
-                    a=''
-                    function val(b){
-                        a=b
-                        
-                    }
-                    function vot(){
+              </form>
+              <script>
+                  a=''
+                  function val(b){
+                      a=b
+                      
+                  }
+                  function vot(){
 
-                        let text = "Esti sigur de alegerea ta\n Ai vot "+a;
-                        if (confirm(text) == true) {
-                            document.getElementById("form1").submit();
-                        }else{
-                            
-                            return false
-                        }
-                    }
-                </script>
-            </div>
-
+                      let text = "Esti sigur de alegerea ta?\n Votul tau este "+a;
+                      if (confirm(text) == true) {
+                          document.getElementById("form1").submit();
+                      }else{
+                          
+                          return false
+                      }
+                  }
+              </script>
+          </div>
+        {% elif session.get('username')!=None and ok==False %}
+          <div id="votultau">
+            <h2>Ai votat {something}</h2>
+          </div>
         {%endif%}
 
         {%if session.get('username')== None %}

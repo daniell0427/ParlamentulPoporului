@@ -1,8 +1,9 @@
 from database import inregistrare , verificare , verificare_pass , inregistrare_changes_db
 from argon2 import PasswordHasher
 from flask_mail import Message
-from webapp import otp, otp_phone, mail
+from webapp import otp, otp_phone, mail, app
 from twilio.rest import Client 
+from flask import session
 
 def password_hash(pass1):
     ph = PasswordHasher()
@@ -71,7 +72,7 @@ def reset_pass(password_old,password,conf_password,email):
     if a==True:
         if password==conf_password :
             pas=password_hash(password)
-            a=inregistrare_changes_db('password', pas, email)
+            inregistrare_changes_db('password', pas, email)
         else:
             e="Parloa de confirmare gresita"
     else :
@@ -111,5 +112,34 @@ def register_user(username, email, phone, passwordhs):
     except:
         error = 'error'
     return error
+
+def verify_changes(username, username_form, email, email_form):
+    error1 = ''
+    error2 = ''
+    gl_username = username
+    gl_email = email
     
+    if username_form == username:
+        pass
+    else:
+        var = verificare("username", username_form)
+        if var:
+            error1 = "Acest username este deja luat!"
+        else:
+            inregistrare_changes_db('username', username_form, email)
+            session["username"]=username_form
+            gl_username = username_form
+
+    if email_form == email:
+        pass
+    else:
+        var = verificare("email", email_form)
+        if var:
+            error2 = "Acest email este deja luat!"
+        else:
+            
+            inregistrare_changes_db('email', email_form, email)
+            session["email"]=email_form
+            gl_email = email_form
+    return gl_username, gl_email, error1, error2
         
