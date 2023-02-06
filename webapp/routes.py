@@ -122,7 +122,7 @@ def inregistrare():
             if error!="Inregistrare completa": 
                 print(error)
             else:
-                return redirect(url_for('email_verification'))    
+                return redirect(url_for('email_verification', exceptie = ''))    
     else:
         return redirect(url_for("acasa"))
 
@@ -338,6 +338,8 @@ def cautare():
         eror="Ne pare rau nu sa gasit nicio lege"
     return render_template("index.html", title = "Cautare",titles=a,len=len(a), eror=eror, ids=ids)
 
+@app.route("/verificare-email" , methods=["GET","POST"])
+@app.route("/verificare-email/" , methods=["GET","POST"])
 @app.route("/verificare-email/<exceptie>" , methods=["GET","POST"])
 def email_verification(exceptie = None):
     global_variables()
