@@ -68,19 +68,19 @@ def acasa(id=None):
             neu = 0
         
         if content[0][5] != None and content[0][5] != "nan":
-            pro_lect2 = content[0][5]
+            pro_pop = content[0][5]
         else:
-            pro_lect2 = 0
+            pro_pop = 0
 
         if content[0][6] != None and content[0][6] != "nan":
-            con_lect2 = content[0][6]
+            con_pop = content[0][6]
         else:
-            con_lect2 = 0
+            con_pop = 0
         
         if content[0][7] != None and content[0][7] != "nan":
-            neu_lect2 = content[0][7]
+            neu_pop = content[0][7]
         else:
-            neu_lect2 = 0
+            neu_pop = 0
 
         ok = None
 
@@ -101,7 +101,7 @@ def acasa(id=None):
                     ok=False
             print(ok)
         
-        return render_template("layout_lege.html", titlu=titlu,pro=pro,contra=contra,neu=neu,ok=ok)
+        return render_template("layout_lege.html", titlu=titlu,pro=pro,contra=contra,neu=neu,pro_pop=pro_pop,con_pop=con_pop,neu_pop=neu_pop,ok=ok)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
