@@ -29,7 +29,6 @@ def global_variables():
 @app.route("/acasa")
 @app.route("/acasa/")
 @app.route("/acasa/<id>")
-@app.route("/acasa/")
 def acasa(id=None):
     global_variables()
     titles=titluri()
