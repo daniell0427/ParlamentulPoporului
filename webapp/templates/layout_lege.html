@@ -100,12 +100,14 @@
         google.charts.setOnLoadCallback(drawChart);
   
         function drawChart() {
-  
+            pro_pop={{ pro_pop | tojson }}
+            con_pop={{ con_pop | tojson }}
+            neu_pop={{ neu_pop | tojson }}
           var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Pro: 24',     24],
-            ['Contra: 16',      16],
-            ['Neutri: 8',  8],
+            ['Pro: '+pro_pop.toString(),     pro_pop],
+            ['Contra: '+con_pop.toString(),      con_pop],
+            ['Neutri: '+neu_pop.toString(),  neu_pop],
           ]);
   
           var options = {
@@ -158,10 +160,10 @@
             
         <div id="voturiContainer">
             <div class="piechartLabel">Lectura 1</div>
-            <div class="piechartLabel">Lectura 2</div>
+            
             <div class="piechartLabel">Votul Poporului</div>
             <div id="piechart1" class="piechart" ></div>
-            <div id="piechart2" class="piechart" ></div>
+            
             <div id="piechart3" class="piechart" ></div>
         </div>  
   

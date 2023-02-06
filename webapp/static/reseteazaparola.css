@@ -1,7 +1,12 @@
+:root{
+    --blue: rgb(12, 12, 38); 
+    --gray: rgb(112, 112, 112);
+    --red: rgb(208, 9, 9);
+}
+
 body{
     font-family:sans-serif;
-    background-color: rgb(232, 232, 232);
-    height: 100vh;
+    background-color: white;
 }
 
 #navimage{
@@ -10,6 +15,7 @@ body{
     filter: blur(12px);
     -webkit-filter: blur(12px);
     margin-left: -20px;
+    margin-top: -40px;
 
 }
 
@@ -19,7 +25,7 @@ body{
    height: 25vh;
    width: 100%;
    display: block;
-   position: absolute;
+   position:static;
    top: -20px;
    overflow: hidden;
 }
@@ -49,16 +55,18 @@ header{
 }
 
 #logo{
-    width: 200px;
+    width: 180px;
     margin-left: 40px;
 }
 
 #nav{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     text-decoration: none;
     width: 100%;
+    gap:80px;
+
 }
 
 #cautare{
@@ -87,6 +95,11 @@ header{
     font-size: 35px;
 }
 
+.account_icon{
+    font-size: 40px;
+    margin-right: 30px;
+}
+
 #limba{
     font-size: 30px;
     color: white;
@@ -98,11 +111,11 @@ header{
     color:rgb(255, 39, 39);
 }
 
-a{
+header a{
     color:white;
     text-decoration: none;
 }
-a:hover{
+header a:hover{
     color:rgb(255, 39, 39);
     text-decoration: none;
 }
@@ -131,7 +144,7 @@ label{
 }
 
 input{
-
+    font-size: 20px;
 }
 
 #container{
@@ -146,5 +159,49 @@ input{
 }
 
 #confirmare{
-    
+    font-size: 20px;
+}
+
+
+
+footer{
+    font-size: 18px;
+    background-color: var(--blue);
+    padding: 6vh;
+}
+
+#footerMain{
+    display:flex;
+    justify-content: space-between;
+}
+
+#information{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.info{
+    color: rgb(112, 112, 112);
+    text-decoration: none;
+}
+
+.info:hover{
+    color:rgb(208, 9, 9);
+}
+
+#socials{
+    display: flex;
+    gap:30px;
+    align-items: flex-end;
+}
+
+.socialIcon{
+    color:var(--gray);
+    font-size: 30px;
+}
+
+.socialIcon:hover{
+    color:var(--red);
 }
