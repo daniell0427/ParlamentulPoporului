@@ -1,28 +1,31 @@
-{% extends "layout.html" %}
+
 
 
 {% block head %}
     <link href="{{ url_for('static', filename='account.css') }}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 {% endblock head %}
 
 
 {% block content %}
 
     <div id="main">
-        
-        <div id="container">
-            <h1>Informatii Personale</h1>
+        <div id="leftSide">
+            <a href="{{ url_for('acasa') }}" id="home"><img src="{{url_for('static',filename='newLogoPPWhite.png.png')}}" id="logo"></a>
+            <div id="container">
+                <div id="title">Informatii Personale</div>
+                <div id="boxes">
+                    <form action="account" method="post" id="form">
+                        
+                        <label for="username" class="label">Nume utilizator</label>
+                        <input type="text" name="user" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
 
-            <form action="account" method="post" id="form">
-                
-                <label for="username">Nume utilizator</label>
-                <input type="text" name="user" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
+                        <label for="email" class="label">Email</label>
+                        <input type="text" name="email" value="{{ session.get('email') }}" id="" class="input" required>
 
-                <label for="email">Email</label>
-                <input type="text" name="email" value="{{ session.get('email') }}" id="" class="input" required>
-
-                <button type="submit" id="update">Actualizati</button>
-            </form>
+                        <button type="submit" id="update">Actualizati</button>
+                    </form>
 
             <div id="links">
                 <a href="{{ url_for('reseteaza_parola') }}">Reseteaza Parola</a>

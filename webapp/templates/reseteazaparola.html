@@ -7,15 +7,20 @@
 
 
 {% block content %}
-        <form action="" method="post">
-            <label for="password">Parola Veche</label>
-            <input type="password" name="password" id=""><br>
-            <label for="new_pass">Parola noua</label>
-            <input type="password" name="new_pass" id="" minlength="8"><br>
-            <label for="conf_pass">Confirmare parola</label>
-            <input type="password" name="conf_pass" id=""><br>
-            <button type="submit">Confirmare</button>
-        </form>
+        <div id="main">
+            <div id="container">
+                <form action="" method="post" id="form">
+                    <label for="password">Parola Veche</label>
+                    <input type="password" name="password" id=""><br>
+                    <label for="new_pass">Parola noua</label>
+                    <input type="password" name="new_pass" id="" minlength="8"><br>
+                    <label for="conf_pass">Confirmare parola</label>
+                    <input type="password" name="conf_pass" id=""><br>
+                    <button type="submit" id="confirmare">Confirmare</button>
+                </form>
+            </div>    
+        </div>
+        
         <div>
             {{e}}
         </div>

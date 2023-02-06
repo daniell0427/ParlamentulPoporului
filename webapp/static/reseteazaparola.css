@@ -1,6 +1,7 @@
 body{
     font-family:sans-serif;
     background-color: rgb(232, 232, 232);
+    height: 100vh;
 }
 
 #navimage{
@@ -108,20 +109,42 @@ a:hover{
 
 
 /*nav-bar end*/
-#resetpass{
-    background-color: rgb(255, 255, 255);
-    margin-top: 30px;
-    margin-left: 480px;
-    margin-right: 480px;
-    border-radius: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.317);
+
+#main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-#resetpass_form{
-    color:rgb(0, 0, 0);
-    font-weight: 100;
+#form{
     display:flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
+    margin: 20px;
+}
+
+label{
+    align-self: flex-start;
     font-size: 20px;
+    color:rgb(141, 141, 141);
+}
+
+input{
+
+}
+
+#container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    font-size: 25px;
+    border-radius: 15px;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.293);
+    margin: 20px;
+}
+
+#confirmare{
+    
 }
