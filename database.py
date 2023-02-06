@@ -20,7 +20,7 @@ def introdu(tit,pro,contra,neu):
      a='neu'
  
 
-  insertQuery = "INSERT INTO legi (titlu, pro, contra, neu,max_parlament) VALUES ('"+tit+"','"+pro+"','"+contra+"','"+neu+"','"+a+"');"
+  insertQuery = "INSERT INTO legi (titlu, pro, contra, neu) VALUES ('"+tit+"','"+pro+"','"+contra+"','"+neu+"');"
   
   mycursor.execute(insertQuery)
   
