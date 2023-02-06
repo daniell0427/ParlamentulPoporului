@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session
 from webapp.form import verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user, verify_changes, password_hash
 from webapp import app
-from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db
+from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db, inreg_data
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -11,11 +11,11 @@ import time
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-global b
-b=1
+global poc
+poc=1
 ##session['ver']
 def global_variables():
-    global a
+    global da
     session['ver']='1'
     
     if session.get('username')!=None:
@@ -33,38 +33,39 @@ def acasa(id=None):
     global_variables()
     titles=titluri()
     if id == None:
-        global a
+        global da
         titles=titluri()
         ids = select_id()
-        a=len(titles)//10
-        global b
-        global ver
-        if session['ver']=='1' and a>b:
-            b+=1
+        da=len(titles)//10
+        global poc
+        
+        if session['ver']=='1' and da>poc:
+            poc+=1
             print("eu")
             session['ver']=None
-        if b*10+len(titles)%10==len(titles):
+        if poc*10+len(titles)%10==len(titles):
             session['ver']='2'
-        c=b
+        c=poc
         return render_template("index.html", len = len(titles),titles=titles, ids=ids,b=c)
     else:
         session['id']=id
         content = get_data_by_id("legi", id)
+        print(content)
         titlu = content[0][1]
         if content[0][2] != None and content[0][2] != "nan":
-            pro_lect1 = content[0][2]
+            pro = content[0][2]
         else:
-            pro_lect1 = 0
+            pro = 0
 
         if content[0][3] != None and content[0][3] != "nan":
-            con_lect1 = content[0][3]
+            contra= content[0][3]
         else:
-            con_lect1 = 0
+            contra = 0
         
         if content[0][4] != None and content[0][4] != "nan":
-            neu_lect1 = content[0][4]
+            neu = content[0][4]
         else:
-            neu_lect1 = 0
+            neu = 0
         
         if content[0][5] != None and content[0][5] != "nan":
             pro_lect2 = content[0][5]
@@ -84,7 +85,7 @@ def acasa(id=None):
         ok = None
 
         if session.get("username"):
-            id_user=get_data_by_username("id",session['username'])
+            id_user=inreg_data("id","username",session['username'])
             legi_votate_ids=validvot(id_user)
             ok=True
             id=str(session['id'])
@@ -94,8 +95,8 @@ def acasa(id=None):
                 if id==id_lege:
                     ok=False
             print(ok)
-
-        return render_template("layout_lege.html", titlu=titlu, pro_lect1=pro_lect1, con_lect1=con_lect1, neu_lect1=neu_lect1, pro_lect2=pro_lect2, con_lect2=con_lect2, neu_lect2=neu_lect2,ok=ok)
+        
+        return render_template("layout_lege.html", titlu=titlu,pro=pro,contra=contra,neu=neu,ok=ok)
 
 
 @app.route("/inregistrare", methods=['GET', 'POST'])
@@ -134,20 +135,23 @@ def autentificare():
         eror=""
         if request.method == "POST":
             global username
-            username = request.form.get("user") 
-            password = request.form.get("password") 
             global email
-            print(username)
-            print(password)
-            if username=="Admin" and password=="parlamentulpoporului":
+            user = request.form.get("user")  
+            if user == "Admin" or user == 'parlamentulpoporului@gmail.com' and password=="parlamentulpoporului":
                 session['username']="Admin"
                 return redirect(url_for("admin"))
             else:
-                email = get_data_by_username("email", username)
+                if '@' in user:
+                    email = user
+                    username = inreg_data("username",'email', email)
+                else:
+                    username = user
+                    email = inreg_data("email",'username', username)
+                password = request.form.get("password") 
                 eror=""
                 eror = autentificarea(email, username,password)
                 if eror=="" :
-                    if username=="Admin" and password=="parlamentulpoporului":
+                    if user=="Admin" or user == 'parlamentulpoporului@gmail.com' and password=="parlamentulpoporului":
                         return redirect(url_for("admin"))
                     else :
                         session["username"] = username
@@ -361,6 +365,7 @@ def admin():
         a=request.form.get("file1")
         print(a)
         data = pd.read_excel(a)
+        print(data)
         tit=data['Denumire'].tolist()
         pro1=data['Lectura 1'].tolist()
         cont1=data['Unnamed: 2'].tolist()
@@ -368,10 +373,35 @@ def admin():
         pro2=data['Lectura 2'].tolist()
         cont2=data['Unnamed: 5'].tolist()
         neu2=data['Unnamed: 6'].tolist()
+        pro3=data['Lectura 3'].tolist()
+        cont3=data['Unnamed: 8'].tolist()
+        neu3=data['Unnamed: 9'].tolist()
+        len1=len(tit)
         for i in range(1, len(tit) ):
             b=verificare_legi(tit[i])
+            pro_s=0
+            cont_s=0
+            neu_s=0
             if b==0:
-                introdu(str(tit[i]),str(pro1[i]),str(cont1[i]),str(neu1[i]),str(pro2[i]),str(cont2[i]),str(neu2[i]))
+                if not pd.isna(pro1[i]):
+                    pro_s+=int(pro1[i])
+                if not pd.isna(pro2[i]):
+                    pro_s+=int(pro2[i])
+                if not pd.isna(pro3[i]):
+                    pro_s+=int(pro3[i])
+                if not pd.isna(cont1[i]):
+                    cont_s=int(cont1[i])
+                if not pd.isna(cont2[i]):
+                    cont_s+=int(cont2[i])
+                if not pd.isna(cont3[i]):
+                    cont_s+=int(cont3[i])
+                if not pd.isna(neu1[i]):
+                    neu_s=int(neu1[i])
+                if not pd.isna(neu2[i]):
+                    neu_s+=int(neu2[i])
+                if not pd.isna(neu3[i]) :
+                    neu_s+=int(neu3[i])
+                introdu(str(tit[i]),str(pro_s),str(cont_s),str(neu_s))
             print(b)
     return render_template("admin.html")
 
@@ -405,7 +435,7 @@ def pro():
         vot_max='neutru'
     set_vot_popor(vot_max,session['id'])
     set_vot(b,session['id'],"pro_popor")
-    a=get_data_by_username("id",session['username'])
+    a=inreg_data("id",'username',session['username'])
     print(a)
     vot_db(a,session['id'],"pro")
     print(session['id'])
@@ -441,7 +471,7 @@ def contra():
         vot_max='neutru'
     set_vot_popor(vot_max,session['id'])
     set_vot(c,session['id'],"contra_popor")
-    a=get_data_by_username("id",session['username'])
+    a=inreg_data("id",'username',session['username'])
     print(a)
     vot_db(a,session['id'],"contra")
     print(session['id'])
@@ -477,7 +507,7 @@ def neutru():
         vot_max='neutru'
     set_vot_popor(vot_max,session['id'])
     set_vot(d,session['id'],"neu_popor")
-    a=get_data_by_username("id",session['username'])
+    a=inreg_data("id",'username',session['username'])
     print(a)
     vot_db(a,session['id'],"neutru")
     print(session['id'])

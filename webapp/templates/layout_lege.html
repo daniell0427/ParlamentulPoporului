@@ -10,12 +10,18 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-
+        pro= {{ pro | tojson }}
+        contra={{ contra | tojson }}
+        neu= {{ neu | tojson }}
+        console.log(neu)
+        pro1=parseInt(pro)
+        cont1=parseInt(contra)
+        neu1=parseInt(neu)
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Pro: 11',     11],
-          ['Contra: 2',      2],
-          ['Neutri: 4',  4],
+          ["Pro: "+pro,    pro1],
+          ['Contra: '+contra,      cont1],
+          ['Neutri: '+neu,  neu1],
         ]);
 
         var options = {
@@ -56,9 +62,9 @@
   
           var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Pro: 19',     19],
-            ['Contra: 10',      10],
-            ['Neutri: 3',  3],
+            ['Pro: 19',     55],
+            ['Contra: 10',      0],
+            ['Neutri: 3',  46],
           ]);
   
           var options = {

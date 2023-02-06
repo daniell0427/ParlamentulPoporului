@@ -20,7 +20,7 @@
                     <form action="account" method="post" id="form">
                         
                         <label for="username" class="label">Nume utilizator</label>
-                        <input type="text" name="user" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
+                        <input type="text" name="user" pattern="^[a-zA-Z0-9._]+$" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
 
                         <label for="email" class="label">Email</label>
                         <input type="text" name="email" value="{{ session.get('email') }}" id="" class="input" required>

@@ -8,39 +8,12 @@ db = mysql.connector.connect(
     database="legi"
 )
 # getting the cursor by cursor() method
-def introdu(tit,pro1,contra1,neu1,pro2,contra2,neu2):
+def introdu(tit,pro,contra,neu):
   mycursor = db.cursor()
-  max1=0
   a=''
-  if pro1!='nan':
-    if pro2!='nan':
-      pro_2=int(pro2)
-      contra_2=int(contra2)
-      neu_2=int(neu2)
-      if pro_2>max1:
-        max1=pro_2
-        a='pro'
-      if contra_2>max1:
-        max1=contra_2
-        a='contra'
-      if neu_2>max1:
-        max1=neu_2
-        a='neutru'
-    else:
-      pro_1=int(pro1)
-      contra_1=int(contra1)
-      neu_1=int(neu1)
-      if pro_1>max1:
-        max1=pro_1
-        a='pro'
-      if contra_1>max1:
-        max1=contra_1
-        a='contra'
-      if neu_1>max1:
-        max1=neu_1
-        a='neutru'
+ 
 
-  insertQuery = "INSERT INTO legi (titlu, pro_l1, contra_l1, neu_l1, pro_l2, contra_l2, neu_l2,max_parlament) VALUES ('"+tit+"','"+pro1+"','"+contra1+"','"+neu1+"','"+pro2+"','"+contra2+"','"+neu2+"','"+a+"');"
+  insertQuery = "INSERT INTO legi (titlu, pro, contra, neu) VALUES ('"+tit+"','"+pro+"','"+contra+"','"+neu+"');"
   
   mycursor.execute(insertQuery)
   
@@ -203,9 +176,9 @@ def cautar(caut):
 
   return myresult
 
-def get_data_by_username(camp, nume):
+def inreg_data(camp1, camp2, nume):
     mycursor = db.cursor()
-    sql = "SELECT "+camp+" FROM inregistrare WHERE username = '"+nume+"'"
+    sql = "SELECT "+camp1+" FROM inregistrare WHERE "+camp2+" = '"+nume+"'"
     mycursor.execute(sql)
     myresult = mycursor.fetchone()[0]
     try:
@@ -289,3 +262,7 @@ def get_id_by_title(camp, title):
   myresult = mycursor.fetchall()
 
   return myresult
+
+
+   
+

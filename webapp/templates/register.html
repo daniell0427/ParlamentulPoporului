@@ -18,11 +18,11 @@
         <form action="inregistrare" method="post" id="form" onsubmit="process(event)">
         
             <label for="user" class="label">Nume de utilizator</label>
-            <input type="text" name="user" id="numeUtilizator" class="input" minlength="3" maxlength="25" required>
+            <input type="text" name="user" id="numeUtilizator" pattern="^[a-zA-Z0-9._]+$" class="input" minlength="3" maxlength="25" required>
             <div id="eroare_nume">Acest nume este folosit</div>
 
             <label for="email" class="label">Email</label>
-            <input type="email" name="email" id="emailSelectat"class="input" required>
+            <input type="email" name="email" id="emailSelectat"class="input" maxlength="75" required>
 
             <label for="phone" class="label">Numar de telefon</label>
             <input type="tel" id="phone" pattern="((6|7)[0-9]{7}|0[0-9]{8})" name="phone" class="input" required>

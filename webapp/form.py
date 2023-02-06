@@ -57,7 +57,7 @@ def autentificarea(email, user, password):
     e=""
     a=verificare("username",user)
     if not(a):
-        e=e+"Acest nume de utilizator nu exista"
+        e=e+"Acest username sau email este invalid"
     else :
         a=verificare_pass(password, email)
         if a==True:
