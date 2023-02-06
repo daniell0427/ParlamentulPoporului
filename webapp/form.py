@@ -1,7 +1,8 @@
 from database import inregistrare , verificare , verificare_pass , inregistrare_changes_db
 from argon2 import PasswordHasher
 from flask_mail import Message
-from webapp import otp, mail
+from webapp import otp, otp_phone, mail
+from twilio.rest import Client 
 
 def password_hash(pass1):
     ph = PasswordHasher()
@@ -9,8 +10,9 @@ def password_hash(pass1):
     return hash
 
 
-def inreg(user, email, phone, password, conf_pass):
+def verify_register_form(user, email, phone, password, conf_pass):
     e=""
+    passwordh = None
     taken_username = False 
     taken_email = False
     taken_phone = False
@@ -90,3 +92,24 @@ def send_otp(email):
     msg.body = str(otp)
     mail.send(msg)
     return str(otp)
+
+def send_otp_phone(phone_nr):
+    account_sid = 'ACfd8f42b2319e166669e54f00026c5def' 
+    auth_token = '45f6a03597ba738beeb6fe0557f774c4' 
+    client = Client(account_sid, auth_token) 
+    message = client.messages.create(  
+                                messaging_service_sid='MGa91850e937131d1178348517855ca354', 
+                                body=otp_phone,      
+                                to=phone_nr
+                            ) 
+    return str(otp_phone)
+
+def register_user(username, email, phone, passwordhs): 
+    error = ''
+    try:
+        inregistrare(username, email, phone, passwordhs)
+    except:
+        error = 'error'
+    return error
+    
+        

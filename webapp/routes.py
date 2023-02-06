@@ -1,5 +1,5 @@
 from flask import render_template, url_for, redirect, request, session, flash
-from webapp.form import inreg, autentificarea ,reset_pass, send_otp,inregistrare_changes_db
+from webapp.form import verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user
 from webapp import app
 from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, postare_db, get_legi, get_data_by_id, cautar, get_data_by_username,introdu,verificare_legi, select_id, get_id_lege, get_id_by_title
 from datetime import datetime
@@ -11,8 +11,11 @@ import time
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
+global b
+b=1
 def global_variables():
+    global a
+    
     
     if session.get('username')!=None:
         global username
@@ -25,14 +28,25 @@ def global_variables():
 @app.route("/acasa")
 @app.route("/acasa/")
 @app.route("/acasa/<id>")
-def acasa(id=None):
+@app.route("/acasa/<ver>")
+def acasa(id=None, ver=None):
     global_variables()
     titles=titluri()
-
     if id == None:
+        global a
         titles=titluri()
         ids = select_id()
-        return render_template("index.html", len = len(titles),titles=titles, ids=ids)
+        a=len(titles)//10
+        global b
+        
+        if ver=='1' and a>b:
+            b+=1
+            print("eu")
+            ver=None
+        if b*10+len(titles)%10==len(titles):
+            ver='2'
+        c=b
+        return render_template("index.html", len = len(titles),titles=titles, ids=ids,ver=ver,b=c)
     else:
         session['id']=id
         content = get_data_by_id("legi", id)
@@ -107,16 +121,16 @@ def inregistrare():
             pass_conf= request.form.get("pass_conf")
             global passwordh
             global phone_nr
-            error, taken_username, taken_email, taken_phone, passwordh, phone_nr=inreg(username,email,phone,password,pass_conf)
+            error, taken_username, taken_email, taken_phone, passwordh, phone_nr=verify_register_form(username,email,phone,password,pass_conf)
+            print(phone_nr)
             if error!="Inregistrare completa": 
                 print(error)
             else:
-                #Verificare email:
-                return redirect(url_for('email_verification'))
-        return render_template("register.html" ,error=error, taken_username=taken_username, taken_email=taken_email, taken_phone=taken_phone)
+                return redirect(url_for('email_verification'))    
     else:
         return redirect(url_for("acasa"))
 
+    return render_template("register.html" ,error=error, taken_username=taken_username, taken_email=taken_email, taken_phone=taken_phone)
 
 @app.route("/autentificare", methods=['GET', 'POST'])
 def autentificare():
@@ -143,17 +157,19 @@ def autentificare():
                         session["username"] = username
                         session["email"] = email
                     return redirect(url_for("acasa",user=username))
-                        
-        return render_template("login.html",e=eror)
     else:
         return redirect(url_for("acasa"))
 
+    return render_template("login.html",e=eror)
 
 
 @app.route("/account",methods=['GET', 'POST'])
 def account():
-    global email
-    return render_template("account.html", email = email)
+    if session.get('username'):
+        global email
+        return render_template("account.html", email = email)
+    else:
+        return redirect(url_for('autentificare'))
 
 @app.route("/reset-password",methods=['GET', 'POST'])
 def reseteaza_parola():
@@ -270,6 +286,12 @@ def reseteaza_parola():
 
 @app.route("/logout")
 def logout():
+    global username
+    username = None
+    global email
+    email = None
+    global phone_nr
+    phone_nr = None
     session["email"]=None
     session["username"]=None
     return redirect(url_for("acasa"))
@@ -293,15 +315,18 @@ def cautare():
 
 @app.route("/verificare-email" , methods=["GET","POST"])
 def email_verification():
-    global email
-    msg = send_otp(email)
-    if request.method == "POST":
-        otp = request.form.get("otp")
-        print(msg, " ", otp)
-        if otp == msg:
-            return redirect(url_for("autentificare"))
-        else:
-            print("Otp invalid")
+    if session.get('username'):
+        return redirect(url_for("acasa"))
+    else:
+        global email
+        msg = send_otp(email)
+        if request.method == "POST":
+            otp = request.form.get("otp")
+            print(msg, " ", otp)
+            if otp == msg:
+                return redirect(url_for("sms"))
+            else:
+                print("Otp invalid")
 
     return render_template('email_verification.html', email=email, msg=msg)
 
@@ -449,3 +474,24 @@ def neutru():
 #         return render_template("reseteazaparola.html",e=e)
 #     else:
 #         return redirect(url_for('acasa'))
+
+@app.route("/verificare-telefon" , methods=["GET","POST"])
+def sms():
+    if session.get('username'):
+        return redirect(url_for("acasa"))
+    else:
+        global phone_nr
+        msg = send_otp_phone(phone_nr)
+        if request.method == "POST":
+            otp = request.form.get("otp")
+            print(msg, " ", otp)
+            if otp == msg:
+                register_user(username, email, phone_nr, passwordh)
+                session["email"]=email
+                session["username"]=username
+                return redirect(url_for("acasa"))
+            else:
+                print("Otp invalid")
+    return render_template("phone_verification.html",phone=phone_nr)
+
+    

@@ -12,6 +12,7 @@ app.config["MAIL_PASSWORD"] = 'sthhvyzwvrjtbdwb'
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
-otp = randint(000000, 999999)
+otp = randint(100000, 999999)
+otp_phone = randint(1000,9999)
 
 from webapp import routes
