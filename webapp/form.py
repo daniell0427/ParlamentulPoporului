@@ -105,7 +105,7 @@ def send_otp_phone(phone_nr):
     return str(otp_phone)
 
 def register_user(username, email, phone, passwordhs): 
-    error = ''
+    error = ""
     try:
         inregistrare(username, email, phone, passwordhs)
     except:
