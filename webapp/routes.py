@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session
-from webapp.form import verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user, verify_changes, password_hash
+from webapp.form import  verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user, verify_changes, password_hash
 from webapp import app
-from database import id_user, vot_select ,titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db, inreg_data
+from database import vot_statistic ,id_user, vot_select ,titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db, inreg_data
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -178,13 +178,49 @@ def account():
             email = gl_email
             username = gl_username
         id=id_user(session['username'])
-        a=vot_select(str(id[0][0]),"pro")
-        b=vot_select(str(id[0][0]),"contra")
-        c=vot_select(str(id[0][0]),"neu")
-        print(len(a))
-        print(len(b))
-        print(len(c))
-        return render_template("account.html", email = email, error_em = error_em, error_us = error_us,a=len(a),b=len(b),c=len(c),tot=len(a)+len(b)+len(c))
+        aux=vot_select(str(id[0][0]),"pro")
+        a=len(aux)
+        aux=vot_select(str(id[0][0]),"contra")
+        b=len(aux)
+        aux=vot_select(str(id[0][0]),"neu")
+        c=len(aux)
+        max1=0
+        max_eu=''
+        if a>b:
+            max1=a
+            max_eu="pro"
+        else: 
+            max1=b
+            max_eu="contra"
+        if max1<c :
+            max1=c
+            max_eu="neutru"
+
+        aux=vot_statistic("legi","max_parlament","pro","nr")
+        pro_par=len(aux)
+        aux=vot_statistic("legi","max_parlament","contra","nr")
+        cont_par=len(aux)
+        aux=vot_statistic("legi","max_parlament","neu","nr")
+        neu_par=len(aux)
+        aux=vot_statistic("vot","vot","pro","id")
+        pro_pop=len(aux)
+        aux=vot_statistic("vot","vot","contra","id")
+        cont_pop=len(aux)
+        aux=vot_statistic("vot","vot","neutru","id")
+        neu_pop=len(aux)
+        stat_par=0
+        if max_eu=="pro":
+            stat_par=int((pro_par/(pro_par+cont_par+neu_par))*100)
+            stat_pop=int((pro_pop/(pro_pop+cont_pop+neu_pop))*100)
+        elif max_eu=="contra":
+            stat_par=int((cont_par/(pro_par+cont_par+neu_par))*100)
+            stat_pop=int((cont_pop/(pro_pop+cont_pop+neu_pop))*100)
+        elif max_eu=="neutru":
+            stat_par=int((neu_par/(pro_par+cont_par+neu_par))*100)
+            stat_pop=int((neu_pop/(pro_pop+cont_pop+neu_pop))*100)
+
+
+        return render_template("account.html", email = email, error_em = error_em, error_us = error_us,a=a,b=b,c=c,tot=a+b+c,stat_par=stat_par,stat_pop=stat_pop)
     else:
         return redirect(url_for('autentificare'))
 
