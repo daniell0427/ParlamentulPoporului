@@ -42,7 +42,7 @@
                     {%if session.get("username")!=None  %}
                         <a href="{{ url_for('account') }}"><i class="fa-regular fa-user account_icon"></i></a>
                     {%else%}
-                        <a href="{{ url_for('inregistrare') }}"id="inregistrare">Înregistrare</a>
+                        <a href="{{ url_for('inregistrare') }}"id="inregistrare"><i class="fa-regular fa-user account_icon"></i></a>
                     {%endif%}
                 </div>
                 
@@ -107,20 +107,20 @@
 
             sectionOneObserver.observe(sectionOne);
             //2nd
-            {
+            
                 const nav = document.querySelector("header");
                 let lastScrollY = window.scrollY;
 
                 window.addEventListener("scroll", () => {
-            
-                if (lastScrollY < window.scrollY) {
-                    nav.classList.add("nav--hidden");
-                } else {
-                    nav.classList.remove("nav--hidden");
-                }
-                    lastScrollY = window.scrollY;
-                });
-            }
+                
+                    if (lastScrollY < window.scrollY) {
+                        nav.classList.add("nav--hidden");
+                    } else {
+                        nav.classList.remove("nav--hidden");
+                    }
+                        lastScrollY = window.scrollY;
+                    });
+                
             
             
 

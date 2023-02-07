@@ -41,7 +41,7 @@ body{
 header{
     display: flex;
     /*background-image: linear-gradient(to bottom right,rgb(57, 57, 146),rgb(17, 16, 75));*/
-    z-index: 2;
+    z-index: 10;
     width: 100%;
     height: 14vh;
     align-items: center;
