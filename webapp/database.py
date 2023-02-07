@@ -55,12 +55,13 @@ def select_id():
 
 
 def inregistrare(user,email,phone,password):
+  print("----------------------")
   mycursor = db.cursor()
-
+  print("?????????????????????????????")
   insertQuery = "INSERT INTO inregistrare (username, email, phone, password) VALUES ('"+user+"','"+email+"','"+phone+"','"+password+"');"
-  
+  print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   mycursor.execute(insertQuery)
-  
+  print("999999999999999999999")
   print("No of Record Inserted :", mycursor.rowcount)
   
   # we can use the id to refer to that row later.
@@ -270,6 +271,23 @@ def get_id_by_title(camp, title):
 
   return myresult
 
+def vot_select(id_user,id):
+    mycursor = db.cursor()
+
+    mycursor.execute("SELECT id FROM vot WHERE vot ='"+id+"' and id_user='"+id_user+"'")
+
+    myresult = mycursor.fetchall()
+
+    return myresult
+
+def id_user(username):
+    mycursor = db.cursor()
+
+    mycursor.execute("SELECT id FROM inregistrare WHERE username ='"+username+"'")
+
+    myresult = mycursor.fetchall()
+
+    return myresult 
 
    
 

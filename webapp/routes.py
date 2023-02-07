@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, session
 from webapp.form import verify_register_form, autentificarea ,reset_pass, send_otp, send_otp_phone, register_user, verify_changes, password_hash
 from webapp import app
-from database import titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db, inreg_data
+from webapp.database import id_user, vot_select ,titluri,select,set_vot,vot_db,validvot,set_vot_popor, get_data_by_id, cautar,introdu,verificare_legi, select_id, get_id_by_title, verificare, inregistrare_changes_db, inreg_data
 from datetime import datetime
 from flask_session import Session
 import pandas as pd
@@ -177,7 +177,14 @@ def account():
             gl_username, gl_email, error_us, error_em = verify_changes(username, username_form, email, email_form)
             email = gl_email
             username = gl_username
-        return render_template("account.html", email = email, error_em = error_em, error_us = error_us)
+        id=id_user(session['username'])
+        a=vot_select(str(id[0][0]),"pro")
+        b=vot_select(str(id[0][0]),"contra")
+        c=vot_select(str(id[0][0]),"neu")
+        print(len(a))
+        print(len(b))
+        print(len(c))
+        return render_template("account.html", email = email, error_em = error_em, error_us = error_us,a=len(a),b=len(b),c=len(c),tot=len(a)+len(b)+len(c))
     else:
         return redirect(url_for('autentificare'))
 
@@ -549,6 +556,8 @@ def sms():
                 register_user(username, email, phone_nr, passwordh)
                 session["email"]=email
                 session["username"]=username
+                print(session['username'])
+                print(session['email'])
                 return redirect(url_for("acasa"))
             else:
                 print("Otp invalid")
