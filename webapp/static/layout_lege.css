@@ -210,10 +210,17 @@ iframe{
 }
 
 #voturiContainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
 }
+.subVoturiContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 
 .piechart{
     width: 320px;

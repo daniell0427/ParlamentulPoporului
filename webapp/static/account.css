@@ -30,7 +30,6 @@ body{
     align-items: center;
     justify-content: space-between;
     border-right: 2px solid #5C5C5C;
-    padding-block: 40px;
 }
 
 #homePage{
@@ -40,9 +39,11 @@ body{
 #container{
     display: flex;
     flex-direction: column;
-    border-block: 2px solid #5c5c5c;
+    border-bottom: 2px solid #5c5c5c;
     align-items: center;
-
+    justify-content: space-evenly;
+    height: 100%;
+    margin-bottom: 40px;
 }
 
 #boxes{
@@ -58,7 +59,7 @@ body{
     margin-top: 0;
     padding-block:6px ;
     padding-inline:50px;
-    border-bottom:2px solid #5C5C5C;
+    border-block:2px solid #5C5C5C;
     color: #989898;
 }
 
