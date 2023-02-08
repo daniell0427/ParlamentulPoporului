@@ -289,5 +289,14 @@ def id_user(username):
 
     return myresult 
 
+def vot_statistic(tabel,camp,data,nume):
+    mycursor = db.cursor()
+
+    mycursor.execute("SELECT "+nume+" FROM "+tabel+" WHERE "+camp+" ='"+data+"'")
+
+    myresult = mycursor.fetchall()
+
+    return myresult
+
    
 

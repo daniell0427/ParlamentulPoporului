@@ -1,4 +1,4 @@
-from database import inregistrare , verificare , verificare_pass , inregistrare_changes_db
+from webapp.database import inregistrare , verificare , verificare_pass , inregistrare_changes_db
 from argon2 import PasswordHasher
 from flask_mail import Message
 from webapp import otp, otp_phone, mail, app
