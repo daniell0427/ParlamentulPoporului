@@ -27,7 +27,7 @@
     </head>
     <body>
         
-        <header>
+        <header id="header">
             <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPPWhite.png.png')}}" id="logo"></a>
             
             <nav id="nav" >
@@ -54,9 +54,6 @@
             
             
         </header>
-        <div class="toptop"> 
-                <img src="{{url_for('static',filename='newscreenshot.png')}}" id="navimage">
-        </div>    
             
 
         {% block content %}
@@ -83,44 +80,20 @@
         <!--src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">-->
         <script >
             //js for navbar transitions
-            const header = document.querySelector("header");
-            const sectionOne = document.querySelector(".toptop");
 
-             const sectionOneOptions = {
-                rootMargin: "-160px 0px 0px 0px"
-            };
-
-            const sectionOneObserver = new IntersectionObserver
-            (function(
-                entries,
-                sectionOneObserver
-            ) {
-                entries.forEach(entry => {
-                    if(!entry.isIntersecting) {
-                        header.classList.add("nav-scrolled");
-                    } else {
-                        header.classList.remove("nav-scrolled");
-                    }
-                });
-            },
-            sectionOneOptions);
-
-            sectionOneObserver.observe(sectionOne);
             //2nd
             
-                const nav = document.querySelector("header");
-                let lastScrollY = window.scrollY;
+            let prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+            let currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos || currentScrollPos <= 60) {
+                document.getElementById("header").style.top = "0";
+            } else {
+                document.getElementById("header").style.top = "-120px";
+            }
+            prevScrollpos = currentScrollPos;
+            };
 
-                window.addEventListener("scroll", () => {
-                
-                    if (lastScrollY < window.scrollY) {
-                        nav.classList.add("nav--hidden");
-                    } else {
-                        nav.classList.remove("nav--hidden");
-                    }
-                        lastScrollY = window.scrollY;
-                    });
-                
             
             
 
