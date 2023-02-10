@@ -13,13 +13,13 @@
 {% block content %}
 <div id="main">
     <div id="container">
-        <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='newLogoPP.png')}}" id="logo"></a>
+        <a href="{{ url_for('acasa') }}"><img src="{{url_for('static',filename='logoNouPPBlack.png')}}" id="logo"></a>
         <h1>Inregistrare</h1>
         <form action="inregistrare" method="post" id="form" onsubmit="process(event)">
         
             <label for="user" class="label">Nume de utilizator</label>
             <input type="text" name="user" id="numeUtilizator" pattern="^[a-zA-Z0-9._]+$" class="input" minlength="3" maxlength="25" required>
-            <div id="eroare_nume">Acest nume este folosit</div>
+            <!--<div id="eroare_nume">Acest nume este folosit</div>-->
 
             <label for="email" class="label">Email</label>
             <input type="email" name="email" id="emailSelectat"class="input" maxlength="75" required>
@@ -39,6 +39,14 @@
        
         <span id="autentificare">Ai cont deja?<a href="{{ url_for('autentificare') }}" id="autentificate">Autentifica-te</a> </span>
 
+    </div>
+    <div id="text">
+        Consideri ca deputatii nu mai reprezinta opinia ta?<br>
+        Solutia este votul online asupra proiectelor de legi dezbatute in legislativ.<br>
+        Ulterior poti compara votul tau cu cel al deputatilor, vazand daca coincide sau difera.<br>
+        Hai sa revolutionam politicul, inlocuind democratia reprezentativa cu cea directa.<br>
+        Fiecare cetatean poate deveni e-deputat in <b>Parlamentul Poporului</b>.<br>
+        Fii printre primii care schimba politica moldoveneasca.<br>
     </div>
 </div>
 
