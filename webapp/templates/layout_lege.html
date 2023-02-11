@@ -176,13 +176,7 @@
 
         {%if session.get('username')!=None and ok==True %} 
           <div>
-              <form action="" method="post" id="form1" onclick="return vot()">
-
-                  <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
-                  <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
-                  <button id="neutru1" class="buttonVote" onclick="val('neutru')"><a href="{{url_for('neutru')}}">Neu</a></button>
-
-              </form>
+              
               <script>
                   a=''
                   function val(b){
@@ -200,35 +194,9 @@
                       }
                   }
               </script>
-              <script type="text/javascript">
-                function toSeconds(timeStr) {
-                  const [hours, minutes, seconds] = timeStr.split(':').map(Number);
-                  return hours * 3600 + minutes * 60 + seconds;
-                }
 
-                let timeStamp = toSeconds('00:01:56'); 
-
-                timeStamp.toString
-
-                let url = document.getElementById("video").innerHTML;
-
-                var filterTextArea = function(text) {
-                  text = text.replace(/(<([^>]+)>)/ig, '');
-                  var re = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([\w\-]{10,12})(?:&feature)?(?:[\w\-]{0})?/g;
-                  var iframe = '<iframe width="460" height="260" src="http://www.youtube.com/embed/$1?start=" frameborder="0" allowfullscreen></iframe>';
-                  text = iframe.replace('$1', text.split(re)[1]);
-                  let newText = text.replace('?start=', '?start=' + timeStamp);
-                  return newText;
-                };
-
-                let ifr = document.getElementById("video");
-
-                let newUrl = filterTextArea(url);
-
-                newUrl.replace(/[\[\]']+/g,'');
-
-                ifr.innerHTML = newUrl;
-              </script>
+              
+              
           </div>
         {% elif session.get('username')!=None and ok==False %}
           <div id="votultau">
@@ -237,11 +205,85 @@
         {%endif%}
 
         {%if session.get('username')== None %}
-            <div>
+            <!--<div>
                 <a href="{{url_for('autentificare')}}"><button id="voteaza">Voteaza</button></a>
-            </div>
+            </div>-->
         {%endif%}
+        <div>
+          <button id="voteaza" class="button open-button">Voteaza</button>
+        </div>
+        
+        <dialog class="modal" id="modal">
+          <form action="" method="post" id="form1" onclick="return vot()">
+            <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
+            <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
+            <button id="neutru1" class="buttonVote" onclick="val('neutru')"><a href="{{url_for('neutru')}}">Neu</a></button>
+          </form>
+          <button class="button close-button">close modal</button>
+        </dialog>
+
     </div>
+
+
+    <!--script pentru dialog-->
+    <script>
+      const modal = document.querySelector("#modal");
+      const openModal = document.querySelector(".open-button");
+      const closeModal = document.querySelector(".close-button");
+
+      openModal.addEventListener("click", () => {
+        modal.showModal();
+      });
+
+      modal.addEventListener('click', (e) =>{
+        if(e.target.nodeName === "DIALOG"){
+          modal.close();
+        }
+      })
+
+      closeModal.addEventListener("click", () => {
+        modal.setAttribute("closing", "");
+
+        modal.addEventListener(
+          "animationend",
+          () => {
+            modal.removeAttribute("closing");
+            modal.close();
+          },
+          { once: true }
+        );
+      });
+    </script>
+<!--script pentru functionarea videoclipului-->
+    <script type="text/javascript">
+      function toSeconds(timeStr) {
+        const [hours, minutes, seconds] = timeStr.split(':').map(Number);
+        return hours * 3600 + minutes * 60 + seconds;
+      }
+
+      let timeStamp = toSeconds('00:01:56'); 
+
+      timeStamp.toString
+
+      let url = document.getElementById("video").innerHTML;
+
+      var filterTextArea = function(text) {
+        text = text.replace(/(<([^>]+)>)/ig, '');
+        var re = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([\w\-]{10,12})(?:&feature)?(?:[\w\-]{0})?/g;
+        var iframe = '<iframe width="460" height="260" src="http://www.youtube.com/embed/$1?start=" frameborder="0" allowfullscreen></iframe>';
+        text = iframe.replace('$1', text.split(re)[1]);
+        let newText = text.replace('?start=', '?start=' + timeStamp);
+        return newText;
+      };
+
+      let ifr = document.getElementById("video");
+
+      let newUrl = filterTextArea(url);
+
+      newUrl.replace(/[\[\]']+/g,'');
+
+      ifr.innerHTML = newUrl;
+    </script>
 
 {% endblock content %}
 

@@ -398,3 +398,79 @@ footer{
 .socialIcon:hover{
     color:var(--red);
 }
+
+
+/*pentru dialog*/
+
+.modal {
+    box-shadow: 0 0 0 100vw rgb(0 0 0 / 0.5);
+    background: #fff;
+    color: #222;
+    border: 0;
+    border-radius: 0.25rem;
+    padding: 0;
+}
+  
+.modal::backdrop {
+    background: rgb(0 0 0 / 0.5);
+    opacity: 0;
+}
+
+.modal[open] {
+    animation: slide-up 1000ms forwards, fade-in 500ms forwards;
+}
+/* */.modal[open]::backdrop {
+    animation: fade-in 500ms forwards;
+}
+
+.modal[closing] {
+    display: block;
+    pointer-events: none;
+    inset: 0;
+    animation: fade-out 500ms forwards;
+}
+
+/* */.modal[closing]::backdrop {
+    animation: fade-out 500ms forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+/* extra styling */
+
+.modal {
+    max-width: 50ch;
+}
+
+
+
+
+.button:hover,
+.button:focus {
+    background:red;
+}

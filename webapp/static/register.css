@@ -85,7 +85,7 @@ h1{
     padding-block: 5px;
     padding-inline: 15px;
     transition: all 0.2s ease-in-out;
-    margin-block: 10px;
+    margin-top: 10px;
 }
 #inregistreazate:hover{
     background-color: rgba(43, 230, 227, 0.272);
@@ -98,7 +98,6 @@ h1{
     width: 100%;
     color: black;
     border-top: 3px solid rgb(225, 225, 225);
-   
 }
 
 

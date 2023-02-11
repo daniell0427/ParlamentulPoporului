@@ -209,6 +209,7 @@ def account():
         aux=vot_statistic("vot","vot","neutru","id")
         neu_pop=len(aux)
         stat_par=0
+        stat_pop = 0
         if pro_par+cont_par+neu_par!=0:
             if max_eu=="pro":
                 stat_par=int((pro_par/(pro_par+cont_par+neu_par))*100)
