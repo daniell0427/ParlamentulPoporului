@@ -104,7 +104,7 @@ header a:hover{
 #main{
     margin-inline: 10vh;
     margin-bottom: 10vh;
-    margin-top: 25vh;
+    margin-top: 2vh;
     display: flex;
     flex-direction: column;
 }
