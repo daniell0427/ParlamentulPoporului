@@ -7,6 +7,16 @@
 body{
     font-family:sans-serif;
     background-color: white;
+
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+*, *::before, *::after{
+    box-sizing: border-box;
 }
 
 header{
@@ -45,7 +55,7 @@ header{
     border: 3px solid transparent;
     padding-left: 0.5em;
     color: rgb(64, 64, 64);
-    height: 2.5rem;
+    padding-block: .2rem;
     outline: none;	
     transition: all 0.3s ease-in-out;
 }
@@ -69,13 +79,12 @@ header{
     background-color: transparent;
     border:none;
     color:white;
-    margin-top: 0.438rem;
     transition: all 0.3s ease-in-out;
-    
+    margin-top: 5px;
 }
 
 #searchButton i{
-    font-size: 2.25rem;
+    font-size: 3.5em;
 }
 
 #searchButton:hover{
@@ -131,6 +140,7 @@ header a:hover{
     background-color: white;
     box-shadow: 0 0 13px #0b2e8689;
     transition: all 0.4s ease-in-out;
+    line-height: 1.6em;
     
 }
 .lege:hover{
@@ -159,7 +169,6 @@ header a:hover{
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: 10vh;
-    margin-top: 5vh;
 }
 
 
