@@ -13,14 +13,13 @@ body{
 
 #logo{
     padding: 30px;
-    width: 180px;
+    width: 250px;
 }
 
 
 #main{
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 100%;
     height: 100vh;
 }
 
@@ -133,7 +132,7 @@ body{
     flex-direction: column;
     align-items: center;
     height: 100%;
-    border-block: 2px solid #5C5C5C;
+    border-bottom: 2px solid #5C5C5C;
     margin-block: 40px;
 }
 
@@ -148,8 +147,7 @@ body{
     font-size: 30px;
     margin-top: 0;
     padding-block:6px ;
-    padding-inline:50px;
-    border-bottom:2px solid #5C5C5C;
+    border-block:2px solid #5C5C5C;
     color: #989898;
     padding-inline: 350px ;
 }
@@ -254,3 +252,112 @@ body{
     transform: rotate(calc(var(--p) * 3.6deg))
     translateY(calc(50% - var(--w)/2));
   }
+
+  /*for different sizes:*/
+@media screen and (max-width: 1200px){
+    #main{
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        align-items: center;
+    }
+
+
+    #logo{
+        width: 600px;
+        padding: 40px;
+    }
+
+    #title{
+        font-size: 5em;
+    }
+
+    #boxes{
+        width: 90%;
+    }
+
+    .input{
+        font-size: 3em;
+        padding-block: 20px;
+        padding-left: 20px;
+    }
+
+    #update, #links a{
+        font-size: 2.5em;
+        padding-block:25px;
+    }
+
+
+    .label{
+        font-size: 2.7em;
+    }
+
+    #update{
+        margin-top: 60px;
+    }
+
+    .label{
+        margin-top: 25px;
+    }
+
+    #links, #boxes{
+        gap: 60px;
+        margin: 0;
+    }
+
+    #container{
+        padding-block: 60px;
+        border: none;
+    }
+
+    #leftSide{
+        border: none;
+    }
+
+    #statistica{
+        font-size: 5em;
+        text-align: center;
+        padding-inline:  250px;
+    }
+
+    #nrDeLegi{
+        font-size: 3em;
+    }
+
+    #nrDeLegiContainer{
+        gap:200px;
+    }
+
+    .voteCircle{
+        height: 40px;
+        width: 40px;
+    
+    }
+
+    #voturilePersonale{
+        font-size: 2.2em;
+        gap: 60px;
+    }
+
+    .textAbovePieCharts{
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .pie{
+        --b:40px;
+        --w:300px;
+        font-size: 3em;
+    } 
+    
+    #rightMain{
+        gap: 60px;
+        width: 90%;
+        border: 0;
+    }
+
+
+    #rightContent{
+        gap: 80px;
+    }
+}
