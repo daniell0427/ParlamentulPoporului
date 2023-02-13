@@ -110,7 +110,7 @@ h1{
 
 #text{
     color: black;
-    font-size: 18px;
+    font-size: 1em;
     max-width: 50vw;
     text-align: center;
     line-height: 50px;
@@ -127,4 +127,56 @@ h1{
 
 .eroareInput{
     border: 2px solid red;
+}
+
+@media screen and (max-width: 1000px){
+    #main{
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        position: relative;
+        gap: 60px;
+        padding-block: 60px;
+    }
+
+    #container{
+        width: 90%;
+        justify-self: center;
+    }
+
+    #text{
+        max-width:auto;
+        font-size: 3em;
+        max-width: 90vw;
+    }
+
+    #logo{
+        width: 600px;
+    }
+
+    h1{
+        font-size: 4em;
+    }
+
+    .label{
+        font-size: 2.5em;
+    }
+
+    .input{
+        font-size: 3em;
+    }
+
+    
+    #inregistreazate{
+        font-size: 2em;
+        border-radius: 20px;
+        padding-inline: 1em;
+        padding-block: 0.3em;
+        margin-block: 0.5em;
+    }
+
+    #autentificare{
+        font-size: 2em;
+        padding-block: 0.5em;
+    }
 }
