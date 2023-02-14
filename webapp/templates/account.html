@@ -17,7 +17,7 @@
                 <a href="{{ url_for('acasa') }}" id="home"><img src="{{url_for('static',filename='logoNouPP.png')}}" id="logo"></a>
                 <div id="title">Informatii Personale</div>
                 <div id="boxes">
-                    <form action="account" method="post" id="form">
+                    <form action="{{url_for('account')}}" method="post" id="form">
                         
                         <label for="username" class="label">Nume utilizator</label>
                         <input type="text" name="user" pattern="^[a-zA-Z0-9._]+$" id="" class="input" value="{{ session.get('username') }}" minlength="3" maxlength="25" required>
