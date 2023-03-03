@@ -1,5 +1,5 @@
 :root{
-    --blue: rgb(12, 12, 38); 
+    --blue: #030A19; 
     --gray: rgb(112, 112, 112);
     --red: rgb(208, 9, 9);
 }
@@ -21,7 +21,7 @@ body{
 
 header{
     display: flex;
-    background-color: rgba(12, 12, 38, 0.95);
+    background-color: #030a19f0;
     border-bottom: 3px solid var(--blue);
     z-index: 100;
     width: 100%;

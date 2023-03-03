@@ -1,5 +1,10 @@
+html:focus-within{
+    scroll-behavior: smooth;
+}
+
+
 :root{
-    --blue: rgb(12, 12, 38); 
+    --blue: #030A19; 
     --gray: rgb(112, 112, 112);
     --red: rgb(208, 9, 9);
     --green: rgb(0, 229, 0);
@@ -8,6 +13,7 @@
 
 
 body{
+    text-rendering: optimizeSpeed;
     font-family:sans-serif;
     background-color: white;
 
@@ -24,7 +30,7 @@ body{
 
 header{
     display: flex;
-    background-color: rgba(12, 12, 38, 0.95);
+    background-color: #030a19f0;
     border-bottom: 3px solid var(--blue);
     z-index: 100;
     width: 100%;
@@ -252,10 +258,6 @@ iframe{
     color:white;
 }
 
-#form1{
-    display: flex;
-    gap: 20px;
-}
 
 .buttonVote{
     width: 80px;
@@ -361,9 +363,14 @@ footer{
     box-shadow: 0 0 0 100vw rgb(0 0 0 / 0.5);
     background: #fff;
     color: #222;
-    border: 0;
-    border-radius: 0.25rem;
+    border:3px solid rgb(218, 218, 218);
+    border-radius: 0.5rem;
     padding: 0;
+    position: fixed; 
+    left: 0; 
+    right: 0; 
+    top: 30%;
+    margin: 0 auto;
 }
   
 .modal::backdrop {
@@ -418,16 +425,51 @@ footer{
 
 /* extra styling */
 
-.modal {
-    max-width: 50ch;
+.modal{
+    max-width: 40ch;
+}
+
+.modal .button{
+    background-color: transparent;
+    border: none;
+}
+
+#dialogTopPart{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 3px solid rgb(218, 218, 218);
 }
 
 
+.fa-xmark{
+    font-size: 40px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+}
 
 
-.button:hover,
-.button:focus {
-    background:red;
+#txtVoteazaDialog{
+    font-size: 2.7em;
+    align-self: center;
+    text-align: center;
+    padding-block: 0.5rem;
+    color: black;
+}
+
+
+#form1{
+    padding-inline: 20px;
+    padding-block: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 20px;
 }
 
 

@@ -214,12 +214,17 @@
         </div>
         
         <dialog class="modal" id="modal">
+          <div id="dialogTopPart">
+            <div id="txtVoteazaDialog">Voteaza</div>
+            <button class="button close-button"><i class=" fa-solid fa-xmark"></i></button>
+          </div>
+        
           <form action="" method="post" id="form1" onclick="return vot()">
             <button id="pro1" class="buttonVote" onclick="val('pro')"><a href="{{url_for('pro')}}">Pro</a></button>
             <button id="contra1" class="buttonVote" onclick="val('contra')"><a href="{{url_for('contra')}}">Con</a></button>
             <button id="neutru1" class="buttonVote" onclick="val('neutru')"><a href="{{url_for('neutru')}}">Neu</a></button>
           </form>
-          <button class="button close-button">close modal</button>
+        
         </dialog>
 
     </div>
