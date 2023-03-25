@@ -145,7 +145,7 @@
 
     <div id="all">
 
-        <h1 id="title">Lege</h1>
+        <div id="title">Lege</div>
 
         <div id="main">
             <div id="video">
@@ -247,7 +247,11 @@
       })
 
       closeModal.addEventListener("click", () => {
-        modal.setAttribute("closing", "");
+        
+        modal.close();
+
+        //visual bug on closing animation
+        /*modal.setAttribute("closing", "");
 
         modal.addEventListener(
           "animationend",
@@ -256,7 +260,7 @@
             modal.close();
           },
           { once: true }
-        );
+        );*/
       });
     </script>
     

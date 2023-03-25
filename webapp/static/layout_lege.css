@@ -142,6 +142,7 @@ header a:hover{
     border-bottom: 3px solid black ;
     white-space: normal;
     word-wrap: break-word;
+    
 
 }
 
@@ -521,6 +522,11 @@ footer{
 
     #tit{
         font-size: 2rem;
+    }
+
+
+    #title{
+        padding-inline: 20px;
     }
 
     #voturiContainer{
