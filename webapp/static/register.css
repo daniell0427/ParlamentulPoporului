@@ -3,6 +3,7 @@
     --gray: rgb(112, 112, 112);
     --red: rgb(208, 9, 9);
     --lightgray: rgb(225, 225, 225);
+    --lightblue: rgb(32, 238, 241);
 }
 
 body{
@@ -99,7 +100,7 @@ h1{
 #inregistreazate:focus{
     cursor: pointer;
     border-color: var(--blue);
-    background-color:rgba(13, 190, 239, 0.293);
+    background-color: rgba(32, 237, 241, 0.285);
     color: var(--blue)
 }
 
@@ -115,7 +116,7 @@ h1{
 
 
 #autentificate{
-    color: rgb(13, 190, 239) ;
+    color: var(--lightblue);
 }
 #autentificate:hover{
     text-decoration: underline;
@@ -140,6 +141,7 @@ h1{
     color: transparent;
     align-self: flex-start;
     margin-top:2px;
+    pointer-events: none;
 
 }
 /*.eroareInput{

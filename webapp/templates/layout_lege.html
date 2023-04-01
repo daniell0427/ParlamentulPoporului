@@ -21,7 +21,7 @@
           ['Task', 'Hours per Day'],
           ["Pro: "+pro,    pro1],
           ['Contra: '+contra,      cont1],
-          ['Neutri: '+neu,  neu1],
+          ['Nu au votat: '+neu,  neu1],
         ]);
 
         var options = {
@@ -34,15 +34,15 @@
           colors: ['#00e500', 'red', 'blue'],
           legend: {
                 textStyle: {
-                    fontSize: 16,
+                    fontSize: 14,
                     }
           },
-          width: 320,
-          height: 300,
+          width: 380,
+          height: 260,
           chartArea: {
             top: 10,
             bottom: 10,
-            left: 10,
+            left: 15,
             right: 10,
         },
             
@@ -64,7 +64,7 @@
             ['Task', 'Hours per Day'],
             ['Pro: 19',     55],
             ['Contra: 10',      0],
-            ['Neutri: 3',  46],
+            ['Nu au votat: 3',  46],
           ]);
   
           var options = {
@@ -80,12 +80,12 @@
                     fontSize: 16,
                     }
           },
-          width: 320,
-          height: 300,
+          width: 380,
+          height: 260,
           chartArea: {
             top: 10,
             bottom: 10,
-            left: 10,
+            left: 15,
             right: 10,
         },
         };
@@ -95,49 +95,7 @@
           chart.draw(data, options);
         }
       </script>
-      <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-  
-        function drawChart() {
-            pro_pop={{ pro_pop | tojson }}
-            con_pop={{ con_pop | tojson }}
-            neu_pop={{ neu_pop | tojson }}
-          var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Pro: '+pro_pop.toString(),     pro_pop],
-            ['Contra: '+con_pop.toString(),      con_pop],
-            ['Neutri: '+neu_pop.toString(),  neu_pop],
-          ]);
-  
-          var options = {
-          title: 'Lectura 1',
-          titleTextStyle: {
-                fontSize: 30,
-                bold: true,
-            },
-        
-          colors: ['#00e500', 'red', 'blue'],
-          legend: {
-                textStyle: {
-                    fontSize: 16,
-                    }
-          },
-          width: 320,
-          height: 300,
-          chartArea: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-        },
-        };
-  
-          var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
-  
-          chart.draw(data, options);
-        }
-      </script>
+      
     
 {% endblock head %}
 
@@ -151,7 +109,10 @@
             <div id="video">
               https://youtu.be/IujQP_KE3L8
             </div>
-            <div id="descriere">{{titlu}}</div>
+            <div id="descriere">
+              <diV>{{titlu}}</diV><br>
+              <div>sursa: <a href="">https://youtu.be/IujQP_KE3L8</a></div>
+            </div>
         </div>
 
         <div id="voturiTitleContainer">

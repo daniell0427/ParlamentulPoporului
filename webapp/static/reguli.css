@@ -1,0 +1,21 @@
+:root{
+    --blue: #030A19; 
+    --gray: rgb(112, 112, 112);
+    --red: rgb(208, 9, 9);
+}
+
+body{
+    font-family:sans-serif;
+    background-color: white;
+
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+

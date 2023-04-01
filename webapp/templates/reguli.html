@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="{{ url_for('static', filename='reguli.css') }}" type="text/css" rel="stylesheet">
+{% endblock head %}
+
+
+{% block content %}
+
+<div id="main">
+    <div id="container">
+        <div>Reguli</div>
+        <div id="leftSide">
+            <div>Dragă e-deputat, regulile de vot sunt foarte simple. Butonul verde - pro, butonul roşu - contra, butonul albastru - abținere.</div>
+            <div>Pentru a vota informat îți sugerăm să citeşti descrierea proiectului, iar dacă ai nevoie de mai multă informație poți accesa pagina web sau canalul de YouTube al Parlamentului Republicii Moldova.</div>
+        </div>
+        
+        <div id="rightSide">
+            <div>Poți vota o singură dată per proiect de lege.</div>
+            <div>Acolo vei găsi textul integral al proiectului de lege, documentele adiționale şi dezbaterile referitoare la fiecare proiect în parte.</div>
+        </div>
+        <div> Îți mulțumim pentru că îți faci vocea auzită şi contribui la o nouă abordare în politica moldovenească!</div>
+    </div>
+</div>
+
+{% endblock content %}

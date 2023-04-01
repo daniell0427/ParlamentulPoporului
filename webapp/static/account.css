@@ -94,7 +94,8 @@ body{
 }
 
 #update:hover{
-    background-color: rgba(182, 0, 0, 0.416);
+   /* background-color: rgba(182, 0, 0, 0.416);*/
+    background-color: rgba(18, 135, 146, 0.416);
 }
 
 #links{
@@ -106,7 +107,7 @@ body{
 }
 
 #links a:hover{
-    background-color: rgba(182, 0, 0, 0.416);
+    background-color: rgba(18, 135, 146, 0.416);
 }
 
 #links a{
