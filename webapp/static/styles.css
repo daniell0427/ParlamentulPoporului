@@ -1,7 +1,7 @@
 :root{
     --blue: #030A19; 
     --gray: rgb(112, 112, 112);
-    --lightblue: rgb(32, 238, 241);
+    --lightblue: rgb(16, 210, 213);
 }
 
 body{
@@ -203,9 +203,9 @@ header a:hover{
 
 #maiMulte:focus{
     cursor: pointer;
-    border-color: #0c1836a8;
+    border-color: var(--blue);
     background-color: rgba(32, 237, 241, 0.285);
-    color:white;
+    color:var(--blue);
 }
 
 
