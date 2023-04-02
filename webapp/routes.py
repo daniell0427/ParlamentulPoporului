@@ -617,3 +617,7 @@ def forgot_password():
     return render_template('forgot_password.html')
 
     
+@app.route("/reguli" )
+def reguli():
+    global_variables()
+    return render_template("reguli.html")
