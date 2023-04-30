@@ -1,9 +1,6 @@
 {% block head %}
     <link href="{{ url_for('static', filename='register.css') }}" type="text/css" rel="stylesheet">
-    <link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
-     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 {% endblock head %}
 {% block content %}
@@ -14,7 +11,7 @@
             <form action="inregistrare" method="post" id="form" onsubmit="process(event)">
             
                 <label for="user" class="label">Nume de utilizator</label>
-                <input type="text" name="user" id="numeUtilizator" pattern="^[a-zA-Z0-9._]+$" class="input" minlength="3" maxlength="25" required>
+                <input type="text" name="user" oninput="getValue()"  id="numeUtilizator" pattern="^[a-zA-Z0-9._]+$" class="input" minlength="3" maxlength="25" required>
                 <div id="eroare_nume" class="eroare">Acest nume este folosit</div>
 
                 <label for="email" class="label">Email</label>
@@ -52,27 +49,36 @@
     <!-- ^^  form code  ^^ -->
 
 
-    <script>
-        let taken_username = "{{ taken_username }}";
-        let eroare_nume = document.getElementById("eroare_nume");
-        let numeUtilizator = document.getElementById("numeUtilizator")
-        if(taken_username){
-            
+    
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--<script>
+        let text = document.getElementById("text").value;
+        let eroare_nume = document.getElementById("eroare_nume"); 
+
+        function getValue(){
+            if({{ taken_username|tojson }}){
+                eroare.style.opacity = 1;
+                numeUtilizator.classList.add("eroareInput");
+            }else{
+                eroare.style.opacity = 0;
+                numeUtilizator.classList.add("eroareInput");
+            };
+        };
+
+    </script>-->
+
+    {% if taken_username %}
+        <script>
+            let eroare_nume = document.getElementById("eroare_nume");
             eroare_nume.style.display = "block";
-            ;
-            numeUtilizator.classList.add("eroareInput")
+            let numeSelectat = document.getElementById("numeSelectat");
+            numeSelectat.classList.add("eroareInput")
+        </script>
+    {% endif %}
 
-        }else{
-     
-            eroare_nume.style.display = "none";
-        
-            numeUtilizator.classList.remove("eroareInput")
-        }
-
-    </script>
 
     {% if taken_email %}
-
         <script>
             let eroare_email = document.getElementById("eroare_email");
             eroare_email.style.display = "block";

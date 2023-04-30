@@ -4,10 +4,11 @@
     --red: rgb(208, 9, 9);
     --green: rgb(0, 229, 0);
     --lightblue: rgb(16, 210, 213);
+    --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body{
-    font-family:sans-serif;
+    font-family: var(--font);
     background-color: var(--blue);
     color: white;
 }

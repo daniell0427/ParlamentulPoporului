@@ -1,11 +1,17 @@
+html:focus-within{
+    scroll-behavior: smooth;
+}
+
 :root{
     --blue: #030A19; 
     --gray: rgb(112, 112, 112);
+    --red: rgb(208, 9, 9);
+    --green: rgb(0, 229, 0);
     --lightblue: rgb(16, 210, 213);
+    --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 body{
-    font-family:sans-serif;
+    font-family:var(--font);
     background-color: white;
 
 }
@@ -103,6 +109,29 @@ header a:hover{
     text-decoration: none;
 }
 
+/**/
+
+#navLinks a::after{
+    content: "";
+    width: 0;
+    height: 1.5px;
+    background-color: var(--lightblue);
+    margin: auto;
+    display: block;
+    
+  }
+
+#navLinks a:hover::after{
+    width: 100%;
+    transition: width 0.4s ease-in-out, left 0.4s ease-in-out;
+    color: var(--lightblue);
+}
+#navLinks a:hover{
+    color: var(--lightblue);
+}
+
+/**/
+
 #navLinks{
     display: flex;
     gap: 60px;
@@ -113,9 +142,72 @@ header a:hover{
 #navLinks a{
     transition: all 0.3s ease-in-out;
 }
-
-
 /*nav-bar end*/
+
+
+footer{
+    font-size: 1.1rem;
+    background-color: var(--blue);
+    padding: 6vh;
+}
+
+#footerMain{
+    display:flex;
+    justify-content: space-between;
+}
+
+#information{
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    font-size: 20px;
+}
+
+.info{
+    color: rgb(112, 112, 112);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.info::after{
+    content: "";
+    width: 0;
+    height: 1.5px;
+    background-color: aqua;
+    margin: auto;
+    display: block;
+    
+}
+
+.info:hover::after{
+    width: 100%;
+    transition: width 0.4s ease-in-out, left 0.4s ease-in-out;
+    color: aqua;
+}
+
+.info:hover{
+    color: var(--lightblue);
+}
+
+#socials{
+    display: flex;
+    gap:2rem;
+    align-items: flex-end;
+    
+}
+
+.socialIcon{
+    color:var(--gray);
+    font-size: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.socialIcon:hover{
+    color:var(--lightblue);
+    transform: scale(1.2);
+}
+
+/*end of footer*/
 
 #main{
     margin-inline: 10vh;
@@ -141,12 +233,14 @@ header a:hover{
     margin: 0px;
     height: 100%;
     padding: 1.5rem;
-    border-radius: 2px;
     color: black;
-    background-color: white;
+    border-radius: 2px;
+    line-height: 1.6em;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.123), rgba(148, 145, 145, 0.1));
+
     box-shadow: 0 0 13px #0b2e8689;
     transition: all 0.4s ease-in-out;
-    line-height: 1.8em;
+    
     
 }
 .lege:hover{
@@ -209,51 +303,6 @@ header a:hover{
 }
 
 
-
-footer{
-    font-size: 1.1rem;
-    background-color: var(--blue);
-    padding: 6vh;
-}
-
-#footerMain{
-    display:flex;
-    justify-content: space-between;
-}
-
-#information{
-    display: flex;
-    align-items: flex-end;
-    gap: 40px;
-    font-size: 20px;
-}
-
-.info{
-    color: rgb(112, 112, 112);
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-}
-
-.info:hover{
-    color: var(--lightblue);
-}
-
-#socials{
-    display: flex;
-    gap:2rem;
-    align-items: flex-end;
-    
-}
-
-.socialIcon{
-    color:var(--gray);
-    font-size: 2rem;
-    transition: all 0.2s ease-in-out;
-}
-
-.socialIcon:hover{
-    color:var(--lightblue);
-}
 
 /*for different sizes:*/
 @media screen and (max-width:50em){
@@ -325,9 +374,6 @@ footer{
 
 /*pentru descrierea de la inceput*/
 
-#descriere{
-   
-}
 
 #image{
     background-image: url(Parlament-republica-moldova.jpg);
@@ -385,7 +431,7 @@ footer{
     padding-block: 15px;
     color: white;
     line-height: 1.5em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.133);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.361);
 
 }
 
